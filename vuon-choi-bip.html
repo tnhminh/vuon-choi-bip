@@ -1283,17 +1283,21 @@ function dragify(el,{onDrop,onTap}){el.classList.add('drag');
     el.addEventListener('pointermove',move);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)})}
 
 /* ================= games ================= */
+const KIND_N={ball:'quả bóng',star:'ngôi sao',heart:'trái tim',flower:'bông hoa',fish:'chú cá'};
 function gBubbles(api){
   const s=api.stage;const GOAL=10;
   s.innerHTML=`<svg class="seabed" viewBox="0 0 400 80" preserveAspectRatio="none"><path d="M0 80 V40 Q50 20 100 38 T200 34 T300 38 T400 30 V80Z" fill="#F6D9A0" stroke="${INK}" stroke-width="3"/></svg><div class="bub-field"></div><div class="bub-meter">${'<i></i>'.repeat(GOAL)}</div>`;
-  const field=s.querySelector('.bub-field'),dots=$$('.bub-meter i',s);let popped=0,ni=0,list=[],last=performance.now(),spawnT=0,paused=false;
+  const field=s.querySelector('.bub-field'),dots=$$('.bub-meter i',s);let popped=0,ni=0,list=[],last=performance.now(),spawnT=0,paused=false,lastPop=performance.now(),nudged=0;
   function spawn(){const W=field.clientWidth,H=field.clientHeight;const base=Math.min(W,H);const size=Math.max(80,Math.min(180,base*rand(S.age===2?.24:.19,S.age===2?.32:.27)));
-    const el=document.createElement('div');el.className='bubble';el.style.width=el.style.height=size+'px';el.innerHTML=`<div class="bub-in">${wrap(itemArt(pick(KINDS),pick(COLORS).c),'0 0 100 100')}</div>`;
-    const b={el,x:rand(0,Math.max(1,W-size)),y:H+10,size,sp:rand(45,75)*(S.age===2?.8:1),ph:rand(0,6.3),amp:rand(8,24),dead:false};
+    const kind=pick(KINDS),col=pick(COLORS);const el=document.createElement('div');el.className='bubble';el.style.width=el.style.height=size+'px';el.innerHTML=`<div class="bub-in">${wrap(itemArt(kind,col.c),'0 0 100 100')}</div>`;
+    const b={el,kind,col,x:rand(0,Math.max(1,W-size)),y:H+10,size,sp:rand(45,75)*(S.age===2?.8:1),ph:rand(0,6.3),amp:rand(8,24),dead:false};
     el.addEventListener('pointerdown',e=>{e.preventDefault();pop(b,e)});field.appendChild(el);list.push(b)}
   function pop(b,e){if(b.dead||paused)return;b.dead=true;A.pop(ni++);FX.sparkle(e.clientX,e.clientY);b.el.classList.add('popped');api.later(()=>b.el.remove(),320);
-    if(popped<GOAL){dots[popped].classList.add('on');popped++}
-    if(popped===GOAL){paused=true;api.later(()=>api.win(()=>{popped=0;paused=false;dots.forEach(d=>d.classList.remove('on'))}),400)}}
+    if(popped<GOAL){dots[popped].classList.add('on');popped++}lastPop=performance.now();nudged=0;
+    if(popped===GOAL){paused=true;api.say('Mười bong bóng rồi! Rio giỏi quá!');api.later(()=>api.win(()=>{popped=0;paused=false;dots.forEach(d=>d.classList.remove('on'));api.say('Bong bóng mới bay lên rồi kìa!')}),1400)}
+    else if(popped===5)api.say('Được năm cái rồi! Thêm năm cái nữa nhé!');
+    else api.say(`${cap(KIND_N[b.kind]||'bong bóng')} ${b.col.n}!`)}
+  api.every(()=>{if(paused||performance.now()-lastPop<7000||nudged>1)return;nudged++;api.say(pick(['Bong bóng bay lên kìa! Rio chạm vào nhé!','Rio thử chạm vào bong bóng xem có gì bên trong nào!']))},3500);
   function tick(now){if(!api.alive)return;const dt=Math.min(.05,(now-last)/1000);last=now;spawnT-=dt;
     if(spawnT<=0&&list.length<(S.age===2?6:8)){spawn();spawnT=rand(.55,1.1)}
     for(const b of list){if(b.dead)continue;b.y-=b.sp*dt;b.ph+=dt*1.5;b.el.style.transform=`translate(${(b.x+Math.sin(b.ph)*b.amp).toFixed(1)}px,${b.y.toFixed(1)}px)`;if(b.y<-b.size-20){b.dead=true;b.el.remove()}}
@@ -1311,29 +1315,35 @@ function gShapes(api){
     const holeOrder=shuffle(types),pieceOrder=shuffle(types);let done=0;const colOf={};types.forEach((t,i)=>colOf[t]=cols[i]);
     s.innerHTML=`<div class="sorter"><div class="box"><div class="holes">${holeOrder.map(t=>`<div class="hole" data-t="${t}">${shapeSvg(t,'#4A2F1C',4)}</div>`).join('')}</div></div>
       <div class="tray">${pieceOrder.map(t=>`<div class="piece" data-t="${t}" role="img" aria-label="${SHAPES[t].n}">${shapeSvg(t,colOf[t])}</div>`).join('')}</div></div>`;
-    const holes=$$('.hole',s);
+    const holes=$$('.hole',s);let idle=0;if(round.n++)api.say(`Thêm ${NUM[types.length]} hình mới nè! Rio xếp tiếp nhé!`);
+    clearInterval(round.nudge);round.nudge=api.every(()=>{if(!api.alive||done===types.length)return;if(++idle<3)return;idle=0;const left=$$('.piece:not(.gone)',s);if(!left.length)return;const pc=pick(left),t=pc.dataset.t;api.say(`Rio thử ${SHAPES[t].n} nhé! Lỗ của nó đây nè.`);hint(holes.find(h=>h.dataset.t===t))},3500);
     $$('.piece',s).forEach(p=>{const t=p.dataset.t;const mine=()=>holes.find(h=>h.dataset.t===t);
       dragify(p,{onTap(){api.say(cap(SHAPES[t].n)+'. Lỗ của nó ở đây!');hint(mine())},
         onDrop(x,y){const h=hitTest(holes.filter(h=>!h.dataset.full),x,y,40);if(!h)return false;
           if(h.dataset.t!==t){A.soft();api.say('Chưa vừa rồi. Thử lỗ khác nhé!');hint(mine());return false}
           h.dataset.full=1;p.classList.add('gone');const plug=document.createElement('div');plug.className='plug';plug.innerHTML=shapeSvg(t,colOf[t]);h.appendChild(plug);
-          A.snap();const c=centerOf(h);FX.sparkle(c.x,c.y);api.say(cap(SHAPES[t].n)+'!');done++;if(done===types.length)api.later(()=>api.win(round),800);return true}})})}
-  round()}
+          A.snap();const c=centerOf(h);FX.sparkle(c.x,c.y);idle=0;done++;
+          if(done===types.length){api.say('Xếp xong hết rồi! Hình nào cũng vào đúng lỗ. Giỏi quá!');api.later(()=>api.win(round),1600)}
+          else api.say(pick([`${cap(SHAPES[t].n)}! Vừa khít luôn!`,`Đúng rồi, ${SHAPES[t].n}!`,`${cap(SHAPES[t].n)} vào lỗ ${SHAPES[t].n}!`]));return true}})})}
+  round.n=0;round()}
 
 function gColors(api){
   const s=api.stage;
   function round(){
     const colors=shuffle(COLORS).slice(0,S.age===2?2:3);const list=shuffle(colors.flatMap(c=>[0,1].map(()=>({c,kind:pick(KINDS)}))));let done=0;
-    s.innerHTML=`<div class="sortc"><div class="loose">${list.map(it=>`<div class="thing" data-k="${it.c.k}" style="--rot:${randInt(-14,14)}deg" role="img" aria-label="${it.c.n}">${wrap(itemArt(it.kind,it.c.c),'0 0 100 100')}</div>`).join('')}</div>
+    s.innerHTML=`<div class="sortc"><div class="loose">${list.map(it=>`<div class="thing" data-k="${it.c.k}" data-kind="${it.kind}" style="--rot:${randInt(-14,14)}deg" role="img" aria-label="${it.c.n}">${wrap(itemArt(it.kind,it.c.c),'0 0 100 100')}</div>`).join('')}</div>
       <div class="baskets">${colors.map(c=>`<div class="basket" data-k="${c.k}"><div class="pile"></div>${wrap(basketI(c.c),'0 0 160 120')}</div>`).join('')}</div></div>`;
-    const baskets=$$('.basket',s);
-    $$('.thing',s).forEach(el=>{const col=COLORS.find(c=>c.k===el.dataset.k);const mine=()=>baskets.find(b=>b.dataset.k===col.k);
+    const baskets=$$('.basket',s);let idle=0;if(round.n++)api.say(`Có ${NUM[colors.length]} cái giỏ: ${colors.map(c=>c.n).join(', ')}. Rio phân loại nhé!`);
+    clearInterval(round.nudge);round.nudge=api.every(()=>{if(!api.alive||done===list.length)return;if(++idle<3)return;idle=0;const left=$$('.thing:not(.gone)',s);if(!left.length)return;const t=pick(left),c=COLORS.find(x=>x.k===t.dataset.k);api.say(`${cap(KIND_N[t.dataset.kind]||'cái này')} ${c.n} vào giỏ nào nhỉ?`);hint(t)},3500);
+    $$('.thing',s).forEach(el=>{const col=COLORS.find(c=>c.k===el.dataset.k);const kn=KIND_N[el.dataset.kind]||'đồ vật';const mine=()=>baskets.find(b=>b.dataset.k===col.k);
       dragify(el,{onTap(){api.say(cap(col.n)+'. Bỏ vào giỏ '+col.n+' nhé!');hint(mine())},
         onDrop(x,y){const b=hitTest(baskets,x,y,30);if(!b)return false;
           if(b.dataset.k!==col.k){A.soft();api.say(`Đây là ${col.n}. Tìm giỏ ${col.n} nhé!`);hint(mine());return false}
           el.classList.add('gone');const m=document.createElement('div');m.className='mini';m.innerHTML=el.innerHTML;b.querySelector('.pile').appendChild(m);
-          bump(b);A.plop();const c=centerOf(b);FX.sparkle(c.x,c.y-c.h*.3);api.say(cap(col.n)+'!');done++;if(done===list.length)api.later(()=>api.win(round),800);return true}})})}
-  round()}
+          bump(b);A.plop();const c=centerOf(b);FX.sparkle(c.x,c.y-c.h*.3);idle=0;done++;
+          if(done===list.length){api.say('Đồ vật nào cũng về đúng giỏ rồi! Rio phân loại giỏi quá!');api.later(()=>api.win(round),1700)}
+          else api.say(`${cap(kn)} ${col.n} vào giỏ ${col.n}!`);return true}})})}
+  round.n=0;round()}
 
 const chip=(m,icon,label)=>`<button class="chip" data-m="${m}" aria-label="${label}">${icon}</button>`;
 function gFarm(api){
@@ -1390,8 +1400,8 @@ function gXylo(api){
   const mark=()=>{bars.forEach(b=>b.classList.remove('next'));if(mode!=='free')bars[SONGS[mode].seq[pos]].classList.add('next')};
   function play(i){A.xylo(i);restart(bars[i],'ring',400);const r=bars[i].getBoundingClientRect(),R=xy.getBoundingClientRect();const n=document.createElement('div');n.className='notefly';
     n.style.left=(r.left-R.left+r.width/2)+'px';n.style.top=(r.top-R.top+10)+'px';n.style.setProperty('--dx',rand(-30,30)+'px');n.innerHTML=ICON.note(XCOL[i]);xy.appendChild(n);setTimeout(()=>n.remove(),1150)}
-  function hit(i){if(mode==='free'){play(i);free++;if(free%36===0)api.win(null);return}
-    const seq=SONGS[mode].seq,t=seq[pos];if(S.age===2||i===t){play(t);pos++;if(pos>=seq.length){pos=0;bars.forEach(b=>b.classList.remove('next'));api.later(()=>api.win(mark),700)}else mark()}else play(i)}
+  let lastTip=0;function hit(i){if(mode==='free'){play(i);free++;if(free%36===0){api.say('Rio chơi đàn hay quá! Như nhạc sĩ luôn!');api.later(()=>api.win(null),1200)}else if(free%12===0)api.say(pick(['Nghe vui tai quá!','Phím này kêu cao, phím kia kêu trầm nè!','Rio gõ thêm nữa đi!']));return}
+    const seq=SONGS[mode].seq,t=seq[pos];if(S.age===2||i===t){play(t);pos++;if(pos>=seq.length){pos=0;bars.forEach(b=>b.classList.remove('next'));api.say(`Rio chơi xong bài ${SONGS[mode].n} rồi! Hay quá!`);api.later(()=>api.win(mark),1500)}else mark()}else{play(i);const now=performance.now();if(now-lastTip>4000){lastTip=now;api.say('Phím đang sáng ở đây nè!');hint(bars[t])}}}
   const check=e=>{const el=document.elementFromPoint(e.clientX,e.clientY);const b=el&&el.closest?el.closest('.bar'):null;if(b&&b!==lastBar)hit(+b.dataset.i);lastBar=b};
   xy.addEventListener('pointerdown',e=>{e.preventDefault();down=true;lastBar=null;try{xy.setPointerCapture(e.pointerId)}catch(_){}check(e)});
   xy.addEventListener('pointermove',e=>{if(down)check(e)});const stop=()=>{down=false;lastBar=null};xy.addEventListener('pointerup',stop);xy.addEventListener('pointercancel',stop);
@@ -1432,8 +1442,8 @@ function gPaint(api){
   const canvas=s.querySelector('.canvas');
   function load(i){pi=(i+PICS.length)%PICS.length;const p=PICS[pi];canvas.innerHTML=`<svg viewBox="${p.vb}" aria-label="Tranh tô màu">${p.regions}<g class="deco">${p.deco}</g></svg>`;rewarded=false;
     regions=$$('.rg',canvas);regions.forEach(r=>r.addEventListener('pointerdown',e=>{e.preventDefault();fill(r,e)}));api.say(p.say)}
-  function fill(r,e){r.style.fill=color.c;r.dataset.f=1;r.classList.remove('squish');void canvas.offsetWidth;r.classList.add('squish');A.paint();FX.sparkle(e.clientX,e.clientY,.6);
-    if(!rewarded&&regions.every(x=>x.dataset.f)){rewarded=true;api.later(()=>api.win(null),700)}}
+  let fills=0;function fill(r,e){fills++;if(fills%5===0&&!regions.every(x=>x.dataset.f))api.say(pick([`${cap(color.n)} đẹp quá!`,'Rio tô đẹp ghê!','Tô tiếp chỗ khác nào!']));r.style.fill=color.c;r.dataset.f=1;r.classList.remove('squish');void canvas.offsetWidth;r.classList.add('squish');A.paint();FX.sparkle(e.clientX,e.clientY,.6);
+    if(!rewarded&&regions.every(x=>x.dataset.f)){rewarded=true;api.say('Rio tô xong cả bức tranh rồi! Đẹp quá!');api.later(()=>api.win(null),1600)}}
   $$('.crayon',s).forEach(b=>b.addEventListener('click',()=>{color=CRAYONS[+b.dataset.i];$$('.crayon',s).forEach(x=>x.classList.toggle('on',x===b));A.tap();api.say(cap(color.n))}));
   s.querySelector('.prev').addEventListener('click',()=>{A.whoosh();load(pi-1)});s.querySelector('.next').addEventListener('click',()=>{A.whoosh();load(pi+1)});
   load(0)}
@@ -1443,12 +1453,14 @@ function gPeek(api){
   const lay=()=>fitGrid(grid,grid.children.length||3,1,22);const ro=new ResizeObserver(lay);ro.observe(grid);api.cleanup.push(()=>ro.disconnect());
   function round(){n=S.age===2?3:4;revealed=0;const as=shuffle(ANIMALS).slice(0,n),type=pick(['bush','box']),bc=shuffle(['#F0503A','#3D95F0','#B36AD8','#2BB5A8']);
     grid.innerHTML=as.map((a,i)=>`<button class="hide ${type}" data-k="${a.k}" aria-label="Chỗ trốn số ${i+1}"><div class="who-clip"><div class="who">${wrap(ART[a.k])}</div></div><div class="cover">${type==='bush'?wrap(BUSH,'0 0 160 120'):`<div class="boxbody">${wrap(boxI(bc[i]),'0 0 160 120')}</div><div class="lid">${wrap(lidI(shade(bc[i],-.12)),'0 0 160 44')}</div>`}</div></button>`).join('');
-    lay();$$('.hide',grid).forEach(h=>h.addEventListener('pointerdown',e=>{e.preventDefault();open(h)}))}
+    lay();$$('.hide',grid).forEach(h=>h.addEventListener('pointerdown',e=>{e.preventDefault();open(h)}));idleT=0;
+    api.later(()=>api.say(type==='bush'?`Có ${NUM[n]} bụi cây. Ai đang trốn sau bụi cây nhỉ?`:`Có ${NUM[n]} hộp quà. Ai đang trốn trong hộp nhỉ?`),round.n++?300:2600)}
   function open(h){if(h.classList.contains('open')||h._busy)return;h._busy=true;const a=AN(h.dataset.k);h.classList.remove('peek');restart(h,'rustle',400);A.rustle();
-    api.later(()=>{h.classList.add('open');A.boing();const c=centerOf(h);FX.sparkle(c.x,c.y-c.h*.2);api.say(`Ú òa! ${cap(a.n)}!`);api.later(()=>A.animal(a.k),700);revealed++;
-      if(revealed===n)api.later(()=>api.win(round),2400)},400)}
+    api.later(()=>{h.classList.add('open');A.boing();const c=centerOf(h);FX.sparkle(c.x,c.y-c.h*.2);idleT=0;api.say(`Ú òa! ${cap(a.n)}! ${cap(a.snd)}!`);api.later(()=>A.animal(a.k),700);revealed++;
+      if(revealed===n)api.later(()=>{api.say('Rio tìm thấy hết các bạn rồi! Giỏi quá!');api.later(()=>api.win(round),1500)},1900)},400)}
+  let idleT=0;api.every(()=>{if(++idleT===3&&revealed<n)api.say('Nghe có tiếng sột soạt kìa! Rio chạm thử nhé!')},3000);
   api.every(()=>{const hid=$$('.hide:not(.open)',grid).filter(h=>!h._busy);if(!hid.length)return;const h=pick(hid);h.classList.add('peek');api.later(()=>h.classList.remove('peek'),900)},4200);
-  round()}
+  round.n=0;round()}
 
 function gMemory(api){
   const s=api.stage;s.innerHTML=`<div class="memo"><div class="cards grid"></div></div>`;const grid=s.querySelector('.cards');let open=[],lock=false,matched=0,pairs=2;
