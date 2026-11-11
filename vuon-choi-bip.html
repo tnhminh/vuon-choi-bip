@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <title>Vườn Chơi Cu Tí</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -176,6 +177,12 @@ body{background:linear-gradient(180deg,#8FD3EE 0%,#B5E4F5 46%,#D9F2F8 100%)}
 /* ---------- 1 bubbles ---------- */
 .stage-bubbles{--stage:linear-gradient(#BFEAF7,#7FCBE6)}
 /* Gấu tìm mật: side-scrolling meadow walk */
+.br-view{position:absolute;inset:0}
+.br-3d{position:absolute;inset:0;width:100%;height:100%;display:block}
+.br-loading{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font:700 clamp(18px,3vmin,26px)/1.2 var(--display);color:var(--ink);pointer-events:none}
+.br-loading span{width:clamp(70px,14vmin,110px);height:clamp(70px,14vmin,110px);animation:wob 1.2s ease-in-out infinite}
+.br-bounce{transform-origin:50% 100%}
+.br-cuti .bipsvg{width:100%;height:100%}
 .stage-bear{--stage:linear-gradient(#9ED8F0 0%,#CFEFF9 55%,#E8F6EC 100%);cursor:pointer}
 .br-layer{position:absolute;left:0;display:flex;will-change:transform;pointer-events:none}
 .br-layer svg{flex:none;height:100%}
@@ -207,6 +214,7 @@ body{background:linear-gradient(180deg,#8FD3EE 0%,#B5E4F5 46%,#D9F2F8 100%)}
 .br-progress{position:absolute;left:50%;translate:-50% 0;top:22px;z-index:5;width:min(30%,220px);height:18px;border-radius:999px;border:3px solid var(--ink);background:rgba(255,255,255,.8);pointer-events:none}
 .br-progress i{position:absolute;inset:0;width:var(--p,0%);border-radius:999px;background:linear-gradient(90deg,#FFD25A,#F29A12)}
 .br-progress span{position:absolute;right:-14px;top:50%;width:34px;height:34px;translate:0 -50%}
+@media (max-width:560px){.br-progress{top:auto;bottom:22px;width:min(60%,240px)}}
 .br-progress em{position:absolute;top:50%;left:var(--p,0%);width:26px;height:26px;translate:-50% -50%}
 /* daily routines */
 .stage-hygiene{--stage:repeating-linear-gradient(0deg,transparent 0 46px,rgba(255,255,255,.55) 46px 49px),repeating-linear-gradient(90deg,#CDEFFF 0 46px,rgba(255,255,255,.55) 46px 49px)}
@@ -1522,67 +1530,197 @@ const BR_OBS={rock:{w:15,h:11,art:()=>wrap(stoneI(),'8 28 84 58'),name:'hòn đ�
 const BR_FRUIT={apple:{art:()=>wrap(appleI(),'0 0 100 100'),name:'quả táo'},orange:{art:()=>wrap(orangeI(),'0 0 100 100'),name:'quả cam'},honey:{art:()=>wrap(honeyI(),'10 20 80 80'),name:'hũ mật ong'}};
 tileArt.bear=wrap(`<g transform="translate(-4 18) scale(.86)">${bearI()}</g><g transform="translate(72 2) scale(.42)">${honeyI()}</g>`,'0 0 120 120');
 
-function gBear(api){
-  const s=api.stage;
-  const farTile=`<svg viewBox="0 0 400 100" preserveAspectRatio="none"><path d="M0 60 C60 26 130 28 200 52 C270 76 340 34 400 60 V100 H0Z" fill="url(#gHillFar)"/></svg>`;
-  const tree=(x,k)=>`<rect x="${x-7}" y="${92-40*k}" width="14" height="${40*k+10}" rx="5" fill="#B8783F" ${st(3.5)}/><path d="M${x} ${100-46*k} C${x-40*k} ${100-40*k} ${x-46*k} ${100-80*k} ${x-20*k} ${100-88*k} C${x-16*k} ${100-112*k} ${x+20*k} ${100-112*k} ${x+24*k} ${100-90*k} C${x+48*k} ${100-84*k} ${x+44*k} ${100-44*k} ${x} ${100-46*k}Z" fill="#5FAE45" ${st(3.5)}/>`;
-  const midTile=`<svg viewBox="0 0 400 160" preserveAspectRatio="xMidYMax slice"><g transform="translate(0 50)" class="tx" filter="url(#plush)">${tree(70,1)}${tree(250,.8)}<path d="M320 102 C300 102 300 84 316 84 C318 70 340 68 346 80 C360 74 374 88 364 102Z" fill="#6DBB52" ${st(3)}/></g></svg>`;
-  const groundTile=`<svg viewBox="0 0 400 60" preserveAspectRatio="none"><rect y="8" width="400" height="60" fill="#C4925E"/><rect y="20" width="400" height="6" fill="#B07E4C" opacity=".6"/><path d="M0 10 Q25 -2 50 10 T100 10 T150 10 T200 10 T250 10 T300 10 T350 10 T400 10 V22 H0Z" fill="#6FBE5A"/><path d="M0 10 Q25 -2 50 10 T100 10 T150 10 T200 10 T250 10 T300 10 T350 10 T400 10" fill="none" stroke="${INK}" stroke-width="3"/><path d="M0 22 H400" stroke="#4E9A47" stroke-width="2.5"/>
-    <g fill="#A97A4A"><ellipse cx="60" cy="40" rx="8" ry="4"/><ellipse cx="190" cy="48" rx="6" ry="3"/><ellipse cx="320" cy="38" rx="9" ry="4"/></g><g fill="#FF8FC1" ${st(1.5)}><circle cx="120" cy="13" r="4"/><circle cx="290" cy="12" r="4"/></g></svg>`;
-  s.innerHTML=`<div class="br-layer br-far">${farTile.repeat(3)}</div><div class="br-layer br-mid">${midTile.repeat(3)}</div><div class="br-layer br-ground">${groundTile.repeat(3)}</div>
-    <div class="br-world"></div><div class="br-shadow"></div><div class="br-bear walk">${wrap(bearI(),'0 0 130 110')}</div>
-    <div class="br-hud"><span class="ic">${wrap(appleI(),'0 0 100 100')}</span><b>0</b></div><div class="br-progress"><i></i><em>${wrap(`<g transform="scale(.92)">${bearI()}</g>`,'0 0 130 110')}</em><span>${wrap(honeyI(),'10 20 80 80')}</span></div>`;
-  const world=s.querySelector('.br-world'),bearEl=s.querySelector('.br-bear'),shadow=s.querySelector('.br-shadow'),hud=s.querySelector('.br-hud'),hudN=hud.querySelector('b'),prog=s.querySelector('.br-progress');
-  const layers=[[s.querySelector('.br-far'),.2],[s.querySelector('.br-mid'),.5],[s.querySelector('.br-ground'),1]];
-  let u=1,W=1;const resize=()=>{u=s.clientHeight/100;W=s.clientWidth;s.style.setProperty('--u',u+'px');
-    layers.forEach(([el])=>{const tw=Math.max(W,el.clientHeight*2.2);[...el.children].forEach(c=>c.style.width=tw+'px');el._tw=tw})};
-  const ro=new ResizeObserver(resize);ro.observe(s);api.cleanup.push(()=>ro.disconnect());resize();
+const bounceI=()=>`<path d="M38 52 L35 86 C35 91 65 91 65 86 L62 52Z" fill="#FFF3DC" ${st(4)}/><path d="M10 56 C10 22 90 22 90 56Z" fill="#3D95F0" ${st(4)}/><circle cx="32" cy="40" r="6" fill="#fff"/><circle cx="56" cy="32" r="5" fill="#fff"/><circle cx="72" cy="46" r="5" fill="#fff"/><path d="M40 70 q10 -6 20 0 M40 78 q10 -6 20 0" fill="none" stroke="#3D95F0" stroke-width="3" stroke-linecap="round"/>`;
+BR_OBS.bee={w:11,h:13,art:()=>wrap(beeI(),'8 14 84 70'),name:'chú ong'};
+BR_OBS.bounce={w:13,h:12,art:()=>wrap(bounceI(),'8 20 84 74'),name:'nấm nhún'};
+/* Worlds cycle as Rio finishes levels. Each world has its own look and obstacle mix. */
+const BR_THEMES=[
+  {name:'Đồng cỏ xanh',k2:['rock','log','bush'],k3:['rock','log','bush','mush'],sky:'linear-gradient(#9ED8F0 0%,#CFEFF9 55%,#E8F6EC 100%)',grass:'#6FBE5A',edge:'#4E9A47',dirt:'#C4925E',deco:'trees'},
+  {name:'Rừng cây',k2:['log','bush','bounce'],k3:['log','mush','bush','bounce'],sky:'linear-gradient(#86C9E0 0%,#BFE3D9 60%,#D7EBD2 100%)',grass:'#5DA84B',edge:'#3F7F39',dirt:'#A97448',deco:'pines'},
+  {name:'Bờ suối',k2:['rock','log'],k3:['rock','log','bounce'],sky:'linear-gradient(#9BD6F2 0%,#D4F0FA 60%,#E6F7F2 100%)',grass:'#7CC66A',edge:'#4E9A47',dirt:'#C49A6C',deco:'river'},
+  {name:'Vườn hoa của ong',k2:['bee','bush','bounce'],k3:['bee','bush','bounce','mush'],sky:'linear-gradient(#A8DDF2 0%,#E9F5FB 60%,#FCEFF4 100%)',grass:'#78C463',edge:'#4E9A47',dirt:'#C4925E',deco:'flowers'}];
+const BR_G=84;
+function brLevel(lv,age2){const th=BR_THEMES[lv%BR_THEMES.length];const L=Math.min(age2?330:440,(age2?230:300)+lv*(age2?15:20));const kinds=age2?th.k2:th.k3;
+  const obs=[],fruits=[];let x=48,prev='';
+  while(x<L-40){let k=pick(kinds);if(k===prev&&kinds.length>1)k=pick(kinds.filter(q=>q!==prev));prev=k;const o=BR_OBS[k];obs.push({x,w:o.w,h:o.h,k,lift:0,lifting:false,squish:0});
+    if(k!=='bee')fruits.push({k:pick(['apple','orange']),x:x+o.w/2-4.5,y:BR_G-44});
+    const gap=age2?rand(38,50):rand(30,44);const n=randInt(1,age2?2:3);for(let i=0;i<n;i++)fruits.push({k:pick(['apple','orange']),x:x+o.w+10+i*9,y:BR_G-10});x+=o.w+gap}
+  fruits.push({k:'honey',x:L*.55,y:BR_G-27});fruits.forEach(f=>f.got=false);return{th,L,obs,fruits}}
+function brWebGL(){try{const c=document.createElement('canvas');return !!(window.WebGLRenderingContext&&(c.getContext('webgl2')||c.getContext('webgl')))}catch(e){return false}}
+let BR_THREE=null;
+function brLoad3D(){return BR_THREE||(BR_THREE=Promise.all([import('three'),import('three/addons/loaders/GLTFLoader.js')]).then(([T,Lm])=>{
+  const load=n=>new Lm.GLTFLoader().loadAsync(`assets/models/${n}.glb`);return Promise.all([load('bear'),load('cuti')]).then(([bear,cuti])=>({T,bear,cuti}))}).catch(e=>{BR_THREE=null;throw e}))}
 
-  const G=84,BX=22.5,HALF=8.5,BH=19;const age2=S.age===2;
+function gBear(api){
+  const s=api.stage,age2=S.age===2;
+  s.innerHTML=`<div class="br-view"></div>
+    <div class="br-hud"><span class="ic">${wrap(appleI(),'0 0 100 100')}</span><b>0</b></div><div class="br-progress"><i></i><em>${wrap(`<g transform="scale(.92)">${bearI()}</g>`,'0 0 130 110')}</em><span>${wrap(honeyI(),'10 20 80 80')}</span></div>
+    <div class="br-loading"><span>${wrap(honeyI(),'10 20 80 80')}</span>Gấu đang chuẩn bị…</div>`;
+  const viewEl=s.querySelector('.br-view'),hud=s.querySelector('.br-hud'),hudN=hud.querySelector('b'),prog=s.querySelector('.br-progress'),loading=s.querySelector('.br-loading');
+  let u=1;const sizeU=()=>{u=s.clientHeight/100;s.style.setProperty('--u',u+'px')};sizeU();
+
+  const G=BR_G,BX=22.5,HALF=8.5,BH=19;
   const WALK=age2?20:26,LEAP=58,JDUR=.85,PEAK=34;
-  let lv=0,L=0,scroll=0,obs=[],fruits=[],got=0,state='walk',jt=0,jy=0,topY=0,waitT=0,hintEl=null,hinted=new Set(),raf=0,last=0,done=false;
-  function put(cls,x,y,w,h,html){const d=document.createElement('div');d.className=cls;Object.entries({x,y,w,h}).forEach(([k,v])=>d.style.setProperty('--'+k,v));d.innerHTML=html;world.appendChild(d);return d}
-  function level(){world.innerHTML='';obs=[];fruits=[];scroll=0;state='walk';jy=0;topY=0;done=false;got=0;hudN.textContent='0';hinted.clear();clearHint();bearEl.className='br-bear walk';
-    L=(age2?230:300)+lv*20;const kinds=age2?['rock','log','bush']:['rock','log','bush','mush'];let x=48;
-    while(x<L-40){const k=pick(kinds),o=BR_OBS[k];obs.push({x,w:o.w,h:o.h,k,el:put('br-obs',x,G-o.h,o.w,o.h,o.art())});
-      fruits.push(mkFruit(pick(['apple','orange']),x+o.w/2-4.5,G-44));
-      const gap=age2?rand(38,50):rand(30,44);const n=randInt(1,age2?2:3);for(let i=0;i<n;i++)fruits.push(mkFruit(pick(['apple','orange']),x+o.w+10+i*9,G-10));x+=o.w+gap}
-    fruits.push(mkFruit('honey',L*.55,G-PEAK*.8));
-    put('br-goal-glow',L-6,G-34,34,34,'');put('br-goal',L,G-22,22,22,wrap(honeyI(),'10 20 80 80'));put('br-bee',L+3,G-40,8,8,wrap(beeI(),'0 0 100 100'));
-    api.say(lv===0?'Gấu đi tìm mật ong! Rio chạm vào màn hình để gấu nhảy nhé!':'Gấu đi tiếp nào! Mật ong ở phía trước!')}
-  function mkFruit(k,x,y){return{k,x,y,got:false,el:put('br-fruit',x,y,9,9,BR_FRUIT[k].art())}}
-  function clearHint(){if(hintEl){hintEl.remove();hintEl=null}}
-  function jump(){if(done||state==='jump')return;if(state==='top'){state='jump';jt=0;topY=jy;A.boing();clearHint();return}state='jump';jt=0;topY=0;A.boing();clearHint();bearEl.classList.remove('walk')}
-  s.addEventListener('pointerdown',e=>{e.preventDefault();jump()});
-  const key=e=>{if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();jump()}};document.addEventListener('keydown',key);api.cleanup.push(()=>document.removeEventListener('keydown',key));
+  let view=null,lv=0,D=null,scroll=0,got=0,state='walk',jt=0,jy=0,topY=0,pk=PEAK,waitT=0,hintEl=null,hinted=new Set(),raf=0,last=0,done=false,bounced=false,tm=0;
   const bx=()=>scroll+BX;
-  const over=o=>bx()+HALF>o.x+1&&bx()-HALF<o.x+o.w-1;
-  function step(dt){if(done)return;let v=0;
-    if(state==='jump'){jt+=dt/JDUR;v=LEAP;const p=Math.min(1,jt);jy=topY*(1-p)+4*PEAK*p*(1-p);
-      if(p>=1){const o=obs.find(over);if(o){state='top';jy=o.h}else{state='walk';jy=0;bearEl.classList.add('walk');A.soft()}}}
-    else if(state==='top'){v=WALK;const o=obs.find(over);if(!o){state='fall';}}
-    else if(state==='fall'){v=WALK;jy=Math.max(0,jy-dt*90);if(jy===0){state='walk';bearEl.classList.add('walk')}}
-    else if(state==='walk'||state==='wait'){const nx=obs.find(o=>o.x+o.w>bx()-HALF);
-      if(nx&&nx.x-(bx()+HALF)<2.5){if(state!=='wait'){state='wait';waitT=0;bearEl.classList.remove('walk');A.soft()}waitT+=dt;
-        if(!hinted.has(nx)&&waitT>(age2?.2:1.2)){hinted.add(nx);api.say(`Có ${BR_OBS[nx.k].name}! Rio chạm để gấu nhảy qua nào!`)}
-        if(!hintEl&&waitT>(age2?.4:2)){hintEl=document.createElement('div');hintEl.className='br-hint';hintEl.innerHTML=ICON.hand;s.appendChild(hintEl)}}
-      else{if(state==='wait'){state='walk';bearEl.classList.add('walk')}v=WALK}}
+  const solid=o=>!(o.k==='bee'&&o.lift>.5);
+  const over=o=>solid(o)&&bx()+HALF>o.x+1&&bx()-HALF<o.x+o.w-1;
+  const ahead=()=>D.obs.find(o=>solid(o)&&o.x+o.w>bx()-HALF);
+  function setState(st){state=st;view.anim(st==='walk'||st==='top'||st==='fall'?'walk':st==='wait'?'idle':st==='jump'?'jump':'eat')}
+  function level(){D=brLevel(lv,age2);scroll=0;jy=0;topY=0;pk=PEAK;done=false;got=0;bounced=false;hudN.textContent='0';hinted.clear();clearHint();
+    s.style.setProperty('--stage',D.th.sky);view.build(D);setState('walk');
+    api.say(lv===0?'Gấu đi tìm mật ong! Rio chạm vào màn hình để gấu nhảy nhé!':`Gấu tới ${D.th.name}! Mật ong ở phía trước!`)}
+  function clearHint(){if(hintEl){hintEl.remove();hintEl=null}}
+  function startJump(from,peak){jt=0;topY=from;pk=peak;A.boing();clearHint();setState('jump')}
+  function tap(){if(!view||done||state==='jump')return;
+    if(state==='wait'){const nx=ahead();if(nx&&nx.k==='bee'&&!nx.lifting){nx.lifting=true;A.whoosh?A.whoosh():A.soft();clearHint();api.say('Ong ơi, cho gấu đi nhờ nhé! Vo ve!');return}}
+    startJump(state==='top'?jy:0,PEAK)}
+  s.addEventListener('pointerdown',e=>{e.preventDefault();tap()});
+  const key=e=>{if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();tap()}};document.addEventListener('keydown',key);api.cleanup.push(()=>document.removeEventListener('keydown',key));
+  function step(dt){tm+=dt;for(const o of D.obs){if(o.lifting)o.lift=Math.min(1,o.lift+dt*1.6);if(o.squish>0)o.squish=Math.max(0,o.squish-dt*2.5)}
+    if(done)return;let v=0;
+    if(state==='jump'){jt+=dt/JDUR;v=LEAP;const p=Math.min(1,jt);jy=topY*(1-p)+4*pk*p*(1-p);
+      if(p>=1){const o=D.obs.find(over);
+        if(o&&o.k==='bounce'){o.squish=1;if(!bounced){bounced=true;api.say('Boing! Nấm nhún bật gấu lên cao!')}startJump(o.h,PEAK*1.3)}
+        else if(o){jy=o.h;setState('top')}else{jy=0;setState('walk');A.soft()}}}
+    else if(state==='top'){v=WALK;if(!D.obs.find(over))setState('fall')}
+    else if(state==='fall'){v=WALK;jy=Math.max(0,jy-dt*90);if(jy===0)setState('walk')}
+    else if(state==='walk'||state==='wait'){const nx=ahead();
+      if(nx&&nx.x-(bx()+HALF)<2.5){if(state!=='wait'){setState('wait');waitT=0;A.soft()}waitT+=dt;
+        if(!hinted.has(nx)&&waitT>(age2?.2:1.2)){hinted.add(nx);api.say(nx.k==='bee'?'Có chú ong! Rio chạm để nhờ ong bay lên nhé!':`Có ${BR_OBS[nx.k].name}! Rio chạm để gấu nhảy qua nào!`)}
+        if(!hintEl&&!nx.lifting&&waitT>(age2?.4:2)){hintEl=document.createElement('div');hintEl.className='br-hint';hintEl.innerHTML=ICON.hand;s.appendChild(hintEl)}}
+      else{if(state==='wait')setState('walk');v=WALK}}
     scroll+=v*dt;
-    for(const f of fruits){if(f.got)continue;const fy=f.y+4.5,by=G-jy-BH/2;if(Math.abs(f.x+4.5-bx())<9&&Math.abs(fy-by)<13){f.got=true;f.el.classList.add('got');collect(f)}}
-    if(bx()>=L-2){finish()}}
-  function collect(f){got++;hudN.textContent=got;restart(hud,'bump',400);A.pop(got);const r=f.el.getBoundingClientRect();FX.sparkle(r.left+r.width/2,r.top+r.height/2);
+    for(const f of D.fruits){if(f.got)continue;const fy=f.y+4.5,by=G-jy-BH/2;if(Math.abs(f.x+4.5-bx())<9&&Math.abs(fy-by)<13){f.got=true;collect(f)}}
+    if(bx()>=D.L-2)finish()}
+  function collect(f){got++;hudN.textContent=got;restart(hud,'bump',400);A.pop(got);const p=view.collect(f);if(p)FX.sparkle(p.x,p.y);
     if(f.k==='honey')api.say('Một hũ mật ong! Ngon quá!');else if(got<=5)api.say(cap(NUM[got])+'!');else if(got%5===0)api.say(`${cap(BR_FRUIT[f.k].name)}! Gấu có nhiều quả quá!`)}
-  function finish(){done=true;state='walk';jy=0;bearEl.className='br-bear eat';clearHint();A.fanfare();
+  function finish(){done=true;jy=0;setState('eat');clearHint();view.cheer();A.fanfare();
     api.say(`Gấu tìm được mật ong rồi! Gấu đã nhặt được ${got>10?'rất nhiều':NUM[got]||got} quả. Giỏi quá!`);
     api.later(()=>api.win(()=>{lv++;level()}),2400)}
-  function render(){world.style.transform=`translate3d(${-scroll*u}px,0,0)`;bearEl.style.transform=`translate3d(0,${-jy*u}px,0)`;
-    const sc=Math.max(.45,1-jy/60);shadow.style.transform=`scale(${sc})`;shadow.style.opacity=sc;
-    layers.forEach(([el,f])=>{const tw=el._tw||W;el.style.transform=`translate3d(${-((scroll*u*f)%tw)}px,0,0)`});
-    prog.style.setProperty('--p',Math.min(100,scroll/(L-BX)*100)+'%')}
   function loop(t){if(!api.alive)return;const dt=Math.min(.05,(t-last)/1000||0);last=t;
-    if($('#reward').hidden&&!document.hidden)step(dt);render();raf=requestAnimationFrame(loop)}
-  api.cleanup.push(()=>cancelAnimationFrame(raf));
-  level();render();raf=requestAnimationFrame(t=>{last=t;loop(t)})}
+    if($('#reward').hidden&&!document.hidden)step(dt);view.frame({scroll,jy,dt,t:tm,D,u});prog.style.setProperty('--p',Math.min(100,scroll/(D.L-BX)*100)+'%');raf=requestAnimationFrame(loop)}
+  const ro=new ResizeObserver(()=>{sizeU();view&&view.resize()});ro.observe(s);
+  api.cleanup.push(()=>{ro.disconnect();cancelAnimationFrame(raf);view&&view.destroy()});
+  let started=false;
+  function start(v){if(started||!api.alive){v.destroy();return}started=true;view=v;loading.remove();level();view.frame({scroll,jy,dt:0,t:0,D,u});raf=requestAnimationFrame(t=>{last=t;loop(t)})}
+  const go2D=()=>start(brView2D(viewEl,s));
+  if(S.hq&&brWebGL()){const timer=setTimeout(go2D,9000);api.cleanup.push(()=>clearTimeout(timer));
+    brLoad3D().then(R=>{clearTimeout(timer);if(!api.alive||started)return;let v;try{v=brView3D(viewEl,s,R)}catch(e){console.warn('3D view failed, using 2D',e);go2D();return}start(v)}).catch(e=>{clearTimeout(timer);console.warn('3D assets failed, using 2D',e);if(api.alive)go2D()})}
+  else go2D()}
+
+/* ---------- 2D felt view (also the fallback) ---------- */
+function brView2D(root,s){
+  const tree=(x,k)=>`<rect x="${x-7}" y="${92-40*k}" width="14" height="${40*k+10}" rx="5" fill="#B8783F" ${st(3.5)}/><path d="M${x} ${100-46*k} C${x-40*k} ${100-40*k} ${x-46*k} ${100-80*k} ${x-20*k} ${100-88*k} C${x-16*k} ${100-112*k} ${x+20*k} ${100-112*k} ${x+24*k} ${100-90*k} C${x+48*k} ${100-84*k} ${x+44*k} ${100-44*k} ${x} ${100-46*k}Z" fill="#5FAE45" ${st(3.5)}/>`;
+  const pine=(x,k)=>`<rect x="${x-5}" y="${100-14*k}" width="10" height="${14*k+4}" fill="#8E5A32" ${st(3)}/>${[0,1,2].map(i=>`<path d="M${x-(34-i*8)*k} ${100-(14+i*26)*k} L${x} ${100-(52+i*26)*k} L${x+(34-i*8)*k} ${100-(14+i*26)*k}Z" fill="${i%2?'#3F8F45':'#4FA052'}" ${st(3)}/>`).join('')}`;
+  const flower=(x,k,c)=>`<path d="M${x} 104 V${104-50*k}" stroke="#3E8A33" stroke-width="4"/><g transform="translate(${x} ${104-54*k}) scale(${k})">${[0,72,144,216,288].map(a=>`<ellipse rx="9" ry="13" transform="rotate(${a}) translate(0 -12)" fill="${c}" ${st(2.5)}/>`).join('')}<circle r="8" fill="#FFC93C" ${st(2.5)}/></g>`;
+  const reeds=x=>`<path d="M${x} 104 C${x-4} 80 ${x-2} 66 ${x-8} 52 M${x+6} 104 C${x+6} 84 ${x+10} 72 ${x+12} 60" stroke="#4E9A47" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="${x-8}" cy="50" rx="4" ry="9" fill="#8E5A32" ${st(2)}/>`;
+  const mid={trees:`${tree(70,1)}${tree(250,.8)}<path d="M320 102 C300 102 300 84 316 84 C318 70 340 68 346 80 C360 74 374 88 364 102Z" fill="#6DBB52" ${st(3)}/>`,
+    pines:`${pine(60,1.1)}${pine(160,.8)}${pine(270,1.2)}${pine(360,.9)}`,
+    river:`${tree(90,.9)}${reeds(200)}${reeds(230)}<path d="M300 102 C280 102 280 84 296 84 C298 70 320 68 326 80 C340 74 354 88 344 102Z" fill="#6DBB52" ${st(3)}/>`,
+    flowers:`${flower(50,1,'#FF8FC1')}${flower(120,.7,'#B48CF0')}${flower(200,1.1,'#FFFFFF')}${flower(290,.8,'#FF7E6B')}${flower(360,1,'#FFC93C')}`};
+  const farTile=`<svg viewBox="0 0 400 100" preserveAspectRatio="none"><path d="M0 60 C60 26 130 28 200 52 C270 76 340 34 400 60 V100 H0Z" fill="url(#gHillFar)"/></svg>`;
+  const groundTile=th=>`<svg viewBox="0 0 400 60" preserveAspectRatio="none"><rect y="8" width="400" height="60" fill="${th.dirt}"/>${th.deco==='river'?`<rect y="30" width="400" height="30" fill="#7CC7E3"/><path d="M20 40 h40 M140 48 h50 M260 38 h36 M330 50 h44" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/><path d="M0 30 H400" stroke="${INK}" stroke-width="2.5"/>`:`<rect y="20" width="400" height="6" fill="#000" opacity=".08"/>`}<path d="M0 10 Q25 -2 50 10 T100 10 T150 10 T200 10 T250 10 T300 10 T350 10 T400 10 V22 H0Z" fill="${th.grass}"/><path d="M0 10 Q25 -2 50 10 T100 10 T150 10 T200 10 T250 10 T300 10 T350 10 T400 10" fill="none" stroke="${INK}" stroke-width="3"/><path d="M0 22 H400" stroke="${th.edge}" stroke-width="2.5"/><g fill="#FF8FC1" ${st(1.5)}><circle cx="120" cy="13" r="4"/><circle cx="290" cy="12" r="4"/></g></svg>`;
+  root.innerHTML=`<div class="br-layer br-far">${farTile.repeat(3)}</div><div class="br-layer br-mid"></div><div class="br-layer br-ground"></div>
+    <div class="br-world"></div><div class="br-shadow"></div><div class="br-bear walk">${wrap(bearI(),'0 0 130 110')}</div>`;
+  const world=root.querySelector('.br-world'),bearEl=root.querySelector('.br-bear'),shadow=root.querySelector('.br-shadow'),midEl=root.querySelector('.br-mid'),groundEl=root.querySelector('.br-ground');
+  const layers=[[root.querySelector('.br-far'),.2],[midEl,.5],[groundEl,1]];
+  let W=1,cuti=null;
+  function resize(){W=s.clientWidth;layers.forEach(([el])=>{const tw=Math.max(W,el.clientHeight*2.2);[...el.children].forEach(c=>c.style.width=tw+'px');el._tw=tw})}
+  function put(cls,x,y,w,h,html){const d=document.createElement('div');d.className=cls;Object.entries({x,y,w,h}).forEach(([k,v])=>d.style.setProperty('--'+k,v));d.innerHTML=html;world.appendChild(d);return d}
+  return{
+    build(D){const th=D.th;world.innerHTML='';
+      midEl.innerHTML=`<svg viewBox="0 0 400 160" preserveAspectRatio="xMidYMax slice"><g transform="translate(0 50)" class="tx" filter="url(#plush)">${mid[th.deco]}</g></svg>`.repeat(3);
+      groundEl.innerHTML=groundTile(th).repeat(3);resize();
+      D.obs.forEach(o=>o.el=put('br-obs br-'+o.k,o.x,BR_G-o.h,o.w,o.h,BR_OBS[o.k].art()));
+      D.fruits.forEach(f=>f.el=put('br-fruit',f.x,f.y,9,9,BR_FRUIT[f.k].art()));
+      put('br-goal-glow',D.L-6,BR_G-34,34,34,'');put('br-goal',D.L,BR_G-22,22,22,wrap(honeyI(),'10 20 80 80'));put('br-bee',D.L+3,BR_G-40,8,8,wrap(beeI(),'0 0 100 100'));
+      cuti=put('br-cuti',D.L+20,BR_G-17,15,15,MASCOT.replace('<svg','<svg class="bipsvg"'))},
+    anim(a){bearEl.className='br-bear'+(a==='walk'?' walk':a==='eat'?' eat':'')},
+    frame({scroll,jy,t,D,u}){world.style.transform=`translate3d(${-scroll*u}px,0,0)`;bearEl.style.transform=`translate3d(0,${-jy*u}px,0)`;
+      const sc=Math.max(.45,1-jy/60);shadow.style.transform=`scale(${sc})`;shadow.style.opacity=sc;
+      layers.forEach(([el,f])=>{const tw=el._tw||W;el.style.transform=`translate3d(${-((scroll*u*f)%tw)}px,0,0)`});
+      for(const o of D.obs){if(o.k==='bee')o.el.style.transform=`translateY(${(-o.lift*30+Math.sin(t*5)*1.2)*u}px)`;else if(o.k==='bounce')o.el.style.transform=`scale(${1+o.squish*.15},${1-o.squish*.25})`}},
+    collect(f){f.el.classList.add('got');const r=f.el.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2}},
+    cheer(){if(cuti)restart(cuti,'bump',600)},
+    resize,
+    destroy(){root.innerHTML=''}}}
+
+/* ---------- 3D plush view: three.js + rigged GLB characters ---------- */
+function brView3D(root,s,R){
+  const T=R.T,K=10;/* 10 game units (u) = 1 metre in the 3D scene */
+  const renderer=new T.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.75));renderer.domElement.className='br-3d';root.appendChild(renderer.domElement);
+  const scene=new T.Scene(),cam=new T.PerspectiveCamera(30,1,.1,300);
+  scene.add(new T.HemisphereLight(0xffffff,0x8a6a4a,1.25));const sun=new T.DirectionalLight(0xfff2d6,1.5);sun.position.set(-4,10,8);scene.add(sun);
+  const mats=new Map(),M=(c,o={})=>{const k=c+JSON.stringify(o);if(!mats.has(k))mats.set(k,new T.MeshStandardMaterial({color:c,roughness:.9,metalness:0,...o}));return mats.get(k)};
+  const geos=[];const G_=g=>{geos.push(g);return g};
+  const mesh=(g,c,o)=>new T.Mesh(G_(g),M(c,o));
+  const ball=(r,c,x=0,y=0,z=0,sx=1,sy=1,sz=1)=>{const m=mesh(new T.SphereGeometry(r,16,12),c);m.position.set(x,y,z);m.scale.set(sx,sy,sz);return m};
+  const grp=(...ch)=>{const g=new T.Group();ch.forEach(c=>g.add(c));return g};
+  // characters from GLB
+  const bear=R.bear.scene;bear.scale.setScalar(1.45);const bearMix=new T.AnimationMixer(bear);const clip=n=>R.bear.animations.find(a=>a.name===n);
+  const acts={};['idle','walk','jump','eat'].forEach(n=>{const c=clip(n);if(c){acts[n]=bearMix.clipAction(c);if(n==='jump'){acts[n].setLoop(T.LoopOnce);acts[n].clampWhenFinished=true}}});
+  let cur=null;const play=n=>{const a=acts[n];if(!a||a===cur&&n!=='jump')return;a.reset().play();if(cur&&cur!==a)a.crossFadeFrom(cur,.15,false);cur=a};
+  scene.add(bear);
+  const cuti=R.cuti.scene;cuti.scale.setScalar(1.25);const cutiMix=new T.AnimationMixer(cuti);
+  const cIdle=cutiMix.clipAction(R.cuti.animations.find(a=>a.name==='idle')),cCheer=cutiMix.clipAction(R.cuti.animations.find(a=>a.name==='cheer'));cIdle.play();scene.add(cuti);
+  const shadow=new T.Mesh(G_(new T.CircleGeometry(.75,24)),new T.MeshBasicMaterial({color:0x2B3550,transparent:true,opacity:.22,depthWrite:false}));shadow.rotation.x=-Math.PI/2;shadow.position.y=.01;scene.add(shadow);
+  let levelGroup=null;
+  const props={
+    rock:()=>{const m=mesh(new T.DodecahedronGeometry(.8,1),'#A9B0BE');m.scale.set(.95,.7,.8);m.position.y=.5;return m},
+    log:()=>{const b=mesh(new T.CylinderGeometry(.5,.5,1.8,20),'#B8783F');b.rotation.z=Math.PI/2;const e=mesh(new T.CircleGeometry(.48,20),'#E0A463');e.position.set(.91,0,0);e.rotation.y=Math.PI/2;const g=grp(b,e);g.rotation.y=-.35;g.position.y=.5;return g},
+    bush:()=>grp(ball(.55,'#5FAE45',-.35,.45,0),ball(.65,'#6DBB52',.1,.6,.05),ball(.5,'#58A84A',.5,.42,-.05),ball(.35,'#FF8FC1',.2,1.05,.35,1,1,.5)),
+    mush:()=>{const st_=mesh(new T.CylinderGeometry(.22,.28,.8,14),'#FFF3DC');st_.position.y=.4;const cap=mesh(new T.SphereGeometry(.62,20,12,0,Math.PI*2,0,Math.PI/2),'#F0603F');cap.position.y=.72;cap.scale.y=.85;return grp(st_,cap,ball(.1,'#fff',-.25,1.05,.3),ball(.09,'#fff',.2,1.15,.25),ball(.08,'#fff',.05,1.0,.5))},
+    bounce:()=>{const st_=mesh(new T.CylinderGeometry(.24,.3,.75,14),'#FFF3DC');st_.position.y=.38;const cap=mesh(new T.SphereGeometry(.7,20,12,0,Math.PI*2,0,Math.PI/2),'#3D95F0');cap.position.y=.7;cap.scale.y=.8;const g=grp(st_,cap,ball(.1,'#fff',-.3,1.0,.35),ball(.09,'#fff',.25,1.1,.3));g.userData.squishy=true;return g},
+    bee:()=>{const body=ball(.42,'#FFC93C',0,0,0,1.15,.95,.9);const s1=mesh(new T.TorusGeometry(.4,.07,8,24),'#2B3550');s1.rotation.y=Math.PI/2;s1.position.x=-.1;s1.scale.set(1,.95,.92);const s2=s1.clone();s2.position.x=.18;s2.scale.set(.92,.85,.85);
+      const wm={transparent:true,opacity:.75};const w1=ball(.28,'#ffffff',0,.45,.15,.6,1,.25);w1.material=M('#ffffff',wm);const w2=ball(.28,'#ffffff',0,.45,-.15,.6,1,.25);w2.material=M('#ffffff',wm);
+      const g=grp(body,s1,s2,w1,w2,ball(.06,'#2B3550',.4,.12,.3),ball(.06,'#2B3550',.4,.12,-.3));g.userData.wings=[w1,w2];g.position.y=.75;return g}};
+  const fruitM={apple:()=>grp(ball(.4,'#EE4B36'),(()=>{const m=mesh(new T.CylinderGeometry(.03,.03,.2,6),'#7A4A2A');m.position.y=.45;return m})(),ball(.12,'#5DBB46',.14,.45,0,1.4,.5,.8)),
+    orange:()=>grp(ball(.4,'#FF9F2E'),ball(.07,'#5DBB46',0,.4,0)),
+    honey:()=>{const j=mesh(new T.CylinderGeometry(.38,.34,.6,18),'#F7A928',{roughness:.45});const c=mesh(new T.CylinderGeometry(.44,.44,.14,18),'#E0558F');c.position.y=.36;return grp(j,c)}};
+  function decor(g,th,L){const R2=(a,b)=>a+Math.random()*(b-a);
+    for(let x=-12;x<L/K+30;x+=R2(2.2,4.5)){const z=R2(-7,-3.2);
+      if(th.deco==='trees'){const t=mesh(new T.CylinderGeometry(.22,.28,2,10),'#B8783F');t.position.set(x,1,z);g.add(t,ball(1.1,'#5FAE45',x,2.6,z),ball(.8,'#6DBB52',x+.7,2.2,z+.3),ball(.7,'#58A84A',x-.7,2.1,z+.2))}
+      else if(th.deco==='pines'){const t=mesh(new T.CylinderGeometry(.18,.22,1,8),'#8E5A32');t.position.set(x,.5,z);g.add(t);[0,1,2].forEach(i=>{const c=mesh(new T.ConeGeometry(1.2-i*.3,1.3,10),i%2?'#3F8F45':'#4FA052');c.position.set(x,1.4+i*.8,z);g.add(c)})}
+      else if(th.deco==='flowers'){const c=pick(['#FF8FC1','#B48CF0','#FFFFFF','#FF7E6B','#FFC93C']);const stem=mesh(new T.CylinderGeometry(.04,.04,1.4,6),'#3E8A33');stem.position.set(x,.7,z+2);g.add(stem);
+        for(let a=0;a<5;a++){const an=a/5*Math.PI*2;g.add(ball(.2,c,x+Math.cos(an)*.24,1.45+Math.sin(an)*.24,z+2,1,1,.4))}g.add(ball(.15,'#FFC93C',x,1.45,z+2.05));g.add(ball(.9,'#6DBB52',x+1.2,.4,z-1,1.2,.6,1))}
+      else{g.add(ball(.9,'#6DBB52',x,.4,z,1.3,.7,1));if(Math.random()<.5){const r=mesh(new T.CylinderGeometry(.04,.05,1.4,6),'#4E9A47');r.position.set(x+1,.7,z+2.2);r.rotation.z=.15;g.add(r,ball(.08,'#8E5A32',x+1.1,1.45,z+2.2,1,2.4,1))}}}
+    for(let x=-40;x<L/K+60;x+=R2(14,22))g.add(ball(R2(8,12),'#A9D98A',x,-3,-34,1.6,.7,1));
+    const ground=mesh(new T.BoxGeometry(L/K+80,1,9),th.grass);ground.position.set(L/K/2+10,-.5,-1.2);g.add(ground);
+    const dirt=mesh(new T.BoxGeometry(L/K+80,24,.4),th.dirt);dirt.position.set(L/K/2+10,-12.05,3.3);g.add(dirt);
+    if(th.deco==='river'){const w=mesh(new T.BoxGeometry(L/K+80,.1,2.2),'#4FA8DC',{roughness:.2,transparent:true,opacity:.95});w.position.set(L/K/2+10,.02,2.1);g.add(w);
+      for(let x=-5;x<L/K+20;x+=R2(3,6)){const st_=mesh(new T.DodecahedronGeometry(.3,0),'#A9B0BE');st_.position.set(x,.08,R2(1.4,2.8));st_.scale.y=.4;g.add(st_)}
+      const bridge=new T.Group();for(let i=0;i<7;i++){const p=mesh(new T.BoxGeometry(.32,.12,2.4),'#C68A52');p.position.set(i*.4,.1,2.1);bridge.add(p)}bridge.position.x=L/K*.4;g.add(bridge)}}
+  let D_=null;
+  function build(D){if(levelGroup){scene.remove(levelGroup)}D_=D;const g=new T.Group();levelGroup=g;
+    decor(g,D.th,D.L);
+    D.obs.forEach(o=>{const m=props[o.k]();if(o.k==='bee')m.scale.setScalar(1.25);m.position.x=(o.x+o.w/2)/K;o.obj=m;o.baseY=m.position.y;g.add(m)});
+    D.fruits.forEach(f=>{const m=fruitM[f.k]();m.position.set((f.x+4.5)/K,(BR_G-f.y-4.5)/K,0);m.scale.setScalar(f.k==='honey'?1.1:1);f.obj=m;g.add(m)});
+    const pot=fruitM.honey();pot.scale.setScalar(2.4);pot.position.set((D.L+15)/K,.75,0);g.add(pot);
+    const glow=new T.Mesh(G_(new T.CircleGeometry(1.8,32)),new T.MeshBasicMaterial({color:0xFFE38A,transparent:true,opacity:.45,depthWrite:false}));glow.position.set((D.L+15)/K,1.2,-.6);g.add(glow);
+    const bee=props.bee();bee.scale.setScalar(.6);bee.position.set((D.L+23)/K,2.6,.3);bee.userData.goalBee=true;g.add(bee);
+    cuti.position.set((D.L+33)/K,0,.4);cuti.rotation.y=-.5;cCheer.stop();cIdle.play();
+    scene.add(g);resize()}
+  let vw=1,vh=1;
+  function resize(){vw=s.clientWidth;vh=s.clientHeight;renderer.setSize(vw,vh,false);cam.aspect=vw/vh;cam.updateProjectionMatrix()}
+  const v3=new T.Vector3();
+  const TILT=.12,TAN=Math.tan(15*Math.PI/180);
+  return{
+    build,
+    anim(a){play(a==='wait'?'idle':a)},
+    frame({scroll,jy,dt,t,D}){bearMix.update(dt);cutiMix.update(dt);
+      /* keep at least ~14 m of path visible: on tall phone screens pull the camera back */const halfH=Math.max(5,5.5/cam.aspect),halfW=halfH*cam.aspect,DIST=halfH/TAN,cy=halfH*(halfH>5.5?.42:.68);const bxm=(scroll+22.5)/K;
+      bear.position.set(bxm,jy/K,0);shadow.position.x=bxm;const sc=Math.max(.45,1-jy/60);shadow.scale.setScalar(sc);shadow.material.opacity=.22*sc;
+      const cx=bxm+halfW*.68;cam.position.set(cx,cy+DIST*Math.sin(TILT),DIST*Math.cos(TILT));cam.lookAt(cx,cy,0);
+      for(const o of D.obs){if(!o.obj)continue;if(o.k==='bee'){o.obj.position.y=o.baseY+o.lift*3+Math.sin(t*5)*.1;o.obj.userData.wings.forEach((w,i)=>w.rotation.x=Math.sin(t*40)*.6*(i?1:-1))}
+        else if(o.obj.userData.squishy)o.obj.scale.set(1+o.squish*.15,1-o.squish*.3,1+o.squish*.15)}
+      for(const f of D.fruits){const m=f.obj;if(!m)continue;if(f.got){m.scale.multiplyScalar(1+dt*6);m.position.y+=dt*3;if(m.scale.x>2.2){m.visible=false}}else m.rotation.y=t*1.5}
+      renderer.render(scene,cam)},
+    collect(f){if(!f.obj)return null;f.obj.getWorldPosition(v3);v3.project(cam);const r=s.getBoundingClientRect();return{x:r.left+(v3.x+1)/2*r.width,y:r.top+(1-v3.y)/2*r.height}},
+    cheer(){cIdle.stop();cCheer.reset().play()},
+    resize,
+    destroy(){bearMix.stopAllAction();cutiMix.stopAllAction();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());renderer.dispose();renderer.domElement.remove()}}}
 
 /* ================= daily routines: Vệ sinh (potty + brushing) and Đi ngủ ================= */
 /* (owned by the routines session — keep this block intact when editing gBear above) */
