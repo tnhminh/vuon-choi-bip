@@ -43,6 +43,33 @@ p{margin:0}
 .cloud.c2{top:26%;left:-200px;width:130px;height:65px;animation-duration:95s;animation-delay:-60s}
 .cloud.c3{top:4%;left:-200px;width:110px;height:55px;animation-duration:85s;animation-delay:-5s}
 .hills{position:absolute;left:0;right:0;bottom:0;height:min(32vh,260px)}
+/* ---------- premium felt scenery ---------- */
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+body{background:linear-gradient(180deg,#8FD3EE 0%,#B5E4F5 46%,#D9F2F8 100%)}
+.scenery::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 88% -10%,rgba(255,236,170,.55),transparent 55%),radial-gradient(90% 70% at 10% 110%,rgba(255,255,255,.35),transparent 60%)}
+.rays{position:absolute;width:160vmax;height:160vmax;top:calc(50px - 80vmax);right:calc(60px - 80vmax);
+  background:repeating-conic-gradient(from 0deg,rgba(255,246,200,.30) 0 7deg,transparent 7deg 18deg);
+  -webkit-mask:radial-gradient(circle,#000 0 12%,rgba(0,0,0,.5) 30%,transparent 62%);mask:radial-gradient(circle,#000 0 12%,rgba(0,0,0,.5) 30%,transparent 62%);
+  animation:spin 140s linear infinite;opacity:.9}
+.scenery .sunball{filter:drop-shadow(0 0 30px rgba(255,214,90,.75))}
+.cloud{filter:drop-shadow(0 8px 10px rgba(60,120,160,.18))}
+.cloud.c4{top:16%;left:-200px;width:150px;height:75px;animation-duration:120s;animation-delay:-90s;opacity:.8}
+.hills-far{height:min(40vh,330px);opacity:.95}
+.lawn{position:absolute;left:0;right:0;bottom:-4px;height:min(9vh,70px);display:flex;justify-content:space-around;align-items:flex-end;pointer-events:none}
+.lawn .tuft{width:min(7vw,56px);height:100%;transform-origin:50% 100%;animation:tuftSway 5s ease-in-out infinite;animation-delay:calc(var(--d) * -1s)}
+@keyframes tuftSway{0%,100%{rotate:-4deg}50%{rotate:4deg}}
+.flyer{position:absolute;width:46px;height:46px;left:0;top:0;pointer-events:none;offset-rotate:0deg}
+.flyer .wing{transform-box:fill-box;transform-origin:50% 50%;animation:flap .32s ease-in-out infinite alternate}
+@keyframes flap{to{transform:scaleX(.35)}}
+.flyer.f1{animation:fly1 34s linear infinite}
+.flyer.f2{width:36px;height:36px;animation:fly2 46s linear infinite;animation-delay:-18s}
+@keyframes fly1{0%{transform:translate(-8vw,62vh)}20%{transform:translate(22vw,48vh)}40%{transform:translate(46vw,58vh)}60%{transform:translate(70vw,44vh)}80%{transform:translate(92vw,56vh)}100%{transform:translate(110vw,46vh)}}
+@keyframes fly2{0%{transform:translate(108vw,34vh)}25%{transform:translate(78vw,46vh)}50%{transform:translate(50vw,30vh)}75%{transform:translate(22vw,42vh)}100%{transform:translate(-10vw,32vh)}}
+.pollen i{position:absolute;width:7px;height:7px;border-radius:50%;background:radial-gradient(circle,#FFF8D6 0 40%,rgba(255,248,214,0) 70%);bottom:-10px;animation:rise 18s linear infinite;opacity:0}
+.pollen i:nth-child(1){left:8%;animation-delay:-2s}.pollen i:nth-child(2){left:21%;animation-delay:-9s;animation-duration:22s}.pollen i:nth-child(3){left:35%;animation-delay:-15s}
+.pollen i:nth-child(4){left:49%;animation-delay:-5s;animation-duration:25s}.pollen i:nth-child(5){left:62%;animation-delay:-12s}.pollen i:nth-child(6){left:74%;animation-delay:-7s;animation-duration:20s}
+.pollen i:nth-child(7){left:86%;animation-delay:-17s}.pollen i:nth-child(8){left:94%;animation-delay:-3s;animation-duration:24s}
+@keyframes rise{0%{transform:translate(0,0);opacity:0}10%{opacity:.9}50%{transform:translate(24px,-45vh)}90%{opacity:.7}100%{transform:translate(-10px,-90vh);opacity:0}}
 @keyframes drift{to{transform:translateX(calc(100vw + 420px))}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -51,9 +78,10 @@ p{margin:0}
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .scroll{overflow-y:auto;-webkit-overflow-scrolling:touch}
 
-/* felt piece */
-.felt{position:relative;border-radius:var(--r,28px);background:var(--bgc,var(--felt));
-  box-shadow:0 5px 0 rgba(43,53,80,.16),0 18px 30px -16px rgba(43,53,80,.5)}
+/* felt piece: fibre texture + soft stuffed shading */
+:root{--fabric:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.62' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 -.42'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17 0 0 0 0 .2 0 0 0 0 .31 0 0 0 .7 -.36'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+.felt{position:relative;border-radius:var(--r,28px);background:var(--fabric),var(--bgc,var(--felt));background-blend-mode:soft-light,multiply,normal;
+  box-shadow:inset 0 3px 0 rgba(255,255,255,.45),inset 0 -10px 18px rgba(43,53,80,.10),0 5px 0 rgba(43,53,80,.16),0 18px 30px -16px rgba(43,53,80,.5)}
 .felt::after{content:"";position:absolute;inset:7px;border-radius:calc(var(--r,28px) - 7px);border:2.5px dashed rgba(255,255,255,.78);pointer-events:none}
 .felt.light::after{border-color:rgba(43,53,80,.2)}
 
@@ -475,23 +503,124 @@ td:first-child{font-weight:800;white-space:nowrap}
 .bipsvg .eyes-open{animation:blink 4.5s infinite;transform-origin:60px 56px}
 @keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
 
+/* ================= premium polish layer ================= */
+.tile.felt,.outbtn,.btn-round,.big-play,.kid-go,.chips .chip,.gate-opts button,.seg,.tog{background-image:var(--fabric);background-blend-mode:soft-light,multiply,normal}
+.tile.felt{box-shadow:inset 0 4px 0 rgba(255,255,255,.4),inset 0 -14px 22px rgba(43,53,80,.12),0 7px 0 rgba(43,53,80,.18),0 22px 30px -14px rgba(43,53,80,.55)}
+.tile .art{filter:drop-shadow(0 6px 4px rgba(43,53,80,.22));transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.tile:hover .art{transform:translateY(-4px) scale(1.04)}
+.stage{box-shadow:inset 0 0 0 3px rgba(255,255,255,.35),inset 0 -30px 60px rgba(43,53,80,.10),0 7px 0 rgba(43,53,80,.25)}
+.stage::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background-image:var(--fabric);mix-blend-mode:soft-light;opacity:.7}
+.stage::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:4;border-radius:inherit;
+  background:radial-gradient(130% 90% at 50% 10%,transparent 55%,rgba(43,53,80,.13) 100%),linear-gradient(180deg,rgba(255,255,255,.18),transparent 25%)}
+.btn-round{box-shadow:inset 0 3px 0 rgba(255,255,255,.7),inset 0 -5px 8px rgba(43,53,80,.12),0 5px 0 var(--ink)}
+.big-play{background:radial-gradient(circle at 35% 30%,#FFE58A 0 18%,var(--sun) 45%,#F4A92A 100%);
+  box-shadow:inset 0 4px 0 rgba(255,255,255,.6),inset 0 -8px 12px rgba(180,90,0,.25),0 9px 0 var(--ink),0 0 0 0 rgba(255,201,60,.6);animation:pulse 1.8s ease-in-out infinite,halo 1.8s ease-out infinite}
+@keyframes halo{0%{box-shadow:inset 0 4px 0 rgba(255,255,255,.6),inset 0 -8px 12px rgba(180,90,0,.25),0 9px 0 var(--ink),0 0 0 0 rgba(255,201,60,.55)}100%{box-shadow:inset 0 4px 0 rgba(255,255,255,.6),inset 0 -8px 12px rgba(180,90,0,.25),0 9px 0 var(--ink),0 0 0 26px rgba(255,201,60,0)}}
+.kid-go{background-color:var(--sun);box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -6px 10px rgba(180,90,0,.2),0 6px 0 var(--ink)}
+.outbtn{box-shadow:inset 0 3px 0 rgba(255,255,255,.55),inset 0 -6px 10px rgba(43,53,80,.12),0 5px 0 var(--ink)}
+.logo span span{text-shadow:0 6px 0 var(--ink),0 14px 18px rgba(43,53,80,.25)}
+.home-head h1,.page-head h1{text-shadow:0 2px 0 rgba(255,255,255,.7)}
+
+/* Cu Tí: breathing, swaying leaf, flapping wings, chirpy beak, cheering */
+.bipsvg .cuti-body{transform-origin:60px 104px;animation:breathe 3.4s ease-in-out infinite}
+.bipsvg .leaf{transform-origin:62px 26px;animation:leaf 2.6s ease-in-out infinite}
+.bipsvg .wingL{transform-origin:24px 70px;animation:wingL 4.8s ease-in-out infinite}
+.bipsvg .wingR{transform-origin:96px 70px;animation:wingR 4.8s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.025,.975)}}
+@keyframes leaf{0%,100%{rotate:-6deg}50%{rotate:8deg}}
+@keyframes wingL{0%,80%,100%{rotate:0deg}85%{rotate:-22deg}90%{rotate:4deg}95%{rotate:-18deg}}
+@keyframes wingR{0%,80%,100%{rotate:0deg}85%{rotate:22deg}90%{rotate:-4deg}95%{rotate:18deg}}
+#mascot.talk .bipsvg .beak{transform-origin:60px 66px;animation:chirp .18s ease-in-out 8 alternate}
+@keyframes chirp{to{transform:scaleY(1.45) translateY(1px)}}
+.cheer .bipsvg .wingL{animation:wingL .5s ease-in-out infinite;animation-delay:-.42s}
+.cheer .bipsvg .wingR{animation:wingR .5s ease-in-out infinite;animation-delay:-.42s}
+.cheer #mascot,.cheer .mini-bip{animation:hop .7s cubic-bezier(.4,0,.4,1) 3}
+.bip-hero{position:relative}
+.bip-hero::after{content:"";position:absolute;left:18%;right:18%;bottom:-6%;height:10%;border-radius:50%;background:rgba(43,53,80,.22);filter:blur(4px);z-index:-1;animation:shadowHop 1.6s cubic-bezier(.4,0,.4,1) infinite}
+@keyframes shadowHop{0%,100%,70%{transform:scaleX(1);opacity:1}40%{transform:scaleX(.7);opacity:.55}}
+
+/* screen entrance */
+.screen.enter{animation:screenIn .42s cubic-bezier(.2,.9,.3,1.15)}
+@keyframes screenIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+
+/* reward: glowing halo */
+.reward-card::before{content:"";position:absolute;left:50%;top:clamp(80px,19vmin,140px);width:clamp(260px,56vmin,420px);aspect-ratio:1;translate:-50% -50%;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,244,190,.95) 0 22%,rgba(255,214,90,.5) 42%,transparent 68%);z-index:-1;animation:glow 2.2s ease-in-out infinite}
+@keyframes glow{50%{scale:1.08;opacity:.85}}
+.reward-title{text-shadow:0 6px 0 var(--ink),0 0 30px rgba(255,214,90,.8)}
+
+/* lite graphics for older devices */
+.lite .tx{filter:none}
+.lite .rays,.lite .flyer,.lite .pollen,.lite .lawn,.lite .hills-far,.lite .grain{display:none}
+.lite .stage::before{display:none}.lite .felt,.lite .tile.felt,.lite .outbtn,.lite .btn-round,.lite .big-play,.lite .kid-go{background-image:none}
+.lite .tile .art,.lite .cloud,.lite .scenery .sunball{filter:none}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .flyer,.pollen{display:none}
 }
 </style>
 
 </head>
 <body>
+<!-- shared art filters: plush felt lighting + fibre grain, used by every drawing -->
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="plush" x="-12%" y="-12%" width="124%" height="124%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.4" result="blur"/>
+      <feSpecularLighting in="blur" surfaceScale="4" specularConstant=".75" specularExponent="14" lighting-color="#ffffff" result="spec"><feDistantLight azimuth="225" elevation="50"/></feSpecularLighting>
+      <feComposite in="spec" in2="SourceAlpha" operator="in" result="specIn"/>
+      <feComponentTransfer in="specIn" result="gloss"><feFuncA type="linear" slope=".5"/></feComponentTransfer>
+      <feOffset in="blur" dx="1.5" dy="-3" result="off"/>
+      <feComposite in="SourceAlpha" in2="off" operator="out" result="rim"/>
+      <feFlood flood-color="#2B3550" flood-opacity=".2"/>
+      <feComposite in2="rim" operator="in" result="shade"/>
+      <feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="2" seed="11" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 .17  0 0 0 0 .2  0 0 0 0 .31  .5 0 0 0 -.2" result="dots"/>
+      <feComposite in="dots" in2="SourceAlpha" operator="in" result="grain"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="shade"/><feMergeNode in="grain"/><feMergeNode in="gloss"/></feMerge>
+    </filter>
+    <filter id="plushBig" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="9" result="blur"/>
+      <feSpecularLighting in="blur" surfaceScale="5" specularConstant=".6" specularExponent="12" lighting-color="#ffffff" result="spec"><feDistantLight azimuth="225" elevation="52"/></feSpecularLighting>
+      <feComposite in="spec" in2="SourceAlpha" operator="in" result="specIn"/>
+      <feComponentTransfer in="specIn" result="gloss"><feFuncA type="linear" slope=".42"/></feComponentTransfer>
+      <feOffset in="blur" dx="4" dy="-10" result="off"/>
+      <feComposite in="SourceAlpha" in2="off" operator="out" result="rim"/>
+      <feFlood flood-color="#2B3550" flood-opacity=".16"/>
+      <feComposite in2="rim" operator="in" result="shade"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="shade"/><feMergeNode in="gloss"/></feMerge>
+    </filter>
+    <radialGradient id="gCuti" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#FFB591"/><stop offset=".55" stop-color="#FF8A5C"/><stop offset="1" stop-color="#E9643A"/></radialGradient>
+    <radialGradient id="gBelly" cx=".5" cy=".35" r=".7"><stop offset="0" stop-color="#FFF0D6"/><stop offset="1" stop-color="#FFCF96"/></radialGradient>
+    <linearGradient id="gScarf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7DBDFF"/><stop offset="1" stop-color="#2F86E8"/></linearGradient>
+    <linearGradient id="gLeaf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#4FAE3A"/><stop offset="1" stop-color="#9BE06E"/></linearGradient>
+    <linearGradient id="gGardenSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ED8F0"/><stop offset=".6" stop-color="#D3EFF8"/></linearGradient>
+    <linearGradient id="gHillFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B9E39A"/><stop offset="1" stop-color="#9DD27B"/></linearGradient>
+    <linearGradient id="gHillMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A3DA7D"/><stop offset="1" stop-color="#7CC05E"/></linearGradient>
+    <linearGradient id="gHillNear" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FBE5A"/><stop offset="1" stop-color="#4E9A47"/></linearGradient>
+  </defs>
+</svg>
 <div id="app">
   <div class="scenery" aria-hidden="true">
+    <div class="rays"></div>
     <div class="sunball" id="sunball"></div>
-    <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+    <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="cloud c4"></div>
+    <svg class="hills hills-far" viewBox="0 0 1200 300" preserveAspectRatio="none">
+      <path d="M0 120 C140 60 300 50 420 100 C560 160 700 40 860 70 C1000 96 1100 60 1200 80 V300 H0Z" fill="url(#gHillFar)"/>
+
+    </svg>
     <svg class="hills" viewBox="0 0 1200 300" preserveAspectRatio="none">
-      <path d="M0 150 C180 70 360 80 520 150 C700 230 880 60 1200 120 V300 H0Z" fill="#8DC96B"/>
+      <g filter="url(#plushBig)" class="tx">
+        <path d="M0 150 C180 70 360 80 520 150 C700 230 880 60 1200 120 V300 H0Z" fill="url(#gHillMid)"/>
+        <path d="M0 220 C220 150 420 170 640 220 C840 265 1000 180 1200 200 V300 H0Z" fill="url(#gHillNear)"/>
+      </g>
       <path d="M0 150 C180 70 360 80 520 150 C700 230 880 60 1200 120" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="3" stroke-dasharray="10 9" transform="translate(0 14)"/>
-      <path d="M0 220 C220 150 420 170 640 220 C840 265 1000 180 1200 200 V300 H0Z" fill="#5FA653"/>
       <path d="M0 220 C220 150 420 170 640 220 C840 265 1000 180 1200 200" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-dasharray="10 9" transform="translate(0 14)"/>
     </svg>
+    <div class="lawn" id="lawn"></div>
+    <div class="flyer f1" id="fly1"></div><div class="flyer f2" id="fly2"></div>
+    <div class="pollen"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   </div>
 
   <section id="splash" class="screen splash">
@@ -542,7 +671,7 @@ td:first-child{font-weight:800;white-space:nowrap}
         <p class="garden-note" id="gardenNote">Mỗi lần bé chơi giỏi, một bạn mới về vườn.</p>
         <div class="garden" id="garden">
           <svg class="garden-bg" viewBox="0 0 1000 680" preserveAspectRatio="none" aria-hidden="true">
-            <rect width="1000" height="680" fill="#BFE6F4"/>
+            <rect width="1000" height="680" fill="url(#gGardenSky)"/><g filter="url(#plushBig)" class="tx">
             <path d="M0 330 C160 260 320 270 470 320 C640 380 820 250 1000 300 V680 H0Z" fill="#9DD27B"/>
             <path d="M0 420 C220 360 440 380 640 420 C820 455 920 400 1000 410 V680 H0Z" fill="#8DC96B" stroke="#2B3550" stroke-width="5"/>
             <path d="M0 420 C220 360 440 380 640 420 C820 455 920 400 1000 410" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="4" stroke-dasharray="12 10" transform="translate(0 16)"/>
@@ -550,7 +679,7 @@ td:first-child{font-weight:800;white-space:nowrap}
             <ellipse cx="800" cy="560" rx="70" ry="14" fill="rgba(255,255,255,.55)"/>
             <rect x="150" y="300" width="44" height="170" rx="14" fill="#B8783F" stroke="#2B3550" stroke-width="5"/>
             <path d="M172 330 C70 340 50 230 110 200 C90 120 190 90 220 140 C270 100 340 160 300 220 C350 260 300 340 220 320 Z" fill="#5FAE45" stroke="#2B3550" stroke-width="5" stroke-linejoin="round"/>
-            <g stroke="#2B3550" stroke-width="4" fill="#E0A463"><rect x="420" y="470" width="14" height="70" rx="5"/><rect x="480" y="474" width="14" height="70" rx="5"/><rect x="540" y="478" width="14" height="70" rx="5"/><rect x="400" y="490" width="170" height="12" rx="6"/></g>
+            <g stroke="#2B3550" stroke-width="4" fill="#E0A463"><rect x="420" y="470" width="14" height="70" rx="5"/><rect x="480" y="474" width="14" height="70" rx="5"/><rect x="540" y="478" width="14" height="70" rx="5"/><rect x="400" y="490" width="170" height="12" rx="6"/></g></g>
           </svg>
           <div class="garden-items" id="gardenItems"></div>
         </div>
@@ -587,6 +716,7 @@ td:first-child{font-weight:800;white-space:nowrap}
           <div class="row"><span class="lb">Giới hạn mỗi ngày<span class="sub">Tính tổng cả ngày, tải lại trang không đặt lại giờ. Hết giờ, Cu Tí đi ngủ. Người lớn có thể cho thêm 10 phút.</span></span>
             <span class="seg" id="segLimit"><button data-v="10">10'</button><button data-v="15">15'</button><button data-v="20">20'</button><button data-v="30">30'</button><button data-v="0">Tắt</button></span></div>
           <div class="row"><span class="lb">Nghỉ mắt mỗi 5 phút<span class="sub">Cu Tí rủ bé nhìn xa, chớp mắt hoặc vận động khoảng 20 giây rồi chơi tiếp.</span></span><button class="tog" id="togBrk" role="switch" aria-label="Nghỉ mắt mỗi 5 phút"></button></div>
+          <div class="row"><span class="lb">Đồ họa đẹp<span class="sub">Chất vải nỉ, ánh nắng, bướm bay. Tắt đi nếu máy chạy chậm hoặc nóng.</span></span><button class="tog" id="togHq" role="switch" aria-label="Đồ họa đẹp"></button></div>
           <p class="muted">WHO khuyến nghị trẻ 2–4 tuổi ngồi trước màn hình không quá 1 giờ mỗi ngày, càng ít càng tốt. Chơi cùng bé và gọi tên những gì bé thấy sẽ giúp bé học nhiều hơn.</p>
           <div class="row"><span class="lb">Làm lại khu vườn<span class="sub">Đưa khu vườn về trống, bé mời các bạn về lại từ đầu.</span></span><button class="btn warn" id="btnReset">Làm lại khu vườn</button></div>
         </section>
@@ -728,10 +858,10 @@ function fitGrid(el,n,ratio=1,gap=16){const cs=getComputedStyle(el);const W=el.c
   el.style.setProperty('--cols',best.c);el.style.setProperty('--cell',Math.max(40,Math.floor(Math.min(best.s,320)))+'px');el.style.setProperty('--gap',gap+'px')}
 function fitAspect(el,parent,ratio){const W=parent.clientWidth,H=parent.clientHeight;let w=W,h=w/ratio;if(h>H){h=H;w=h*ratio}el.style.width=w+'px';el.style.height=h+'px'}
 const store={get(k,d){try{const v=localStorage.getItem('bip.'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('bip.'+k,JSON.stringify(v))}catch(e){}}};
-const S={sound:store.get('sound',true),voice:store.get('voice',true),music:store.get('music',false),limit:store.get('limit',15),age:store.get('age',2),name:store.get('name',''),stickers:store.get('stickers',{}),brk:store.get('brk',true),plant:store.get('plant',null),outN:store.get('outN',0),played:0,extra:0,round:0,day:''};
+const S={sound:store.get('sound',true),voice:store.get('voice',true),music:store.get('music',false),limit:store.get('limit',15),age:store.get('age',2),name:store.get('name',''),stickers:store.get('stickers',{}),brk:store.get('brk',true),hq:store.get('hq',!(navigator.deviceMemory&&navigator.deviceMemory<=2)),plant:store.get('plant',null),outN:store.get('outN',0),played:0,extra:0,round:0,day:''};
 if(S.plant&&typeof S.plant!=='object')S.plant=null;
 if(typeof S.stickers!=='object'||Array.isArray(S.stickers)||!S.stickers)S.stickers={};
-const save=()=>['sound','voice','music','limit','age','name','stickers','brk','plant','outN'].forEach(k=>store.set(k,S[k]));
+const save=()=>['sound','voice','music','limit','age','name','stickers','brk','plant','outN','hq'].forEach(k=>store.set(k,S[k]));
 /* play time is counted per calendar day and survives reloads */
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
 const saveDay=()=>store.set('today',{d:S.day,p:S.played,x:S.extra,r:S.round});
@@ -744,7 +874,7 @@ const INK='#2B3550';
 const st=(w=4)=>`stroke="${INK}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
 const eye=(x,y,r=4.6)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${INK}"/><circle cx="${(x+r*.38).toFixed(1)}" cy="${(y-r*.38).toFixed(1)}" r="${(r*.38).toFixed(1)}" fill="#fff"/>`;
 const blush=(x,y,rx=6.5)=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${(rx*.62).toFixed(1)}" fill="#FF7E9A" opacity=".45"/>`;
-const wrap=(inner,vb='0 0 120 120')=>`<svg viewBox="${vb}" aria-hidden="true" focusable="false">${inner}</svg>`;
+const wrap=(inner,vb='0 0 120 120')=>`<svg viewBox="${vb}" aria-hidden="true" focusable="false"><g class="tx" filter="url(#plush)">${inner}</g></svg>`;
 const thick=(d,col,w=5)=>`<path d="${d}" fill="none" ${st(w+8)}/><path d="${d}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`;
 function starPath(cx,cy,R,r,n=5){let d='';for(let i=0;i<n*2;i++){const a=-Math.PI/2+i*Math.PI/n,rr=i%2?r:R;d+=(i?'L':'M')+(cx+Math.cos(a)*rr).toFixed(1)+' '+(cy+Math.sin(a)*rr).toFixed(1)}return d+'Z'}
 const HEART='M50 88 C20 66 6 48 10 30 C14 14 34 8 50 26 C66 8 86 14 90 30 C94 48 80 66 50 88Z';
@@ -838,14 +968,20 @@ const TREE=`<path d="M0 360 Q200 318 400 360Z" fill="#7DBE5C"/>
 <path d="M80 200 C28 192 26 110 88 100 C88 38 170 18 200 58 C230 12 322 28 316 96 C376 100 382 192 320 202 C300 242 230 238 200 216 C170 242 100 238 80 200Z" fill="#6CC551" ${st(5)}/>
 <path d="M96 120 q20 -28 52 -18 M226 74 q30 -10 52 10 M300 140 q22 6 26 30 M110 196 q30 14 56 0" fill="none" stroke="#9BDC7E" stroke-width="7" stroke-linecap="round"/>`;
 const MASCOT=`<svg viewBox="0 0 120 120" aria-hidden="true">
+<g class="cuti-body">
 <path d="M50 102 v12 M70 102 v12" stroke="#F08A2B" stroke-width="5" stroke-linecap="round"/>
-<path d="M60 26 C55 9 67 1 78 5 C74 16 68 23 60 26Z" fill="#6CC551" ${st(3.5)}/>
-<path d="M24 58 C6 58 6 84 26 86Z" fill="#F26D3D" ${st(3.5)}/><path d="M96 58 C114 58 114 84 94 86Z" fill="#F26D3D" ${st(3.5)}/>
-<circle cx="60" cy="64" r="40" fill="#FF8A5C" ${st(4.5)}/><ellipse cx="60" cy="82" rx="24" ry="18" fill="#FFD9A8"/>
-<g class="eyes-open">${eye(46,56,6)}${eye(74,56,6)}</g>
+<g filter="url(#plush)" class="tx">
+<path class="leaf" d="M60 26 C55 9 67 1 78 5 C74 16 68 23 60 26Z" fill="url(#gLeaf)" ${st(3.5)}/>
+<path class="wingL" d="M24 58 C6 58 6 84 26 86Z" fill="#F26D3D" ${st(3.5)}/><path class="wingR" d="M96 58 C114 58 114 84 94 86Z" fill="#F26D3D" ${st(3.5)}/>
+<circle cx="60" cy="64" r="40" fill="url(#gCuti)" ${st(4.5)}/><ellipse cx="60" cy="82" rx="24" ry="18" fill="url(#gBelly)"/>
+<path d="M28 90 Q60 106 92 90 L93 98 Q60 115 27 98Z" fill="url(#gScarf)" ${st(3.5)}/><path d="M74 100 l9 16 l9 -6 l-7 -13z" fill="url(#gScarf)" ${st(3)}/>
+<path d="M34 96 l4 -3 M46 101 l4 -3 M58 103 l4 -3 M70 102 l4 -3 M82 98 l4 -3" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+</g>
+<ellipse cx="44" cy="40" rx="11" ry="6" fill="#fff" opacity=".35" transform="rotate(-28 44 40)"/>
+<g class="eyes-open">${eye(46,56,6)}${eye(74,56,6)}<circle cx="44.2" cy="58.6" r="1.2" fill="#fff"/><circle cx="72.2" cy="58.6" r="1.2" fill="#fff"/></g>
 <g class="lid-closed"><path d="M40 57 q6 5 12 0 M68 57 q6 5 12 0" fill="none" ${st(3.5)}/></g>
-<path d="M52 66 Q60 61 68 66 Q60 79 52 66Z" fill="#FFC93C" ${st(3)}/>${blush(36,70)}${blush(84,70)}
-<path d="M28 90 Q60 106 92 90 L93 98 Q60 115 27 98Z" fill="#4DA3FF" ${st(3.5)}/><path d="M74 100 l9 16 l9 -6 l-7 -13z" fill="#4DA3FF" ${st(3)}/>
+<path class="beak" d="M52 66 Q60 61 68 66 Q60 79 52 66Z" fill="#FFC93C" ${st(3)}/>${blush(36,70)}${blush(84,70)}
+</g>
 </svg>`;
 const CLOUD=`<svg viewBox="0 0 180 90" aria-hidden="true"><path d="M30 80 C8 80 6 54 26 50 C24 26 56 16 72 34 C82 8 128 8 132 38 C156 32 176 56 160 76 C158 80 154 80 150 80Z" fill="#fff" opacity=".92"/><path d="M34 72 C18 72 16 56 30 54 C30 34 56 26 70 42 C80 18 122 18 124 44 C146 40 162 58 150 72Z" fill="none" stroke="#A9DDF0" stroke-width="2.5" stroke-dasharray="7 6"/></svg>`;
 const SUNBIG=wrap(sunI(),'0 0 100 100');
@@ -1308,7 +1444,7 @@ const GENRES=[
 
 /* ================= app shell ================= */
 let cur=null;
-function show(id){$$('.screen').forEach(s=>s.hidden=s.id!==id);A.music(id==='home'||id==='album');if(id!=='game')$('#say').classList.remove('on')}
+function show(id){$$('.screen').forEach(s=>{const was=s.hidden;s.hidden=s.id!==id;if(!s.hidden&&was)restart(s,'enter',450)});A.music(id==='home'||id==='album');if(id!=='game')$('#say').classList.remove('on')}
 function openGame(id){closeGame();if(overLimit()){showRest();return}const g=GAMES.find(x=>x.id===id);show('game');const st=$('#stage');st.className='stage stage-'+id;st.innerHTML='';
   $('#gname').textContent=g.name;$('#gdot').style.setProperty('--dot',g.bg);
   const timers=new Set();const api={id,stage:st,alive:true,wins:0,cleanup:[],
@@ -1322,7 +1458,7 @@ function closeGame(){if(cur){cur.destroy();cur=null}$('#stage').innerHTML='';V.s
 function renderStars(n){$('#stars').innerHTML=Array.from({length:3},(_,i)=>ICON.starFill(i<Math.min(n,3)?'#FFC93C':'rgba(43,53,80,.12)')).join('')+(n>3?`<b style="font-family:var(--display);font-size:18px;margin-left:4px">+${n-3}</b>`:'')}
 
 let rewardCb=null,rewardT=0,rewardAt=0;
-function celebrate(after,s0){const base=STICKERS.filter(s=>!s.out);const pool=base.filter(s=>!S.stickers[s.id]);const s=s0||(pool.length?pick(pool):pick(base));S.stickers[s.id]=(S.stickers[s.id]||0)+1;save();
+function celebrate(after,s0){restart(document.body,'cheer',2200);const base=STICKERS.filter(s=>!s.out);const pool=base.filter(s=>!S.stickers[s.id]);const s=s0||(pool.length?pick(pool):pick(base));S.stickers[s.id]=(S.stickers[s.id]||0)+1;save();
   $('#rewardArt').innerHTML=s.art;const t=pick(PRAISE);$('#rewardTitle').textContent=t;$('#rewardSub').textContent=`${s.name} đã về vườn của Rio`;lastNew=s.id;
   $('#reward').hidden=false;rewardAt=performance.now();A.fanfare();FX.burst(innerWidth/2,innerHeight*.42);V.say(`${t} ${s.name} đã về vườn của Rio!`);
   rewardCb=after;clearTimeout(rewardT);rewardT=setTimeout(closeReward,3600)}
@@ -1453,13 +1589,13 @@ function renderAlbum(){const got=STICKERS.filter(s=>S.stickers[s.id]).length;$('
 /* parent page */
 function renderParent(){
   $$('#segAge button').forEach(b=>b.classList.toggle('on',+b.dataset.v===S.age));$$('#segLimit button').forEach(b=>b.classList.toggle('on',+b.dataset.v===S.limit));
-  $('#togBrk').setAttribute('aria-checked',S.brk);$('#togSound').setAttribute('aria-checked',S.sound);$('#togVoice').setAttribute('aria-checked',S.voice);$('#togMusic').setAttribute('aria-checked',S.music);
+  $('#togHq').setAttribute('aria-checked',S.hq);$('#togBrk').setAttribute('aria-checked',S.brk);$('#togSound').setAttribute('aria-checked',S.sound);$('#togVoice').setAttribute('aria-checked',S.voice);$('#togMusic').setAttribute('aria-checked',S.music);
   $('#statOut').textContent=S.outN||0;$('#statPlant').textContent=S.plant?`${S.plant.d||0} ngày tưới`:'Chưa trồng';
   $('#statTime').textContent=Math.floor(S.played/60)+' phút';$('#statStick').textContent=Object.values(S.stickers).reduce((a,b)=>a+b,0);updVoice();
   $('#genreRows').innerHTML=GENRES.map(([n,d,a,k,w])=>`<tr><td>${n}</td><td>${d}</td><td>${a}</td><td><span class="pill ${k}">${w}</span></td></tr>`).join('');renderHouseList()}
 $$('#segAge button').forEach(b=>b.addEventListener('click',()=>{S.age=+b.dataset.v;save();renderParent()}));
 $$('#segLimit button').forEach(b=>b.addEventListener('click',()=>{S.limit=+b.dataset.v;save();renderParent()}));
-[['#togSound','sound'],['#togVoice','voice'],['#togMusic','music'],['#togBrk','brk']].forEach(([sel,k])=>$(sel).addEventListener('click',()=>{S[k]=!S[k];save();renderParent();if(k==='sound'&&S.sound){A.init();A.tap()}if(k==='voice'&&S.voice)V.say('Chào bé!')}));
+[['#togSound','sound'],['#togVoice','voice'],['#togMusic','music'],['#togBrk','brk'],['#togHq','hq']].forEach(([sel,k])=>$(sel).addEventListener('click',()=>{S[k]=!S[k];save();renderParent();applyHq();if(k==='sound'&&S.sound){A.init();A.tap()}if(k==='voice'&&S.voice)V.say('Chào bé!')}));
 let resetArm=0;$('#btnReset').addEventListener('click',e=>{const b=e.currentTarget;if(Date.now()-resetArm<4000){S.stickers={};save();renderParent();b.textContent='Đã xóa';resetArm=0;setTimeout(()=>b.textContent='Làm lại khu vườn',1800)}else{resetArm=Date.now();b.textContent='Bấm lần nữa để xóa';setTimeout(()=>{if(Date.now()-resetArm>=3900)b.textContent='Làm lại khu vườn'},4000)}});
 /* Nhà của Rio: parent list + photo editor */
 function renderHouseList(){const el=$('#hList');HDB.all().then(rs=>{el.innerHTML=rs.length?rs.map(r=>{const n=r.items.filter(i=>!i.store&&i.label).length,hasStore=r.items.some(i=>i.store);
@@ -1533,6 +1669,17 @@ document.addEventListener('pointerdown',()=>{if(A.ctx&&A.ctx.state==='suspended'
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('gesturestart',e=>e.preventDefault());
 document.addEventListener('visibilitychange',()=>{if(document.hidden)V.stop()});
+/* ambient life: grass tufts, flowers and two butterflies drifting across the meadow */
+function applyHq(){document.body.classList.toggle('lite',!S.hq)}
+(function scenery(){const cols=['#FF8FC1','#FFC93C','#FFFFFF','#B48CF0','#FF7E6B'];
+  const tuft=(i)=>{const c=cols[i%cols.length],fl=i%2===0;return `<svg class="tuft" style="--d:${(i*.73)%5}" viewBox="0 0 60 70" aria-hidden="true"><g class="tx" filter="url(#plush)">
+    <path d="M10 70 C12 50 6 38 2 30 C14 38 20 52 22 70Z M24 70 C24 44 28 26 34 14 C36 34 34 52 36 70Z M38 70 C40 52 48 40 58 34 C52 46 48 58 50 70Z" fill="${i%3?'#5DB04A':'#4C9E3E'}" ${st(2.5)}/>
+    ${fl?`<path d="M34 14 V4" stroke="#3E8A33" stroke-width="3"/><g transform="translate(34 6)">${[0,72,144,216,288].map(a=>`<ellipse rx="5" ry="7" transform="rotate(${a}) translate(0 -6)" fill="${c}" ${st(1.8)}/>`).join('')}<circle r="4" fill="#FFC93C" ${st(1.8)}/></g>`:''}</g></svg>`};
+  $('#lawn').innerHTML=Array.from({length:12},(_,i)=>tuft(i)).join('');
+  const fly=(a,b)=>`<svg viewBox="0 0 60 60" aria-hidden="true"><g class="tx" filter="url(#plush)"><g class="wing"><path d="M30 28 C20 6 2 8 6 24 C9 34 22 34 30 30Z" fill="${a}" ${st(2.5)}/><path d="M30 32 C22 36 10 44 16 52 C22 58 30 46 30 34Z" fill="${b}" ${st(2.5)}/>
+    <path d="M30 28 C40 6 58 8 54 24 C51 34 38 34 30 30Z" fill="${a}" ${st(2.5)}/><path d="M30 32 C38 36 50 44 44 52 C38 58 30 46 30 34Z" fill="${b}" ${st(2.5)}/></g><ellipse cx="30" cy="31" rx="3.2" ry="12" fill="${INK}"/></g></svg>`;
+  $('#fly1').innerHTML=fly('#FF8FC1','#B48CF0');$('#fly2').innerHTML=fly('#FFC93C','#FF7E6B')})();
+applyHq();
 FX.init();renderHome();
 })();
 </script>
