@@ -291,6 +291,18 @@ p{margin:0}
 .slot.got .sticker{filter:drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 -4px 0 #fff) drop-shadow(0 6px 6px rgba(43,53,80,.3));rotate:var(--rot)}
 .slot .cnt{position:absolute;right:6%;bottom:6%;background:var(--ink);color:#fff;font-size:13px;font-weight:900;padding:2px 8px;border-radius:999px;font-variant-numeric:tabular-nums}
 .album-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.garden-note{margin:-6px 0 14px;font-size:clamp(15px,2.4vmin,19px);color:var(--ink-soft)}
+.garden{position:relative;width:100%;aspect-ratio:1000/680;border-radius:26px;border:4px solid var(--ink);overflow:hidden;background:#BFE6F4}
+.garden-bg{position:absolute;inset:0}
+.garden-items{position:absolute;inset:0}
+.gitem{position:absolute;left:calc(var(--x) * 1%);top:calc(var(--y) * 1%);width:max(46px,calc(var(--s) * 1%));aspect-ratio:1;translate:-50% -50%;display:grid;place-items:center;border-radius:50%}
+.gitem .sticker{width:100%;height:100%;filter:brightness(0) opacity(.14)}
+.gitem:not(.got){outline:3px dashed rgba(43,53,80,.25);outline-offset:-2px}
+.gitem.got .sticker{filter:drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(0 5px 5px rgba(43,53,80,.3));animation:bob 3.2s ease-in-out infinite;animation-delay:calc(var(--i) * -.37s)}
+.gitem.new .sticker{animation:rin .8s cubic-bezier(.3,1.6,.5,1),bob 3.2s ease-in-out .8s infinite}
+.gitem .cnt{position:absolute;right:-6%;bottom:-6%;background:var(--ink);color:#fff;font-size:12px;font-weight:900;padding:1px 7px;border-radius:999px;font-variant-numeric:tabular-nums}
+@media (max-aspect-ratio:4/5){.garden{aspect-ratio:1/1.05}}
+@media (prefers-reduced-motion:reduce){.gitem.got .sticker,.gitem.new .sticker{animation:none}}
 .album-meta .big{font-family:var(--display);font-size:clamp(24px,4vmin,34px)}
 .meter{flex:1;min-width:160px;height:20px;border-radius:999px;border:3px solid var(--ink);background:#fff;overflow:hidden}
 .meter b{display:block;height:100%;background:var(--grass-2);width:var(--p);transition:width .5s}
@@ -362,6 +374,18 @@ td:first-child{font-weight:800;white-space:nowrap}
 #rest h2{font-size:clamp(28px,6vmin,52px);color:#FFF3C4}
 #rest p{font-size:18px;color:#D7DDF2;max-width:36ch}
 #rest .btn{color:var(--ink)}
+#brk{z-index:74;background:rgba(169,221,240,.92)}
+.brk-card{--r:34px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:clamp(18px,3.4vmin,32px) clamp(18px,4vmin,40px);max-width:min(560px,100%);animation:rin .6s cubic-bezier(.3,1.6,.5,1)}
+.brk-art{width:clamp(110px,24vmin,180px);aspect-ratio:1;animation:wob 2s ease-in-out infinite}
+.brk-card h2{font-size:clamp(28px,6vmin,48px);line-height:1.1}
+.brk-card p:not(.eyebrow){font-size:clamp(17px,2.8vmin,22px);margin:0;max-width:30ch;color:var(--ink-soft)}
+.brk-done{position:relative;width:clamp(120px,22vmin,160px);aspect-ratio:1;margin-top:6px;border-radius:50%;display:grid;place-items:center}
+.brk-ring{position:absolute;inset:0}
+#brkProg{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--p,0));transition:stroke-dashoffset 1s linear}
+.brk-bip{width:68%;aspect-ratio:1;transition:opacity .3s,filter .3s}
+.brk-done:disabled{cursor:default}
+.brk-done:disabled .brk-bip{opacity:.45;filter:grayscale(.6)}
+.brk-done:not(:disabled) .brk-bip{animation:pulse 1.2s ease-in-out infinite}
 .zz{position:absolute;right:-6%;top:-4%;font-family:var(--display);font-size:34px;color:#FFF3C4;animation:zz 2.4s ease-in-out infinite}
 @keyframes zz{0%{opacity:0;translate:0 10px}50%{opacity:1}100%{opacity:0;translate:16px -30px}}
 .nightstars{position:absolute;inset:0;pointer-events:none;background:
@@ -408,7 +432,7 @@ td:first-child{font-weight:800;white-space:nowrap}
       <div class="mini-bip" id="homeBip"></div>
       <div class="titles"><h1>Vườn Chơi Bíp</h1><p id="greet">Chào bé! Hôm nay mình chơi gì nhỉ?</p></div>
       <div class="head-btns">
-        <button class="btn-round" id="btnAlbum" aria-label="Sổ nhãn dán"></button>
+        <button class="btn-round" id="btnAlbum" aria-label="Khu vườn của bé"></button>
         <button class="btn-round small" id="btnParent" aria-label="Góc phụ huynh"></button>
       </div>
     </header>
@@ -429,11 +453,25 @@ td:first-child{font-weight:800;white-space:nowrap}
     <div class="page">
       <header class="page-head">
         <button class="btn-round" data-go="home" aria-label="Về trang chính"></button>
-        <div><p class="eyebrow">Sổ của bé</p><h1>Nhãn dán đã sưu tầm</h1></div>
+        <div><p class="eyebrow">Khu vườn của Bíp</p><h1>Vườn của bé</h1></div>
       </header>
       <div class="album-board felt">
         <div class="album-meta"><span class="big" id="albumCount">0 / 16</span><div class="meter"><b id="albumMeter" style="--p:0%"></b></div></div>
-        <div class="album-grid" id="albumGrid"></div>
+        <p class="garden-note" id="gardenNote">Mỗi lần bé chơi giỏi, một bạn mới về vườn.</p>
+        <div class="garden" id="garden">
+          <svg class="garden-bg" viewBox="0 0 1000 680" preserveAspectRatio="none" aria-hidden="true">
+            <rect width="1000" height="680" fill="#BFE6F4"/>
+            <path d="M0 330 C160 260 320 270 470 320 C640 380 820 250 1000 300 V680 H0Z" fill="#9DD27B"/>
+            <path d="M0 420 C220 360 440 380 640 420 C820 455 920 400 1000 410 V680 H0Z" fill="#8DC96B" stroke="#2B3550" stroke-width="5"/>
+            <path d="M0 420 C220 360 440 380 640 420 C820 455 920 400 1000 410" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="4" stroke-dasharray="12 10" transform="translate(0 16)"/>
+            <ellipse cx="830" cy="575" rx="150" ry="62" fill="#7CC7E3" stroke="#2B3550" stroke-width="5"/>
+            <ellipse cx="800" cy="560" rx="70" ry="14" fill="rgba(255,255,255,.55)"/>
+            <rect x="150" y="300" width="44" height="170" rx="14" fill="#B8783F" stroke="#2B3550" stroke-width="5"/>
+            <path d="M172 330 C70 340 50 230 110 200 C90 120 190 90 220 140 C270 100 340 160 300 220 C350 260 300 340 220 320 Z" fill="#5FAE45" stroke="#2B3550" stroke-width="5" stroke-linejoin="round"/>
+            <g stroke="#2B3550" stroke-width="4" fill="#E0A463"><rect x="420" y="470" width="14" height="70" rx="5"/><rect x="480" y="474" width="14" height="70" rx="5"/><rect x="540" y="478" width="14" height="70" rx="5"/><rect x="400" y="490" width="170" height="12" rx="6"/></g>
+          </svg>
+          <div class="garden-items" id="gardenItems"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -454,20 +492,21 @@ td:first-child{font-weight:800;white-space:nowrap}
               <input class="field" id="kidName" maxlength="16" placeholder="Ví dụ: Na" autocomplete="off"></div>
             <div class="row"><span class="lb">Âm thanh</span><button class="tog" id="togSound" role="switch" aria-label="Âm thanh"></button></div>
             <div class="row"><span class="lb">Giọng Bíp đọc<span class="sub" id="voiceStatus">Đang kiểm tra giọng đọc…</span></span><button class="tog" id="togVoice" role="switch" aria-label="Giọng đọc"></button></div>
-            <div class="row"><span class="lb">Nhạc nền<span class="sub">Chỉ phát ở màn hình chính và sổ nhãn dán.</span></span><button class="tog" id="togMusic" role="switch" aria-label="Nhạc nền"></button></div>
+            <div class="row"><span class="lb">Nhạc nền<span class="sub">Chỉ phát ở màn hình chính và khu vườn.</span></span><button class="tog" id="togMusic" role="switch" aria-label="Nhạc nền"></button></div>
             <div class="row"><span class="lb">Toàn màn hình<span class="sub">Giúp bé không bấm nhầm ra ngoài.</span></span><button class="btn" id="btnFull"></button></div>
           </div>
         </section>
         <section class="panel felt light">
           <h2>Thời gian chơi</h2>
           <div class="stat">
-            <div><b id="statTime">0 phút</b><span>đã chơi lần này</span></div>
+            <div><b id="statTime">0 phút</b><span>đã chơi hôm nay</span></div>
             <div><b id="statStick">0</b><span>nhãn dán đã nhận</span></div>
           </div>
-          <div class="row"><span class="lb">Nhắc bé nghỉ sau<span class="sub">Hết giờ, Bíp đi ngủ và chỉ người lớn mới mở lại được.</span></span>
-            <span class="seg" id="segLimit"><button data-v="10">10'</button><button data-v="15">15'</button><button data-v="20">20'</button><button data-v="0">Tắt</button></span></div>
+          <div class="row"><span class="lb">Giới hạn mỗi ngày<span class="sub">Tính tổng cả ngày, tải lại trang không đặt lại giờ. Hết giờ, Bíp đi ngủ. Người lớn có thể cho thêm 10 phút.</span></span>
+            <span class="seg" id="segLimit"><button data-v="10">10'</button><button data-v="15">15'</button><button data-v="20">20'</button><button data-v="30">30'</button><button data-v="0">Tắt</button></span></div>
+          <div class="row"><span class="lb">Nghỉ mắt mỗi 5 phút<span class="sub">Bíp rủ bé nhìn xa, chớp mắt hoặc vận động khoảng 20 giây rồi chơi tiếp.</span></span><button class="tog" id="togBrk" role="switch" aria-label="Nghỉ mắt mỗi 5 phút"></button></div>
           <p class="muted">WHO khuyến nghị trẻ 2–4 tuổi ngồi trước màn hình không quá 1 giờ mỗi ngày, càng ít càng tốt. Chơi cùng bé và gọi tên những gì bé thấy sẽ giúp bé học nhiều hơn.</p>
-          <div class="row"><span class="lb">Xóa nhãn dán<span class="sub">Đưa sổ nhãn dán về trống.</span></span><button class="btn warn" id="btnReset">Xóa sổ nhãn dán</button></div>
+          <div class="row"><span class="lb">Làm lại khu vườn<span class="sub">Đưa khu vườn về trống, bé mời các bạn về lại từ đầu.</span></span><button class="btn warn" id="btnReset">Làm lại khu vườn</button></div>
         </section>
       </div>
 
@@ -489,7 +528,8 @@ td:first-child{font-weight:800;white-space:nowrap}
           <li><b>Không đếm giờ</b>Bé chơi theo nhịp của mình. Không có đồng hồ đếm ngược.</li>
           <li><b>Không cần biết chữ</b>Bíp đọc lời nhắc. Chữ trên màn hình chỉ để bố mẹ đọc cùng.</li>
           <li><b>Nút to, dễ chạm</b>Mọi thứ bé chạm vào đều lớn hơn 2 cm. Kéo thả có vùng hút rộng.</li>
-          <li><b>Lượt chơi ngắn</b>Mỗi lượt chỉ 1–2 phút rồi bé nhận nhãn dán, đủ để bé thấy mình làm được.</li>
+          <li><b>Lượt chơi ngắn</b>Mỗi lượt chỉ 1–2 phút rồi một bạn mới về vườn của bé, đủ để bé thấy mình làm được.</li>
+          <li><b>Nghỉ mắt thường xuyên</b>Cứ khoảng 5 phút, Bíp rủ bé nhìn xa, chớp mắt hoặc nhảy nhót 20 giây. Bé quen dần với việc rời mắt khỏi màn hình.</li>
           <li><b>Không quảng cáo, không mua hàng</b>Không có nút dẫn ra ngoài. Góc phụ huynh được khóa bằng một phép cộng.</li>
         </ul>
       </section>
@@ -519,8 +559,21 @@ td:first-child{font-weight:800;white-space:nowrap}
     <div class="nightstars"></div>
     <div class="moon sleep" id="restBip"><span class="zz">z z</span></div>
     <h2>Bíp buồn ngủ rồi</h2>
-    <p>Hết giờ chơi hôm nay. Bé cất máy, uống nước và đi chơi với bố mẹ nhé!</p>
+    <p>Hết giờ chơi hôm nay. Bé cất máy, uống nước và đi chơi với bố mẹ nhé! Mai Bíp chờ bé ở khu vườn.</p>
     <button class="btn" id="restContinue"></button>
+  </div>
+
+  <div id="brk" class="overlay" hidden>
+    <div class="brk-card felt light">
+      <p class="eyebrow">Giờ nghỉ mắt</p>
+      <div class="brk-art" id="brkArt"></div>
+      <h2 id="brkTitle">Nghỉ mắt nào!</h2>
+      <p id="brkText"></p>
+      <button class="brk-done" id="brkDone" disabled aria-label="Bé làm xong rồi, chơi tiếp">
+        <svg class="brk-ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" fill="none" stroke="rgba(43,53,80,.12)" stroke-width="10"/><circle id="brkProg" cx="60" cy="60" r="54" fill="none" stroke="#5DBB46" stroke-width="10" stroke-linecap="round" pathLength="1" transform="rotate(-90 60 60)"/></svg>
+        <span class="brk-bip" id="brkBip"></span>
+      </button>
+    </div>
   </div>
 
   <canvas id="fx"></canvas>
@@ -547,9 +600,15 @@ function fitGrid(el,n,ratio=1,gap=16){const cs=getComputedStyle(el);const W=el.c
   el.style.setProperty('--cols',best.c);el.style.setProperty('--cell',Math.max(40,Math.floor(Math.min(best.s,320)))+'px');el.style.setProperty('--gap',gap+'px')}
 function fitAspect(el,parent,ratio){const W=parent.clientWidth,H=parent.clientHeight;let w=W,h=w/ratio;if(h>H){h=H;w=h*ratio}el.style.width=w+'px';el.style.height=h+'px'}
 const store={get(k,d){try{const v=localStorage.getItem('bip.'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('bip.'+k,JSON.stringify(v))}catch(e){}}};
-const S={sound:store.get('sound',true),voice:store.get('voice',true),music:store.get('music',false),limit:store.get('limit',15),age:store.get('age',2),name:store.get('name',''),stickers:store.get('stickers',{}),played:0};
+const S={sound:store.get('sound',true),voice:store.get('voice',true),music:store.get('music',false),limit:store.get('limit',15),age:store.get('age',2),name:store.get('name',''),stickers:store.get('stickers',{}),brk:store.get('brk',true),played:0,extra:0,round:0,day:''};
 if(typeof S.stickers!=='object'||Array.isArray(S.stickers)||!S.stickers)S.stickers={};
-const save=()=>['sound','voice','music','limit','age','name','stickers'].forEach(k=>store.set(k,S[k]));
+const save=()=>['sound','voice','music','limit','age','name','stickers','brk'].forEach(k=>store.set(k,S[k]));
+/* play time is counted per calendar day and survives reloads */
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
+const saveDay=()=>store.set('today',{d:S.day,p:S.played,x:S.extra,r:S.round});
+function syncDay(){const t=today();if(S.day===t)return;const v=store.get('today',{})||{};S.day=t;
+  if(v.d===t){S.played=v.p|0;S.extra=v.x|0;S.round=v.r|0}else{S.played=0;S.extra=0;S.round=0;saveDay()}}
+syncDay();
 
 /* ================= art ================= */
 const INK='#2B3550';
@@ -666,6 +725,7 @@ const SUNBIG=wrap(sunI(),'0 0 100 100');
 const ic=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 const ICON={
 home:ic('<path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/><path d="M10 19.5v-5h4v5"/>'),
+tree:ic('<path d="M12 21v-6.5"/><path d="M12 3c-2.9 0-4.8 2.1-4.8 4.5-1.6.6-2.6 2-2.6 3.7 0 2.4 2 3.8 4 3.8h6.8c2 0 4-1.4 4-3.8 0-1.7-1-3.1-2.6-3.7C16.8 5.1 14.9 3 12 3z"/>'),
 book:ic('<path d="M4 5.5c2.5-1 5.5-1 8 .8 2.5-1.8 5.5-1.8 8-.8v13c-2.5-1-5.5-1-8 .8-2.5-1.8-5.5-1.8-8-.8z"/><path d="M12 6.3v13.5"/>'),
 lock:ic('<rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>'),
 ear:ic('<path d="M7.5 9a5 5 0 1 1 9 3c-1.4 1.6-3 2.4-3 4.5a2.6 2.6 0 0 1-5 .8"/><path d="M10.5 9.5a2 2 0 1 1 3.4 1.4"/>'),
@@ -1018,13 +1078,13 @@ const GENRES=[
 /* ================= app shell ================= */
 let cur=null;
 function show(id){$$('.screen').forEach(s=>s.hidden=s.id!==id);A.music(id==='home'||id==='album');if(id!=='game')$('#say').classList.remove('on')}
-function openGame(id){closeGame();const g=GAMES.find(x=>x.id===id);show('game');const st=$('#stage');st.className='stage stage-'+id;st.innerHTML='';
+function openGame(id){closeGame();if(overLimit()){showRest();return}const g=GAMES.find(x=>x.id===id);show('game');const st=$('#stage');st.className='stage stage-'+id;st.innerHTML='';
   $('#gname').textContent=g.name;$('#gdot').style.setProperty('--dot',g.bg);
-  const timers=new Set();const api={stage:st,alive:true,wins:0,cleanup:[],
+  const timers=new Set();const api={id,stage:st,alive:true,wins:0,cleanup:[],
     later(fn,ms){const t=setTimeout(()=>{timers.delete(t);if(api.alive)fn()},ms);timers.add(t);return t},
     every(fn,ms){const t=setInterval(()=>{if(api.alive)fn()},ms);timers.add(t);return t},
     say:t=>V.say(t),
-    win(next){if(!api.alive)return;api.wins++;renderStars(api.wins);celebrate(()=>{if(api.alive&&next)next()})},
+    win(next){if(!api.alive)return;api.wins++;renderStars(api.wins);celebrate(()=>{if(!api.alive)return;if(breakDue()){showBreak();return}next&&next()})},
     destroy(){api.alive=false;timers.forEach(t=>{clearTimeout(t);clearInterval(t)});api.cleanup.forEach(f=>{try{f()}catch(e){}})}};
   cur=api;renderStars(0);requestAnimationFrame(()=>{if(!api.alive)return;g.start(api);if(g.intro)api.later(()=>V.say(g.intro),250)})}
 function closeGame(){if(cur){cur.destroy();cur=null}$('#stage').innerHTML='';V.stop()}
@@ -1032,8 +1092,8 @@ function renderStars(n){$('#stars').innerHTML=Array.from({length:3},(_,i)=>ICON.
 
 let rewardCb=null,rewardT=0,rewardAt=0;
 function celebrate(after){const pool=STICKERS.filter(s=>!S.stickers[s.id]);const s=pool.length?pick(pool):pick(STICKERS);S.stickers[s.id]=(S.stickers[s.id]||0)+1;save();
-  $('#rewardArt').innerHTML=s.art;const t=pick(PRAISE);$('#rewardTitle').textContent=t;$('#rewardSub').textContent=`Bé được nhãn dán ${s.name.toLowerCase()}`;
-  $('#reward').hidden=false;rewardAt=performance.now();A.fanfare();FX.burst(innerWidth/2,innerHeight*.42);V.say(`${t} Bé được nhãn dán ${s.name.toLowerCase()}!`);
+  $('#rewardArt').innerHTML=s.art;const t=pick(PRAISE);$('#rewardTitle').textContent=t;$('#rewardSub').textContent=`${s.name} đã về vườn của bé`;lastNew=s.id;
+  $('#reward').hidden=false;rewardAt=performance.now();A.fanfare();FX.burst(innerWidth/2,innerHeight*.42);V.say(`${t} ${s.name} đã về vườn của bé!`);
   rewardCb=after;clearTimeout(rewardT);rewardT=setTimeout(closeReward,3600)}
 function closeReward(){clearTimeout(rewardT);if($('#reward').hidden)return;$('#reward').hidden=true;const cb=rewardCb;rewardCb=null;cb&&cb()}
 $('#reward').addEventListener('click',()=>{if(performance.now()-rewardAt>900)closeReward()});
@@ -1046,51 +1106,87 @@ function newQ(){const a=randInt(3,7),b=randInt(2,6),ans=a+b;const opts=shuffle([
   $$('#gateOpts button').forEach(b=>b.addEventListener('click',()=>{if(+b.dataset.v===ans){$('#gate').hidden=true;const f=gateCb;gateCb=null;f&&f()}else{restart($('#gateCard'),'shake',450);newQ()}}))}
 $('#gateClose').addEventListener('click',()=>{$('#gate').hidden=true;gateCb=null});
 
-/* rest timer */
-setInterval(()=>{if(document.hidden||$('#game').hidden||!$('#rest').hidden||!$('#reward').hidden)return;S.played++;if(S.limit&&S.played>=S.limit*60)showRest()},1000);
-function showRest(){closeGame();show('home');$('#rest').hidden=false;A.music(false);V.say('Hết giờ chơi rồi. Bé nghỉ ngơi một chút nhé!')}
-$('#restContinue').addEventListener('click',()=>gate(()=>{S.played=0;$('#rest').hidden=true;show('home')}));
+/* rest timer: daily limit + short movement breaks */
+const BREAK_EVERY=300,BREAK_GRACE=60,BREAK_LEN=20;
+const timeLeft=()=>S.limit?(S.limit+S.extra)*60-S.played:Infinity;
+const overLimit=()=>timeLeft()<=0;
+const breakDue=()=>S.brk&&S.round>=BREAK_EVERY&&timeLeft()>90;
+setInterval(()=>{syncDay();
+  if(document.hidden||$('#game').hidden||!$('#rest').hidden||!$('#reward').hidden||!$('#brk').hidden)return;
+  S.played++;S.round++;if(S.played%5===0)saveDay();
+  if(overLimit()){saveDay();showRest();return}
+  if(breakDue()&&S.round>=BREAK_EVERY+BREAK_GRACE)showBreak()},1000);
+function showRest(){closeGame();show('home');$('#brk').hidden=true;clearInterval(brkT);$('#rest').hidden=false;A.music(false);
+  V.say(`Hết giờ chơi hôm nay rồi. Bíp đi ngủ đây. Bé đi chơi với bố mẹ nhé!`)}
+$('#restContinue').addEventListener('click',()=>gate(()=>{S.extra+=10;saveDay();$('#rest').hidden=true;show('home');V.say('Bé được chơi thêm một chút nhé!')}));
+
+const MOVES=[
+  {t:'Nhìn thật xa',d:'Bé nhìn ra cửa sổ, tìm một thứ màu xanh lá nhé!',art:()=>wrap(flowerI('#5DBB46'),'0 0 100 100')},
+  {t:'Chớp mắt như bướm',d:'Bé chớp mắt thật chậm, như cánh bướm. Một, hai, ba, bốn, năm!',art:()=>wrap(butterflyI(),'0 0 100 100')},
+  {t:'Nhảy như ếch',d:'Bé ngồi xuống rồi bật nhảy như chú ếch. Ộp, ộp, ộp!',art:()=>wrap(ART.frog)},
+  {t:'Cao như cây',d:'Bé giơ hai tay lên thật cao, vươn người như cái cây nào!',art:()=>wrap(appleI(),'0 0 100 100')},
+  {t:'Nhắm mắt nghe',d:'Bé nhắm mắt lại, nghe xem trong nhà có tiếng gì nhé!',art:()=>wrap(ART.cat)},
+  {t:'Vỗ tay cùng Bíp',d:'Bé vỗ tay cùng Bíp nào. Một, hai, ba!',art:()=>wrap(starI('#FFC325'),'0 0 100 100')}
+];
+let brkT=0,brkGame=null,brkLast=-1;
+function showBreak(){if(!$('#brk').hidden)return;brkGame=cur&&cur.id;closeGame();
+  let i;do{i=randInt(0,MOVES.length-1)}while(i===brkLast&&MOVES.length>1);brkLast=i;const m=MOVES[i];
+  $('#brkArt').innerHTML=m.art();$('#brkTitle').textContent=m.t;$('#brkText').textContent=m.d;
+  const done=$('#brkDone');done.disabled=true;$('#brk').hidden=false;$('#brkProg').style.setProperty('--p',0);
+  A.soft();V.say(`Bé nghỉ mắt một chút nhé! ${m.d}`);
+  let n=0;clearInterval(brkT);brkT=setInterval(()=>{if(document.hidden)return;n++;$('#brkProg').style.setProperty('--p',Math.min(1,n/BREAK_LEN));
+    if(n===Math.round(BREAK_LEN/2))V.say(m.d);
+    if(n>=BREAK_LEN){clearInterval(brkT);done.disabled=false;hint(done);V.say('Giỏi quá! Bé chạm vào Bíp để chơi tiếp nhé!')}},1000)}
+$('#brkDone').addEventListener('click',()=>{if($('#brkDone').disabled)return;A.tap();clearInterval(brkT);S.round=0;saveDay();$('#brk').hidden=true;
+  if(brkGame&&!overLimit())openGame(brkGame);else show('home')});
 
 /* home */
 function renderHome(){$('#tiles').innerHTML=GAMES.map((g,i)=>`<button class="tile felt" data-id="${g.id}" style="--bgc:${g.bg};--rot:${[-1.6,1.2,-.8,1.4,-1.2,.9,-1.4,1,-.6][i]}deg" aria-label="${g.name}"><span class="art">${tileArt[g.id]}</span><span class="nm">${g.name}</span><span class="sk">${g.sk}</span></button>`).join('');
   $$('.tile').forEach(t=>t.addEventListener('click',()=>{A.tap();openGame(t.dataset.id)}));greetText()}
 function greetText(){$('#greet').textContent=S.name?`Chào bé ${S.name}! Hôm nay mình chơi gì nhỉ?`:'Chào bé! Hôm nay mình chơi gì nhỉ?'}
 
-/* album */
+/* garden (replaces the sticker grid): every sticker has its own spot in Bíp's garden */
+const SPOTS={sun:[90,13,11],star:[44,11,7],balloon:[67,19,9],bfly:[55,33,8],apple:[13,34,7],orange:[26,28,7],
+  cow:[44,52,13],sheep:[63,50,11],duck:[93,69,8],frog:[70,83,8],fish:[84,86,9],
+  dog:[17,80,11],pig:[31,81,11],cat:[48,89,9],chick:[61,89,7],flower:[6,62,7]};
+let lastNew=null;
 function renderAlbum(){const got=STICKERS.filter(s=>S.stickers[s.id]).length;$('#albumCount').textContent=`${got} / ${STICKERS.length}`;$('#albumMeter').style.setProperty('--p',(got/STICKERS.length*100)+'%');
-  $('#albumGrid').innerHTML=STICKERS.map((s,i)=>{const n=S.stickers[s.id]||0;return `<button class="slot ${n?'got':''}" data-id="${s.id}" style="--rot:${[-6,4,-3,7,-5,3,-7,5][i%8]}deg" aria-label="${n?s.name:'Chưa có nhãn dán'}"><span class="sticker">${s.art}</span>${n>1?`<span class="cnt">×${n}</span>`:''}</button>`}).join('');
-  $$('#albumGrid .slot').forEach(b=>b.addEventListener('click',()=>{const s=STICKERS.find(x=>x.id===b.dataset.id);if(S.stickers[s.id]){bump(b);A.tap();if(AN(s.id))A.animal(s.id);V.say(s.name)}else{A.soft();V.say('Bé chơi thêm để nhận nhãn dán này nhé!')}}))}
+  $('#gardenNote').textContent=got>=STICKERS.length?'Khu vườn đã đủ bạn rồi! Bé chạm vào từng bạn để chào nhé.':got?'Mỗi lần bé chơi giỏi, một bạn mới về vườn.':'Vườn còn trống. Bé chơi giỏi để mời các bạn về vườn nhé!';
+  $('#gardenItems').innerHTML=STICKERS.map((s,i)=>{const n=S.stickers[s.id]||0;const [x,y,z]=SPOTS[s.id]||[10+(i%8)*11,60+Math.floor(i/8)*20,8];
+    return `<button class="gitem ${n?'got':''} ${s.id===lastNew?'new':''}" data-id="${s.id}" style="--x:${x};--y:${y};--s:${z};--i:${i}" aria-label="${n?s.name:'Chỗ trống trong vườn'}"><span class="sticker">${s.art}</span>${n>1?`<span class="cnt">×${n}</span>`:''}</button>`}).join('');
+  lastNew=null;
+  $$('#gardenItems .gitem').forEach(b=>b.addEventListener('click',()=>{const s=STICKERS.find(x=>x.id===b.dataset.id);if(S.stickers[s.id]){bump(b);A.tap();if(AN(s.id))A.animal(s.id);V.say(s.name)}else{A.soft();V.say('Bé chơi thêm để mời bạn này về vườn nhé!')}}))}
 
 /* parent page */
 function renderParent(){
   $$('#segAge button').forEach(b=>b.classList.toggle('on',+b.dataset.v===S.age));$$('#segLimit button').forEach(b=>b.classList.toggle('on',+b.dataset.v===S.limit));
-  $('#togSound').setAttribute('aria-checked',S.sound);$('#togVoice').setAttribute('aria-checked',S.voice);$('#togMusic').setAttribute('aria-checked',S.music);
+  $('#togBrk').setAttribute('aria-checked',S.brk);$('#togSound').setAttribute('aria-checked',S.sound);$('#togVoice').setAttribute('aria-checked',S.voice);$('#togMusic').setAttribute('aria-checked',S.music);
   $('#kidName').value=S.name;$('#statTime').textContent=Math.floor(S.played/60)+' phút';$('#statStick').textContent=Object.values(S.stickers).reduce((a,b)=>a+b,0);updVoice();
   $('#genreRows').innerHTML=GENRES.map(([n,d,a,k,w])=>`<tr><td>${n}</td><td>${d}</td><td>${a}</td><td><span class="pill ${k}">${w}</span></td></tr>`).join('')}
 $$('#segAge button').forEach(b=>b.addEventListener('click',()=>{S.age=+b.dataset.v;save();renderParent()}));
 $$('#segLimit button').forEach(b=>b.addEventListener('click',()=>{S.limit=+b.dataset.v;save();renderParent()}));
-[['#togSound','sound'],['#togVoice','voice'],['#togMusic','music']].forEach(([sel,k])=>$(sel).addEventListener('click',()=>{S[k]=!S[k];save();renderParent();if(k==='sound'&&S.sound){A.init();A.tap()}if(k==='voice'&&S.voice)V.say('Chào bé!')}));
+[['#togSound','sound'],['#togVoice','voice'],['#togMusic','music'],['#togBrk','brk']].forEach(([sel,k])=>$(sel).addEventListener('click',()=>{S[k]=!S[k];save();renderParent();if(k==='sound'&&S.sound){A.init();A.tap()}if(k==='voice'&&S.voice)V.say('Chào bé!')}));
 $('#kidName').addEventListener('input',e=>{S.name=e.target.value.trim().slice(0,16);save();greetText()});
-let resetArm=0;$('#btnReset').addEventListener('click',e=>{const b=e.currentTarget;if(Date.now()-resetArm<4000){S.stickers={};save();renderParent();b.textContent='Đã xóa';resetArm=0;setTimeout(()=>b.textContent='Xóa sổ nhãn dán',1800)}else{resetArm=Date.now();b.textContent='Bấm lần nữa để xóa';setTimeout(()=>{if(Date.now()-resetArm>=3900)b.textContent='Xóa sổ nhãn dán'},4000)}});
+let resetArm=0;$('#btnReset').addEventListener('click',e=>{const b=e.currentTarget;if(Date.now()-resetArm<4000){S.stickers={};save();renderParent();b.textContent='Đã xóa';resetArm=0;setTimeout(()=>b.textContent='Làm lại khu vườn',1800)}else{resetArm=Date.now();b.textContent='Bấm lần nữa để xóa';setTimeout(()=>{if(Date.now()-resetArm>=3900)b.textContent='Làm lại khu vườn'},4000)}});
 $('#btnFull').innerHTML=ICON.expand+'<span>Bật</span>';
 $('#btnFull').addEventListener('click',()=>{const d=document;try{if(d.fullscreenElement)d.exitFullscreen();else{const r=d.documentElement.requestFullscreen&&d.documentElement.requestFullscreen();r&&r.catch&&r.catch(()=>{$('#btnFull span').textContent='Máy không hỗ trợ'})}}catch(e){}});
 document.addEventListener('fullscreenchange',()=>{const sp=$('#btnFull span');if(sp)sp.textContent=document.fullscreenElement?'Tắt':'Bật'});
 
 /* wiring */
-$('#heroBip').innerHTML=MASCOT;$('#homeBip').innerHTML=MASCOT;$('#gameBip').innerHTML=MASCOT;$('#restBip').insertAdjacentHTML('afterbegin',MASCOT.replace('<svg','<svg class="bipsvg"'));
+$('#heroBip').innerHTML=MASCOT;$('#homeBip').innerHTML=MASCOT;$('#gameBip').innerHTML=MASCOT;$('#brkBip').innerHTML=MASCOT;$('#restBip').insertAdjacentHTML('afterbegin',MASCOT.replace('<svg','<svg class="bipsvg"'));
 $('#heroBip').firstElementChild.classList.add('bipsvg');$('#homeBip').firstElementChild.classList.add('bipsvg');$('#gameBip').firstElementChild.classList.add('bipsvg');
 $('#sunball').innerHTML=SUNBIG;$$('.cloud').forEach(c=>c.innerHTML=CLOUD);
 $('#btnStart').innerHTML=ICON.play;$('#splashHint').innerHTML=ICON.speaker+'<span>Bật âm thanh để nghe Bíp nói chuyện</span>';
 const LOGO_COLS=['#F0603F','#FFC93C','#5DBB46','#3D95F0','#E0558F','#FF8A2E','#7A62C9','#2BB5A8'];let li=0;
 $('#logo').innerHTML='Vườn Chơi Bíp'.split(' ').map(w=>`<span class="w">${[...w].map(ch=>`<span style="--c:${LOGO_COLS[li%8]};--i:${li++}">${ch}</span>`).join('')}</span>`).join('');
-$('#btnHome').innerHTML=ICON.home;$('#btnAlbum').innerHTML=ICON.book;$('#btnParent').innerHTML=ICON.lock;$('#gateClose').innerHTML=ICON.close;$('#restContinue').innerHTML=ICON.lock+'<span>Người lớn mở lại</span>';
+$('#btnHome').innerHTML=ICON.home;$('#btnAlbum').innerHTML=ICON.tree;$('#btnParent').innerHTML=ICON.lock;$('#gateClose').innerHTML=ICON.close;$('#restContinue').innerHTML=ICON.lock+'<span>Người lớn cho thêm 10 phút</span>';
 $$('[data-go="home"]').forEach(b=>{b.innerHTML=ICON.home;b.addEventListener('click',()=>{A.tap();show('home')})});
 $('#btnHome').addEventListener('click',()=>{A.tap();closeGame();show('home')});
-$('#btnAlbum').addEventListener('click',()=>{A.tap();renderAlbum();show('album');V.say('Sổ nhãn dán của bé đây!')});
+$('#btnAlbum').addEventListener('click',()=>{A.tap();renderAlbum();show('album');V.say('Khu vườn của bé đây! Chạm vào các bạn để chào nhé.')});
 $('#btnParent').addEventListener('click',()=>{A.tap();gate(()=>{renderParent();show('parent')})});
 $('#mascot').addEventListener('click',()=>{if(lastLine)V.say(lastLine)});
 $('#btnStart').addEventListener('click',()=>{A.init();V.load();try{navigator.wakeLock&&navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}
-  renderHome();show('home');A.fanfare();setTimeout(()=>V.say(S.name?`Chào bé ${S.name}! Mình là Bíp. Mình cùng chơi nhé!`:'Chào bé! Mình là Bíp. Mình cùng chơi nhé!'),350)});
+  renderHome();show('home');if(overLimit()){showRest();return}A.fanfare();setTimeout(()=>V.say(S.name?`Chào bé ${S.name}! Mình là Bíp. Mình cùng chơi nhé!`:'Chào bé! Mình là Bíp. Mình cùng chơi nhé!'),350)});
 document.addEventListener('pointerdown',()=>{if(A.ctx&&A.ctx.state==='suspended')A.ctx.resume()},{passive:true});
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('gesturestart',e=>e.preventDefault());
