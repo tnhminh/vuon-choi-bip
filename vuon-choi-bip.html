@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
-<title>Vườn Chơi Rio</title>
+<title>Vườn Chơi Cu Tí</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,7 +91,7 @@ p{margin:0}
 .home-head p{font-size:15px;color:var(--ink-soft)}
 .head-btns{display:flex;gap:10px}
 .tiles{position:relative;z-index:2;flex:1;min-height:0;display:grid;--g:clamp(10px,2.2vmin,22px);gap:var(--g);
-  --tw:min(calc((100vw - 32px - 2 * var(--g)) / 3),calc((100vh - 130px) / 3 - var(--g)),320px);--tw:min(calc((100vw - 32px - 2 * var(--g)) / 3),calc((100dvh - 130px) / 3 - var(--g)),320px);
+  --tw:min(calc((100vw - 32px - 2 * var(--g)) / 3),calc((100vh - 196px) / 3 - var(--g)),320px);--tw:min(calc((100vw - 32px - 2 * var(--g)) / 3),calc((100dvh - 196px) / 3 - var(--g)),320px);
   grid-template-columns:repeat(3,var(--tw));grid-auto-rows:var(--tw);justify-content:center;align-content:center;padding-bottom:8px}
 .tile{--r:30px;background:var(--bgc);width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2%;
   padding:9% 6% 7%;rotate:var(--rot);transition:transform .18s cubic-bezier(.3,1.6,.5,1)}
@@ -298,6 +298,7 @@ p{margin:0}
 .gitem{position:absolute;left:calc(var(--x) * 1%);top:calc(var(--y) * 1%);width:max(46px,calc(var(--s) * 1%));aspect-ratio:1;translate:-50% -50%;display:grid;place-items:center;border-radius:50%}
 .gitem .sticker{width:100%;height:100%;filter:brightness(0) opacity(.14)}
 .gitem:not(.got){outline:3px dashed rgba(43,53,80,.25);outline-offset:-2px}
+.gitem.o:not(.got){outline:3.5px dashed #2E8B3E;background:rgba(255,255,255,.35)}
 .gitem.got .sticker{filter:drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(0 5px 5px rgba(43,53,80,.3));animation:bob 3.2s ease-in-out infinite;animation-delay:calc(var(--i) * -.37s)}
 .gitem.new .sticker{animation:rin .8s cubic-bezier(.3,1.6,.5,1),bob 3.2s ease-in-out .8s infinite}
 .gitem .cnt{position:absolute;right:-6%;bottom:-6%;background:var(--ink);color:#fff;font-size:12px;font-weight:900;padding:1px 7px;border-radius:999px;font-variant-numeric:tabular-nums}
@@ -375,6 +376,32 @@ td:first-child{font-weight:800;white-space:nowrap}
 #rest p{font-size:18px;color:#D7DDF2;max-width:36ch}
 #rest .btn{color:var(--ink)}
 #brk{z-index:74;background:rgba(169,221,240,.92)}
+/* outdoor: home bar, mission/plant panel */
+.outbar{position:relative;z-index:2;display:flex;justify-content:center;gap:clamp(10px,2vmin,18px);margin:10px 0 12px}
+.outbtn{position:relative;display:flex;align-items:center;gap:10px;height:54px;padding:0 20px 0 8px;border-radius:999px;background:var(--bgc);border:4px solid var(--ink);box-shadow:0 5px 0 var(--ink);font-family:var(--display);font-size:clamp(16px,2.6vmin,21px);transition:transform .15s}
+.outbtn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--ink)}
+.outbtn .ic{width:40px;height:40px;flex:none}
+.outbtn .due{position:absolute;top:-6px;right:-4px;width:20px;height:20px;border-radius:50%;background:var(--tomato);border:3px solid var(--ink);display:none;animation:pulse 1.4s ease-in-out infinite}
+.outbtn.due .due{display:block}
+#rest .kid-go{color:var(--ink)}
+.kid-go{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:8px 28px;border-radius:999px;background:var(--sun);border:4px solid var(--ink);box-shadow:0 6px 0 var(--ink);font-family:var(--display);font-size:clamp(20px,3.4vmin,26px)}
+.kid-go svg{width:40px;height:40px}
+.kid-go:active{transform:translateY(3px);box-shadow:0 3px 0 var(--ink)}
+#out{z-index:76;background:rgba(141,201,107,.94);transition:background .6s}
+#out.wait{background:#17261C}
+.out-card{--r:34px;position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:clamp(20px,3.4vmin,32px) clamp(18px,4vmin,40px);width:min(560px,100%);max-height:100%;overflow:auto;animation:rin .6s cubic-bezier(.3,1.6,.5,1);transition:filter .6s}
+#out.wait .out-card{filter:brightness(.55)}
+.out-close{position:absolute;top:12px;right:12px}
+.out-art{width:clamp(120px,26vmin,190px);aspect-ratio:1;animation:wob 2.4s ease-in-out infinite}
+#out.wait .out-art{width:clamp(80px,16vmin,120px);animation:none}
+.out-card h2{font-size:clamp(28px,6vmin,46px);line-height:1.1}
+.out-card p:not(.eyebrow){font-size:clamp(17px,2.8vmin,21px);margin:0;max-width:32ch;color:var(--ink-soft)}
+.out-btns{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:10px}
+.btn.ghost{background:transparent;box-shadow:none;border-color:rgba(43,53,80,.3)}
+.plant-days{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:2px}
+.plant-days i{width:16px;height:16px;border-radius:50%;border:2.5px solid var(--ink);background:#fff}
+.plant-days i.on{background:#3D95F0}
+@media (prefers-reduced-motion:reduce){.out-art,.outbtn .due{animation:none}}
 .brk-card{--r:34px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:clamp(18px,3.4vmin,32px) clamp(18px,4vmin,40px);max-width:min(560px,100%);animation:rin .6s cubic-bezier(.3,1.6,.5,1)}
 .brk-art{width:clamp(110px,24vmin,180px);aspect-ratio:1;animation:wob 2s ease-in-out infinite}
 .brk-card h2{font-size:clamp(28px,6vmin,48px);line-height:1.1}
@@ -420,7 +447,7 @@ td:first-child{font-weight:800;white-space:nowrap}
   <section id="splash" class="screen splash">
     <div class="splash-inner">
       <div class="bip-hero" id="heroBip"></div>
-      <h1 class="logo" id="logo" aria-label="Vườn Chơi Rio"></h1>
+      <h1 class="logo" id="logo" aria-label="Vườn Chơi Cu Tí"></h1>
       <p class="tag">Chín trò chơi nhỏ cho bé 2–3 tuổi</p>
       <button id="btnStart" class="big-play" aria-label="Bắt đầu chơi"></button>
       <p class="hint" id="splashHint"></p>
@@ -430,12 +457,16 @@ td:first-child{font-weight:800;white-space:nowrap}
   <section id="home" class="screen" hidden>
     <header class="home-head">
       <div class="mini-bip" id="homeBip"></div>
-      <div class="titles"><h1>Vườn Chơi Rio</h1><p id="greet">Chào Rio! Chơi game nhớ giữ sức khỏe nha Rio!</p></div>
+      <div class="titles"><h1>Vườn Chơi Cu Tí</h1><p id="greet">Chào Rio! Chơi game nhớ giữ sức khỏe nha Rio!</p></div>
       <div class="head-btns">
         <button class="btn-round" id="btnAlbum" aria-label="Khu vườn của bé"></button>
         <button class="btn-round small" id="btnParent" aria-label="Góc phụ huynh"></button>
       </div>
     </header>
+    <div class="outbar">
+      <button class="outbtn" id="btnOut" style="--bgc:#C9EDB3"><span class="ic" id="icOut"></span><span>Ra ngoài chơi</span></button>
+      <button class="outbtn" id="btnPlant" style="--bgc:#FFE7A6"><span class="ic" id="icPlant"></span><span>Cây của Rio</span><b class="due" aria-hidden="true"></b></button>
+    </div>
     <div class="tiles" id="tiles"></div>
   </section>
 
@@ -444,7 +475,7 @@ td:first-child{font-weight:800;white-space:nowrap}
       <button class="btn-round" id="btnHome" aria-label="Về trang chính"></button>
       <div class="gtitle felt"><span class="dot" id="gdot"></span><h2 id="gname">Trò chơi</h2><span class="stars" id="stars"></span></div>
       <div class="spacer"></div>
-      <button id="mascot" aria-label="Nghe lại lời Rio"><span class="bipsvg" id="gameBip"></span><span class="saybubble" id="say"></span></button>
+      <button id="mascot" aria-label="Nghe lại lời Cu Tí"><span class="bipsvg" id="gameBip"></span><span class="saybubble" id="say"></span></button>
     </header>
     <div class="stage" id="stage"></div>
   </section>
@@ -453,7 +484,7 @@ td:first-child{font-weight:800;white-space:nowrap}
     <div class="page">
       <header class="page-head">
         <button class="btn-round" data-go="home" aria-label="Về trang chính"></button>
-        <div><p class="eyebrow">Khu vườn của Rio</p><h1>Vườn của bé</h1></div>
+        <div><p class="eyebrow">Khu vườn của Cu Tí</p><h1>Vườn của Rio</h1></div>
       </header>
       <div class="album-board felt">
         <div class="album-meta"><span class="big" id="albumCount">0 / 16</span><div class="meter"><b id="albumMeter" style="--p:0%"></b></div></div>
@@ -489,7 +520,7 @@ td:first-child{font-weight:800;white-space:nowrap}
             <div class="row"><span class="lb">Độ tuổi<span class="sub">3 tuổi: thêm hình, thêm màu, thêm thẻ và phải gõ đúng nốt.</span></span>
               <span class="seg" id="segAge"><button data-v="2">2 tuổi</button><button data-v="3">3 tuổi</button></span></div>
             <div class="row"><span class="lb">Âm thanh</span><button class="tog" id="togSound" role="switch" aria-label="Âm thanh"></button></div>
-            <div class="row"><span class="lb">Giọng Rio đọc<span class="sub" id="voiceStatus">Đang kiểm tra giọng đọc…</span></span><button class="tog" id="togVoice" role="switch" aria-label="Giọng đọc"></button></div>
+            <div class="row"><span class="lb">Giọng Cu Tí đọc<span class="sub" id="voiceStatus">Đang kiểm tra giọng đọc…</span></span><button class="tog" id="togVoice" role="switch" aria-label="Giọng đọc"></button></div>
             <div class="row"><span class="lb">Nhạc nền<span class="sub">Chỉ phát ở màn hình chính và khu vườn.</span></span><button class="tog" id="togMusic" role="switch" aria-label="Nhạc nền"></button></div>
             <div class="row"><span class="lb">Toàn màn hình<span class="sub">Giúp bé không bấm nhầm ra ngoài.</span></span><button class="btn" id="btnFull"></button></div>
           </div>
@@ -499,10 +530,12 @@ td:first-child{font-weight:800;white-space:nowrap}
           <div class="stat">
             <div><b id="statTime">0 phút</b><span>đã chơi hôm nay</span></div>
             <div><b id="statStick">0</b><span>nhãn dán đã nhận</span></div>
+            <div><b id="statOut">0</b><span>nhiệm vụ ngoài trời</span></div>
+            <div><b id="statPlant">Chưa trồng</b><span>cây đậu của Rio</span></div>
           </div>
-          <div class="row"><span class="lb">Giới hạn mỗi ngày<span class="sub">Tính tổng cả ngày, tải lại trang không đặt lại giờ. Hết giờ, Rio đi ngủ. Người lớn có thể cho thêm 10 phút.</span></span>
+          <div class="row"><span class="lb">Giới hạn mỗi ngày<span class="sub">Tính tổng cả ngày, tải lại trang không đặt lại giờ. Hết giờ, Cu Tí đi ngủ. Người lớn có thể cho thêm 10 phút.</span></span>
             <span class="seg" id="segLimit"><button data-v="10">10'</button><button data-v="15">15'</button><button data-v="20">20'</button><button data-v="30">30'</button><button data-v="0">Tắt</button></span></div>
-          <div class="row"><span class="lb">Nghỉ mắt mỗi 5 phút<span class="sub">Rio rủ bé nhìn xa, chớp mắt hoặc vận động khoảng 20 giây rồi chơi tiếp.</span></span><button class="tog" id="togBrk" role="switch" aria-label="Nghỉ mắt mỗi 5 phút"></button></div>
+          <div class="row"><span class="lb">Nghỉ mắt mỗi 5 phút<span class="sub">Cu Tí rủ bé nhìn xa, chớp mắt hoặc vận động khoảng 20 giây rồi chơi tiếp.</span></span><button class="tog" id="togBrk" role="switch" aria-label="Nghỉ mắt mỗi 5 phút"></button></div>
           <p class="muted">WHO khuyến nghị trẻ 2–4 tuổi ngồi trước màn hình không quá 1 giờ mỗi ngày, càng ít càng tốt. Chơi cùng bé và gọi tên những gì bé thấy sẽ giúp bé học nhiều hơn.</p>
           <div class="row"><span class="lb">Làm lại khu vườn<span class="sub">Đưa khu vườn về trống, bé mời các bạn về lại từ đầu.</span></span><button class="btn warn" id="btnReset">Làm lại khu vườn</button></div>
         </section>
@@ -513,7 +546,7 @@ td:first-child{font-weight:800;white-space:nowrap}
         <p class="muted">Ở tuổi này bé học bằng cách chạm, nghe và lặp lại. Thể loại tốt là loại có phản hồi ngay, không có thua, không đếm giờ và không cần biết chữ.</p>
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Thể loại</th><th>Bé học được gì</th><th>Tuổi</th><th>Trong Vườn Chơi Rio</th></tr></thead>
+            <thead><tr><th>Thể loại</th><th>Bé học được gì</th><th>Tuổi</th><th>Trong Vườn Chơi Cu Tí</th></tr></thead>
             <tbody id="genreRows"></tbody>
           </table>
         </div>
@@ -524,10 +557,11 @@ td:first-child{font-weight:800;white-space:nowrap}
         <ul class="rules">
           <li><b>Không có thua</b>Bé làm sai thì đồ vật nhẹ nhàng quay về chỗ cũ. Không có tiếng còi báo sai, không mất mạng.</li>
           <li><b>Không đếm giờ</b>Bé chơi theo nhịp của mình. Không có đồng hồ đếm ngược.</li>
-          <li><b>Không cần biết chữ</b>Rio đọc lời nhắc. Chữ trên màn hình chỉ để bố mẹ đọc cùng.</li>
+          <li><b>Không cần biết chữ</b>Cu Tí đọc lời nhắc. Chữ trên màn hình chỉ để bố mẹ đọc cùng.</li>
           <li><b>Nút to, dễ chạm</b>Mọi thứ bé chạm vào đều lớn hơn 2 cm. Kéo thả có vùng hút rộng.</li>
           <li><b>Lượt chơi ngắn</b>Mỗi lượt chỉ 1–2 phút rồi một bạn mới về vườn của bé, đủ để bé thấy mình làm được.</li>
-          <li><b>Nghỉ mắt thường xuyên</b>Cứ khoảng 5 phút, Rio rủ bé nhìn xa, chớp mắt hoặc nhảy nhót 20 giây. Bé quen dần với việc rời mắt khỏi màn hình.</li>
+          <li><b>Màn hình dẫn ra ngoài trời</b>Nhiệm vụ đi dạo và cây đậu thật cho phần thưởng chỉ có khi bé làm ngoài đời. Lúc chờ bé, màn hình tối đi và được phép tự tắt. Bố mẹ bấm xác nhận khi bé làm xong.</li>
+          <li><b>Nghỉ mắt thường xuyên</b>Cứ khoảng 5 phút, Cu Tí rủ bé nhìn xa, chớp mắt hoặc nhảy nhót 20 giây. Bé quen dần với việc rời mắt khỏi màn hình.</li>
           <li><b>Không quảng cáo, không mua hàng</b>Không có nút dẫn ra ngoài. Góc phụ huynh được khóa bằng một phép cộng.</li>
         </ul>
       </section>
@@ -556,9 +590,22 @@ td:first-child{font-weight:800;white-space:nowrap}
   <div id="rest" class="overlay" hidden>
     <div class="nightstars"></div>
     <div class="moon sleep" id="restBip"><span class="zz">z z</span></div>
-    <h2>Rio buồn ngủ rồi</h2>
-    <p>Hết giờ chơi hôm nay. Bé cất máy, uống nước và đi chơi với bố mẹ nhé! Mai Rio chờ bé ở khu vườn.</p>
+    <h2>Hết giờ chơi máy rồi!</h2>
+    <p>Màn hình cần nghỉ, còn Rio thì ra ngoài chơi nhé! Cu Tí có một nhiệm vụ cho Rio đây.</p>
+    <button class="kid-go" id="restOut"></button>
     <button class="btn" id="restContinue"></button>
+  </div>
+
+  <div id="out" class="overlay" hidden>
+    <div class="out-card felt light" id="outCard">
+      <button class="btn-round small out-close" id="outClose" aria-label="Để lần sau"></button>
+      <p class="eyebrow" id="outEyebrow">Nhiệm vụ ngoài trời</p>
+      <div class="out-art" id="outArt"></div>
+      <h2 id="outTitle"></h2>
+      <p id="outText"></p>
+      <div id="outExtra"></div>
+      <div class="out-btns" id="outBtns"></div>
+    </div>
   </div>
 
   <div id="brk" class="overlay" hidden>
@@ -598,9 +645,10 @@ function fitGrid(el,n,ratio=1,gap=16){const cs=getComputedStyle(el);const W=el.c
   el.style.setProperty('--cols',best.c);el.style.setProperty('--cell',Math.max(40,Math.floor(Math.min(best.s,320)))+'px');el.style.setProperty('--gap',gap+'px')}
 function fitAspect(el,parent,ratio){const W=parent.clientWidth,H=parent.clientHeight;let w=W,h=w/ratio;if(h>H){h=H;w=h*ratio}el.style.width=w+'px';el.style.height=h+'px'}
 const store={get(k,d){try{const v=localStorage.getItem('bip.'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('bip.'+k,JSON.stringify(v))}catch(e){}}};
-const S={sound:store.get('sound',true),voice:store.get('voice',true),music:store.get('music',false),limit:store.get('limit',15),age:store.get('age',2),name:store.get('name',''),stickers:store.get('stickers',{}),brk:store.get('brk',true),played:0,extra:0,round:0,day:''};
+const S={sound:store.get('sound',true),voice:store.get('voice',true),music:store.get('music',false),limit:store.get('limit',15),age:store.get('age',2),name:store.get('name',''),stickers:store.get('stickers',{}),brk:store.get('brk',true),plant:store.get('plant',null),outN:store.get('outN',0),played:0,extra:0,round:0,day:''};
+if(S.plant&&typeof S.plant!=='object')S.plant=null;
 if(typeof S.stickers!=='object'||Array.isArray(S.stickers)||!S.stickers)S.stickers={};
-const save=()=>['sound','voice','music','limit','age','name','stickers','brk'].forEach(k=>store.set(k,S[k]));
+const save=()=>['sound','voice','music','limit','age','name','stickers','brk','plant','outN'].forEach(k=>store.set(k,S[k]));
 /* play time is counted per calendar day and survives reloads */
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
 const saveDay=()=>store.set('today',{d:S.day,p:S.played,x:S.extra,r:S.round});
@@ -749,8 +797,31 @@ const KINDS=['ball','star','heart','flower','fish'];
 const NUM=['không','một','hai','ba','bốn','năm'];
 const PRAISE=['Giỏi quá!','Hoan hô bé!','Tuyệt vời!','Bé làm được rồi!','Siêu quá!'];
 const CONF=['#F0603F','#FFC93C','#5DBB46','#3D95F0','#E0558F','#7A62C9','#2BB5A8','#fff'];
+/* outdoor art (all on a 100×100 box) */
+const leafI=()=>`<path d="M18 82 C16 42 44 16 84 16 C86 56 60 84 18 82Z" fill="#5DBB46" ${st(4)}/><path d="M18 82 C38 62 54 46 72 30" fill="none" ${st(3)}/>`;
+const stoneI=()=>`<path d="M12 66 C8 48 26 34 46 34 C70 32 90 44 88 62 C86 78 66 84 48 82 C30 82 14 78 12 66Z" fill="#A9B0BE" ${st(4)}/><ellipse cx="38" cy="48" rx="10" ry="5" fill="#fff" opacity=".5"/>`;
+const cloudI=()=>`<path d="M22 74 C6 74 6 52 22 50 C22 32 44 26 54 40 C60 22 88 24 86 46 C98 48 98 74 82 74Z" fill="#fff" ${st(4)}/>`;
+const birdI=()=>`<path d="M20 58 L4 48 L8 64Z" fill="#9C6436" ${st(3)}/><ellipse cx="46" cy="60" rx="30" ry="22" fill="#C98A52" ${st(4)}/><circle cx="72" cy="40" r="16" fill="#C98A52" ${st(4)}/><path d="M86 37 L98 42 L86 47Z" fill="#FFB347" ${st(3)}/>${eye(75,37,3.6)}<path d="M28 56 C38 46 54 50 58 62 C46 66 34 64 28 56Z" fill="#9C6436" ${st(3)}/><path d="M40 82 L38 94 M54 82 L56 94" fill="none" ${st(3)}/>`;
+const rainbowI=()=>[['#F0603F',38],['#FFC93C',30],['#5DBB46',22],['#3D95F0',14]].map(([c,r])=>`<path d="M${50-r} 72 A${r} ${r} 0 0 1 ${50+r} 72" fill="none" stroke="${c}" stroke-width="8.5"/>`).join('')+`<path d="M8 72 A42 42 0 0 1 92 72 M40 72 A10 10 0 0 1 60 72" fill="none" ${st(3.5)}/><ellipse cx="14" cy="74" rx="13" ry="8" fill="#fff" ${st(3.5)}/><ellipse cx="86" cy="74" rx="13" ry="8" fill="#fff" ${st(3.5)}/>`;
+const mushroomI=()=>`<path d="M38 52 L35 86 C35 91 65 91 65 86 L62 52Z" fill="#FFF3DC" ${st(4)}/><path d="M10 56 C10 22 90 22 90 56Z" fill="#F0603F" ${st(4)}/><circle cx="32" cy="40" r="6" fill="#fff"/><circle cx="56" cy="32" r="5" fill="#fff"/><circle cx="72" cy="46" r="5" fill="#fff"/>`;
+const snailI=()=>`<path d="M8 82 C8 72 18 70 28 70 L80 70 C92 70 94 82 84 84 L14 84 C10 84 8 84 8 82Z" fill="#F4C27A" ${st(4)}/><path d="M80 70 L84 48 M88 70 L95 52" fill="none" ${st(3)}/><circle cx="84" cy="47" r="3.5" fill="${INK}"/><circle cx="95" cy="51" r="3.5" fill="${INK}"/><circle cx="46" cy="48" r="25" fill="#E0A463" ${st(4)}/><path d="M46 48 m0 -13 a13 13 0 1 1 -13 13 a8 8 0 0 1 8 -8 a4 4 0 0 1 4 4" fill="none" ${st(3)}/>`;
+const ladybugI=()=>`<path d="M32 30 C34 14 66 14 68 30Z" fill="${INK}"/><circle cx="50" cy="58" r="32" fill="#EE4B36" ${st(4)}/><path d="M50 27 V90" fill="none" ${st(3)}/><circle cx="34" cy="50" r="6" fill="${INK}"/><circle cx="66" cy="50" r="6" fill="${INK}"/><circle cx="36" cy="72" r="5" fill="${INK}"/><circle cx="64" cy="72" r="5" fill="${INK}"/>`;
+const treeI=()=>`<rect x="42" y="56" width="16" height="36" rx="5" fill="#B8783F" ${st(4)}/><path d="M50 62 C20 66 12 40 30 32 C28 12 56 6 64 20 C82 14 94 36 80 48 C92 60 76 72 50 62Z" fill="#5FAE45" ${st(4)}/>`;
+const PLANT_DAYS=[2,4,7,10,14];
+const plantStage=d=>PLANT_DAYS.filter(x=>d>=x).length;
+const plantI=n=>{const top=[58,46,38,28,20,16][n];const ly=n>=4?top+12:top+4,sc=n===1?.5:.8;
+  const leaf=(y,dx,s)=>`<path d="M50 ${y} C${50+dx*10*s} ${y-12*s} ${50+dx*26*s} ${y-10*s} ${50+dx*30*s} ${y-2*s} C${50+dx*22*s} ${y+6*s} ${50+dx*8*s} ${y+4*s} 50 ${y}Z" fill="#7CC95A" ${st(3)}/>`;
+  let g=n===0?`<ellipse cx="50" cy="56" rx="8" ry="5" fill="#9C6436" ${st(3)}/>`:`<path d="M50 62 V${top}" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round"/><path d="M50 62 V${top}" fill="none" stroke="#5DBB46" stroke-width="5" stroke-linecap="round"/>`;
+  if(n>=3)g+=leaf(top+20,-1,.9)+leaf(top+24,1,.9);
+  if(n>=1)g+=leaf(ly,-1,sc)+leaf(ly,1,sc);
+  if(n===4)g+=`<ellipse cx="50" cy="${top-4}" rx="7" ry="10" fill="#FF8FC1" ${st(3)}/>`;
+  if(n>=5)g+=`<g transform="translate(50 ${top}) scale(.42) translate(-50 -50)">${flowerI('#FF8FC1')}</g>`;
+  return g+`<rect x="22" y="58" width="56" height="11" rx="4" fill="#C9653A" ${st(4)}/><path d="M27 69 L73 69 L66 95 L34 95Z" fill="#E07B4A" ${st(4)}/>`};
 const STICKERS=[
   ...ANIMALS.map(a=>({id:a.k,name:cap(a.n),art:wrap(ART[a.k])})),
+  {id:'rainbow',name:'Cầu vồng',out:true,art:wrap(rainbowI(),'0 0 100 100')},{id:'bird',name:'Chim sẻ',out:true,art:wrap(birdI(),'0 0 100 100')},
+  {id:'mushroom',name:'Cây nấm',out:true,art:wrap(mushroomI(),'0 0 100 100')},{id:'snail',name:'Ốc sên',out:true,art:wrap(snailI(),'0 0 100 100')},
+  {id:'ladybug',name:'Bọ rùa',out:true,art:wrap(ladybugI(),'0 0 100 100')},
   {id:'apple',name:'Quả táo',art:wrap(appleI(),'0 0 100 100')},{id:'orange',name:'Quả cam',art:wrap(orangeI(),'0 0 100 100')},
   {id:'star',name:'Ngôi sao',art:wrap(starI('#FFC325'),'0 0 100 100')},{id:'sun',name:'Ông mặt trời',art:wrap(sunI(),'0 0 100 100')},
   {id:'flower',name:'Bông hoa',art:wrap(flowerI('#FF8FC1'),'0 0 100 100')},{id:'fish',name:'Con cá',art:wrap(fishI('#3D95F0'),'0 0 100 100')},
@@ -821,7 +892,7 @@ const V={voice:null,supported:'speechSynthesis' in window,
 let lastLine='',capT=0;
 function caption(t){lastLine=t;const b=$('#say');if($('#game').hidden)return;b.textContent=t;b.classList.add('on');const m=$('#mascot');restart(m,'talk',1600);clearTimeout(capT);capT=setTimeout(()=>b.classList.remove('on'),Math.max(2600,t.length*85))}
 function updVoice(){const el=$('#voiceStatus');if(!el)return;
-  el.textContent=!V.supported?'Trình duyệt này không có giọng đọc. Lời nhắc hiện bằng chữ để bố mẹ đọc cho bé.':V.voice?`Đang dùng giọng tiếng Việt: ${V.voice.name}.`:'Máy này chưa có giọng tiếng Việt, nên Rio chỉ hiện lời nhắc bằng chữ. Bé vẫn nghe đủ hiệu ứng âm thanh.'}
+  el.textContent=!V.supported?'Trình duyệt này không có giọng đọc. Lời nhắc hiện bằng chữ để bố mẹ đọc cho bé.':V.voice?`Đang dùng giọng tiếng Việt: ${V.voice.name}.`:'Máy này chưa có giọng tiếng Việt, nên Cu Tí chỉ hiện lời nhắc bằng chữ. Bé vẫn nghe đủ hiệu ứng âm thanh.'}
 
 /* ================= confetti / sparkles ================= */
 const FX={p:[],on:false,
@@ -1089,9 +1160,9 @@ function closeGame(){if(cur){cur.destroy();cur=null}$('#stage').innerHTML='';V.s
 function renderStars(n){$('#stars').innerHTML=Array.from({length:3},(_,i)=>ICON.starFill(i<Math.min(n,3)?'#FFC93C':'rgba(43,53,80,.12)')).join('')+(n>3?`<b style="font-family:var(--display);font-size:18px;margin-left:4px">+${n-3}</b>`:'')}
 
 let rewardCb=null,rewardT=0,rewardAt=0;
-function celebrate(after){const pool=STICKERS.filter(s=>!S.stickers[s.id]);const s=pool.length?pick(pool):pick(STICKERS);S.stickers[s.id]=(S.stickers[s.id]||0)+1;save();
-  $('#rewardArt').innerHTML=s.art;const t=pick(PRAISE);$('#rewardTitle').textContent=t;$('#rewardSub').textContent=`${s.name} đã về vườn của bé`;lastNew=s.id;
-  $('#reward').hidden=false;rewardAt=performance.now();A.fanfare();FX.burst(innerWidth/2,innerHeight*.42);V.say(`${t} ${s.name} đã về vườn của bé!`);
+function celebrate(after,s0){const base=STICKERS.filter(s=>!s.out);const pool=base.filter(s=>!S.stickers[s.id]);const s=s0||(pool.length?pick(pool):pick(base));S.stickers[s.id]=(S.stickers[s.id]||0)+1;save();
+  $('#rewardArt').innerHTML=s.art;const t=pick(PRAISE);$('#rewardTitle').textContent=t;$('#rewardSub').textContent=`${s.name} đã về vườn của Rio`;lastNew=s.id;
+  $('#reward').hidden=false;rewardAt=performance.now();A.fanfare();FX.burst(innerWidth/2,innerHeight*.42);V.say(`${t} ${s.name} đã về vườn của Rio!`);
   rewardCb=after;clearTimeout(rewardT);rewardT=setTimeout(closeReward,3600)}
 function closeReward(){clearTimeout(rewardT);if($('#reward').hidden)return;$('#reward').hidden=true;const cb=rewardCb;rewardCb=null;cb&&cb()}
 $('#reward').addEventListener('click',()=>{if(performance.now()-rewardAt>900)closeReward()});
@@ -1115,7 +1186,8 @@ setInterval(()=>{syncDay();
   if(overLimit()){saveDay();showRest();return}
   if(breakDue()&&S.round>=BREAK_EVERY+BREAK_GRACE)showBreak()},1000);
 function showRest(){closeGame();show('home');$('#brk').hidden=true;clearInterval(brkT);$('#rest').hidden=false;A.music(false);
-  V.say(`Hết giờ chơi hôm nay rồi. Rio đi ngủ đây. Bé đi chơi với bố mẹ nhé!`)}
+  V.say('Hết giờ chơi máy rồi! Màn hình đi ngủ, còn Rio ra ngoài chơi nhé. Chạm nút vàng để nhận nhiệm vụ nào!')}
+$('#restOut').addEventListener('click',()=>{A.tap();startMission()});
 $('#restContinue').addEventListener('click',()=>gate(()=>{S.extra+=10;saveDay();$('#rest').hidden=true;show('home');V.say('Bé được chơi thêm một chút nhé!')}));
 
 const MOVES=[
@@ -1124,7 +1196,7 @@ const MOVES=[
   {t:'Nhảy như ếch',d:'Bé ngồi xuống rồi bật nhảy như chú ếch. Ộp, ộp, ộp!',art:()=>wrap(ART.frog)},
   {t:'Cao như cây',d:'Bé giơ hai tay lên thật cao, vươn người như cái cây nào!',art:()=>wrap(appleI(),'0 0 100 100')},
   {t:'Nhắm mắt nghe',d:'Bé nhắm mắt lại, nghe xem trong nhà có tiếng gì nhé!',art:()=>wrap(ART.cat)},
-  {t:'Vỗ tay cùng Rio',d:'Bé vỗ tay cùng Rio nào. Một, hai, ba!',art:()=>wrap(starI('#FFC325'),'0 0 100 100')}
+  {t:'Vỗ tay cùng Cu Tí',d:'Bé vỗ tay cùng Cu Tí nào. Một, hai, ba!',art:()=>wrap(starI('#FFC325'),'0 0 100 100')}
 ];
 let brkT=0,brkGame=null,brkLast=-1;
 function showBreak(){if(!$('#brk').hidden)return;brkGame=cur&&cur.id;closeGame();
@@ -1134,32 +1206,93 @@ function showBreak(){if(!$('#brk').hidden)return;brkGame=cur&&cur.id;closeGame()
   A.soft();V.say(`Bé nghỉ mắt một chút nhé! ${m.d}`);
   let n=0;clearInterval(brkT);brkT=setInterval(()=>{if(document.hidden)return;n++;$('#brkProg').style.setProperty('--p',Math.min(1,n/BREAK_LEN));
     if(n===Math.round(BREAK_LEN/2))V.say(m.d);
-    if(n>=BREAK_LEN){clearInterval(brkT);done.disabled=false;hint(done);V.say('Giỏi quá! Bé chạm vào Rio để chơi tiếp nhé!')}},1000)}
+    if(n>=BREAK_LEN){clearInterval(brkT);done.disabled=false;hint(done);V.say('Giỏi quá! Bé chạm vào Cu Tí để chơi tiếp nhé!')}},1000)}
 $('#brkDone').addEventListener('click',()=>{if($('#brkDone').disabled)return;A.tap();clearInterval(brkT);S.round=0;saveDay();$('#brk').hidden=true;
   if(brkGame&&!overLimit())openGame(brkGame);else show('home')});
 
+/* outdoor play: the screen hands out a real-world task, then gets out of the way */
+let wl=null;
+function wake(on){try{if(on){if(!wl&&navigator.wakeLock)navigator.wakeLock.request('screen').then(l=>{wl=l;l.addEventListener('release',()=>{if(wl===l)wl=null})}).catch(()=>{})}else if(wl){const l=wl;wl=null;l.release().catch(()=>{})}}catch(e){}}
+let outClose=null;
+function panel(o){const el=$('#out');el.className='overlay'+(o.wait?' wait':'');el.hidden=false;A.music(false);
+  $('#outEyebrow').textContent=o.eyebrow;$('#outArt').innerHTML=wrap(o.art,'0 0 100 100');$('#outTitle').textContent=o.title;$('#outText').textContent=o.text;$('#outExtra').innerHTML=o.extra||'';
+  const bx=$('#outBtns');bx.innerHTML='';(o.buttons||[]).forEach(b=>{const btn=document.createElement('button');btn.className=b.parent?'btn':b.ghost?'btn ghost':'kid-go';
+    btn.innerHTML=(b.parent?ICON.lock:'')+`<span>${b.label}</span>`;btn.addEventListener('click',()=>{A.tap();b.parent?gate(b.fn):b.fn()});bx.appendChild(btn)});
+  outClose=o.close||endOut}
+$('#outClose').addEventListener('click',()=>{A.tap();const f=outClose||endOut;f()});
+function endOut(){$('#out').hidden=true;V.stop();wake(true);if(overLimit())showRest();else{show('home');renderOutbar()}}
+
+const MISSIONS=[
+  {t:'Tìm một chiếc lá',d:'Rio ra ngoài tìm một chiếc lá nhé. Lá to hay lá nhỏ đều được!',art:leafI},
+  {t:'Tìm một bông hoa',d:'Rio tìm một bông hoa thật. Nhìn xem hoa màu gì nhé!',art:()=>flowerI('#FF8FC1')},
+  {t:'Nghe tiếng chim hót',d:'Rio đứng thật yên, nghe xem chim hót ở đâu nhé. Chíp chíp!',art:birdI},
+  {t:'Ngắm mây trên trời',d:'Rio nhìn lên trời tìm một đám mây. Mây trông giống con gì nhỉ?',art:cloudI},
+  {t:'Tìm một hòn đá',d:'Rio tìm một hòn đá nhỏ. Sờ xem đá nhẵn hay sần nhé!',art:stoneI},
+  {t:'Tìm một thứ màu đỏ',d:'Rio đi tìm một thứ màu đỏ ở ngoài sân nhé!',art:appleI},
+  {t:'Chạm vào cái cây',d:'Rio chạy tới một cái cây, sờ thân cây rồi ôm cây một cái nhé!',art:treeI},
+  {t:'Đi như con vịt',d:'Rio đi lạch bạch như con vịt mười bước nào. Cạp cạp!',art:()=>ART.duck,vb:true}
+];
+let lastMission=-1;
+function startMission(){closeGame();$('#rest').hidden=true;$('#brk').hidden=true;clearInterval(brkT);wake(true);
+  let i;do{i=randInt(0,MISSIONS.length-1)}while(i===lastMission);lastMission=i;const m=MISSIONS[i];
+  panel({eyebrow:'Nhiệm vụ ngoài trời',art:missionArt(m),title:m.t,text:m.d,buttons:[{label:'Đi thôi!',fn:()=>waitMission(m)}]});
+  A.soft();V.say(`Cu Tí có nhiệm vụ cho Rio nè! ${m.d} Chạm nút vàng để đi nhé!`)}
+const missionArt=m=>m.vb?`<g transform="scale(.8333)">${m.art()}</g>`:m.art();
+function waitMission(m){V.say('Đi chơi vui nha Rio! Cu Tí chờ ở đây.');
+  panel({wait:true,eyebrow:'Cu Tí đang chờ Rio',art:missionArt(m),title:m.t,text:'Màn hình nghỉ một chút. Khi Rio làm xong, bố mẹ bấm nút bên dưới nhé.',
+    buttons:[{label:'Rio làm xong rồi',parent:true,fn:doneMission},{label:'Đổi nhiệm vụ khác',ghost:true,fn:startMission}]});
+  setTimeout(()=>{if(!$('#out').hidden&&$('#out').classList.contains('wait'))wake(false)},4000)}
+function doneMission(){S.outN=(S.outN||0)+1;save();wake(true);$('#out').hidden=true;
+  const all=STICKERS.filter(s=>s.out),left=all.filter(s=>!S.stickers[s.id]);
+  celebrate(()=>endOut(),left.length?pick(left):pick(all))}
+
+/* real bean plant: grows one step only when the child waters the real one */
+function plantDots(d){return `<div class="plant-days" aria-label="${d} ngày tưới">${Array.from({length:PLANT_DAYS[PLANT_DAYS.length-1]},(_,i)=>`<i class="${i<d?'on':''}"></i>`).join('')}</div>`}
+function openPlant(){closeGame();wake(true);const p=S.plant,t=today();
+  if(!p){panel({eyebrow:'Trồng cây cùng Cu Tí',art:plantI(0),title:'Gieo một hạt đậu',text:'Bố mẹ cùng Rio gieo một hạt đậu vào cốc đất, đặt cạnh cửa sổ. Mỗi ngày Rio tưới nước thật, cây ở đây sẽ lớn theo.',
+      buttons:[{label:'Đã gieo hạt',parent:true,fn:()=>{S.plant={d:0,w:'',c:0};save();A.fanfare();openPlant();V.say('Hạt đậu nằm trong đất rồi! Ngày mai Rio nhớ tưới nước nhé.')}}]});
+    V.say('Mình cùng trồng cây thật nhé! Rio nhờ bố mẹ lấy một hạt đậu và một cốc đất nào.');return}
+  const d=p.d||0,n=plantStage(d);
+  if(n>=5){panel({eyebrow:'Cây của Rio',art:plantI(5),title:'Cây ra hoa rồi!',text:'Rio chăm cây giỏi quá! Cây đậu đã ra hoa. Mình trồng thêm cây mới nhé?',extra:plantDots(d),
+      buttons:[{label:'Trồng cây mới',parent:true,fn:()=>{S.plant={d:0,w:'',c:(p.c||0)+1};save();openPlant()}}]});V.say('Cây của Rio ra hoa rồi! Giỏi quá!');return}
+  if(p.w===t){panel({eyebrow:'Cây của Rio',art:plantI(n),title:'Hôm nay Rio tưới rồi',text:'Cây đang uống nước và lớn dần. Ngày mai Rio tưới tiếp nhé!',extra:plantDots(d),buttons:[{label:'Về vườn chơi',fn:endOut}]});
+    V.say('Hôm nay Rio tưới cây rồi. Ngày mai mình tưới tiếp nhé!');return}
+  panel({eyebrow:'Cây của Rio',art:plantI(n),title:'Rio tưới cây chưa?',text:'Rio cầm cốc nước nhỏ, tưới cho cây đậu thật nhé. Tưới xong bố mẹ bấm nút bên dưới.',extra:plantDots(d),
+    buttons:[{label:'Rio tưới rồi',parent:true,fn:waterPlant}]});
+  V.say('Cây đậu khát nước rồi! Rio đi tưới cây thật nhé.')}
+function waterPlant(){const before=plantStage(S.plant.d||0);S.plant.d=(S.plant.d||0)+1;S.plant.w=today();save();const n=plantStage(S.plant.d);
+  A.fanfare();FX.burst(innerWidth/2,innerHeight*.4);openPlant();
+  V.say(n>=5?'Oa! Cây ra hoa rồi! Rio giỏi quá!':n>before?'Cây lớn thêm rồi! Rio nhìn xem cây thật có lớn không nhé.':'Cây uống nước rồi! Mai Rio tưới tiếp nhé.')}
+function renderOutbar(){const due=!S.plant||(S.plant.w!==today()&&plantStage(S.plant.d||0)<5);$('#btnPlant').classList.toggle('due',due);
+  $('#icPlant').innerHTML=wrap(plantI(S.plant?plantStage(S.plant.d||0):0),'0 0 100 100')}
+
 /* home */
-function renderHome(){$('#tiles').innerHTML=GAMES.map((g,i)=>`<button class="tile felt" data-id="${g.id}" style="--bgc:${g.bg};--rot:${[-1.6,1.2,-.8,1.4,-1.2,.9,-1.4,1,-.6][i]}deg" aria-label="${g.name}"><span class="art">${tileArt[g.id]}</span><span class="nm">${g.name}</span><span class="sk">${g.sk}</span></button>`).join('');
+function renderHome(){renderOutbar();$('#tiles').innerHTML=GAMES.map((g,i)=>`<button class="tile felt" data-id="${g.id}" style="--bgc:${g.bg};--rot:${[-1.6,1.2,-.8,1.4,-1.2,.9,-1.4,1,-.6][i]}deg" aria-label="${g.name}"><span class="art">${tileArt[g.id]}</span><span class="nm">${g.name}</span><span class="sk">${g.sk}</span></button>`).join('');
   $$('.tile').forEach(t=>t.addEventListener('click',()=>{A.tap();openGame(t.dataset.id)}));greetText()}
 const HELLO='Chào Rio! Chơi game nhớ giữ sức khỏe nha Rio!';
 function greetText(){$('#greet').textContent=HELLO}
 
-/* garden (replaces the sticker grid): every sticker has its own spot in Rio's garden */
+/* garden (replaces the sticker grid): every sticker has its own spot in Cu Tí's garden */
 const SPOTS={sun:[90,13,11],star:[44,11,7],balloon:[67,19,9],bfly:[55,33,8],apple:[13,34,7],orange:[26,28,7],
   cow:[44,52,13],sheep:[63,50,11],duck:[93,69,8],frog:[70,83,8],fish:[84,86,9],
-  dog:[17,80,11],pig:[31,81,11],cat:[48,89,9],chick:[61,89,7],flower:[6,62,7]};
+  dog:[17,80,11],pig:[31,81,11],cat:[48,89,9],chick:[61,89,7],flower:[6,62,7],
+  rainbow:[80,31,12],bird:[52,63,7],mushroom:[25,66,7],snail:[38,67,6],ladybug:[77,60,6]};
+const PLANT_SPOT=[61,70,8];
 let lastNew=null;
 function renderAlbum(){const got=STICKERS.filter(s=>S.stickers[s.id]).length;$('#albumCount').textContent=`${got} / ${STICKERS.length}`;$('#albumMeter').style.setProperty('--p',(got/STICKERS.length*100)+'%');
-  $('#gardenNote').textContent=got>=STICKERS.length?'Khu vườn đã đủ bạn rồi! Bé chạm vào từng bạn để chào nhé.':got?'Mỗi lần bé chơi giỏi, một bạn mới về vườn.':'Vườn còn trống. Bé chơi giỏi để mời các bạn về vườn nhé!';
+  $('#gardenNote').textContent=got>=STICKERS.length?'Khu vườn đã đủ bạn rồi! Rio chạm vào từng bạn để chào nhé.':'Chơi giỏi hoặc ra ngoài làm nhiệm vụ để mời bạn mới về vườn. Chỗ viền xanh lá dành cho bạn ở ngoài trời.';
   $('#gardenItems').innerHTML=STICKERS.map((s,i)=>{const n=S.stickers[s.id]||0;const [x,y,z]=SPOTS[s.id]||[10+(i%8)*11,60+Math.floor(i/8)*20,8];
-    return `<button class="gitem ${n?'got':''} ${s.id===lastNew?'new':''}" data-id="${s.id}" style="--x:${x};--y:${y};--s:${z};--i:${i}" aria-label="${n?s.name:'Chỗ trống trong vườn'}"><span class="sticker">${s.art}</span>${n>1?`<span class="cnt">×${n}</span>`:''}</button>`}).join('');
+    return `<button class="gitem ${n?'got':''} ${s.out?'o':''} ${s.id===lastNew?'new':''}" data-id="${s.id}" style="--x:${x};--y:${y};--s:${z};--i:${i}" aria-label="${n?s.name:'Chỗ trống trong vườn'}"><span class="sticker">${s.art}</span>${n>1?`<span class="cnt">×${n}</span>`:''}</button>`}).join('');
+  if(S.plant){const [x,y,z]=PLANT_SPOT;$('#gardenItems').insertAdjacentHTML('beforeend',`<button class="gitem got plant" id="gPlant" style="--x:${x};--y:${y};--s:${z};--i:3" aria-label="Cây đậu của Rio"><span class="sticker">${wrap(plantI(plantStage(S.plant.d||0)),'0 0 100 100')}</span></button>`);
+    $('#gPlant').addEventListener('click',()=>{A.tap();openPlant()})}
   lastNew=null;
-  $$('#gardenItems .gitem').forEach(b=>b.addEventListener('click',()=>{const s=STICKERS.find(x=>x.id===b.dataset.id);if(S.stickers[s.id]){bump(b);A.tap();if(AN(s.id))A.animal(s.id);V.say(s.name)}else{A.soft();V.say('Bé chơi thêm để mời bạn này về vườn nhé!')}}))}
+  $$('#gardenItems .gitem:not(.plant)').forEach(b=>b.addEventListener('click',()=>{const s=STICKERS.find(x=>x.id===b.dataset.id);if(S.stickers[s.id]){bump(b);A.tap();if(AN(s.id))A.animal(s.id);V.say(s.name)}else{A.soft();V.say(s.out?'Rio ra ngoài làm nhiệm vụ để mời bạn này về vườn nhé!':'Rio chơi thêm để mời bạn này về vườn nhé!')}}))}
 
 /* parent page */
 function renderParent(){
   $$('#segAge button').forEach(b=>b.classList.toggle('on',+b.dataset.v===S.age));$$('#segLimit button').forEach(b=>b.classList.toggle('on',+b.dataset.v===S.limit));
   $('#togBrk').setAttribute('aria-checked',S.brk);$('#togSound').setAttribute('aria-checked',S.sound);$('#togVoice').setAttribute('aria-checked',S.voice);$('#togMusic').setAttribute('aria-checked',S.music);
+  $('#statOut').textContent=S.outN||0;$('#statPlant').textContent=S.plant?`${S.plant.d||0} ngày tưới`:'Chưa trồng';
   $('#statTime').textContent=Math.floor(S.played/60)+' phút';$('#statStick').textContent=Object.values(S.stickers).reduce((a,b)=>a+b,0);updVoice();
   $('#genreRows').innerHTML=GENRES.map(([n,d,a,k,w])=>`<tr><td>${n}</td><td>${d}</td><td>${a}</td><td><span class="pill ${k}">${w}</span></td></tr>`).join('')}
 $$('#segAge button').forEach(b=>b.addEventListener('click',()=>{S.age=+b.dataset.v;save();renderParent()}));
@@ -1174,16 +1307,20 @@ document.addEventListener('fullscreenchange',()=>{const sp=$('#btnFull span');if
 $('#heroBip').innerHTML=MASCOT;$('#homeBip').innerHTML=MASCOT;$('#gameBip').innerHTML=MASCOT;$('#brkBip').innerHTML=MASCOT;$('#restBip').insertAdjacentHTML('afterbegin',MASCOT.replace('<svg','<svg class="bipsvg"'));
 $('#heroBip').firstElementChild.classList.add('bipsvg');$('#homeBip').firstElementChild.classList.add('bipsvg');$('#gameBip').firstElementChild.classList.add('bipsvg');
 $('#sunball').innerHTML=SUNBIG;$$('.cloud').forEach(c=>c.innerHTML=CLOUD);
-$('#btnStart').innerHTML=ICON.play;$('#splashHint').innerHTML=ICON.speaker+'<span>Bật âm thanh để nghe Rio nói chuyện</span>';
+$('#btnStart').innerHTML=ICON.play;$('#splashHint').innerHTML=ICON.speaker+'<span>Bật âm thanh để nghe Cu Tí nói chuyện</span>';
 const LOGO_COLS=['#F0603F','#FFC93C','#5DBB46','#3D95F0','#E0558F','#FF8A2E','#7A62C9','#2BB5A8'];let li=0;
-$('#logo').innerHTML='Vườn Chơi Rio'.split(' ').map(w=>`<span class="w">${[...w].map(ch=>`<span style="--c:${LOGO_COLS[li%8]};--i:${li++}">${ch}</span>`).join('')}</span>`).join('');
+$('#logo').innerHTML='Vườn Chơi Cu Tí'.split(' ').map(w=>`<span class="w">${[...w].map(ch=>`<span style="--c:${LOGO_COLS[li%8]};--i:${li++}">${ch}</span>`).join('')}</span>`).join('');
 $('#btnHome').innerHTML=ICON.home;$('#btnAlbum').innerHTML=ICON.tree;$('#btnParent').innerHTML=ICON.lock;$('#gateClose').innerHTML=ICON.close;$('#restContinue').innerHTML=ICON.lock+'<span>Người lớn cho thêm 10 phút</span>';
 $$('[data-go="home"]').forEach(b=>{b.innerHTML=ICON.home;b.addEventListener('click',()=>{A.tap();show('home')})});
 $('#btnHome').addEventListener('click',()=>{A.tap();closeGame();show('home')});
 $('#btnAlbum').addEventListener('click',()=>{A.tap();renderAlbum();show('album');V.say('Khu vườn của bé đây! Chạm vào các bạn để chào nhé.')});
 $('#btnParent').addEventListener('click',()=>{A.tap();gate(()=>{renderParent();show('parent')})});
+$('#icOut').innerHTML=wrap(leafI(),'0 0 100 100');$('#outClose').innerHTML=ICON.close;
+$('#restOut').innerHTML=wrap(leafI(),'0 0 100 100')+'<span>Nhận nhiệm vụ ngoài trời</span>';
+$('#btnOut').addEventListener('click',()=>{A.tap();startMission()});
+$('#btnPlant').addEventListener('click',()=>{A.tap();openPlant()});
 $('#mascot').addEventListener('click',()=>{if(lastLine)V.say(lastLine)});
-$('#btnStart').addEventListener('click',()=>{A.init();V.load();try{navigator.wakeLock&&navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}
+$('#btnStart').addEventListener('click',()=>{A.init();V.load();wake(true);
   renderHome();show('home');if(overLimit()){showRest();return}A.fanfare();setTimeout(()=>V.say(HELLO),350)});
 document.addEventListener('pointerdown',()=>{if(A.ctx&&A.ctx.state==='suspended')A.ctx.resume()},{passive:true});
 document.addEventListener('contextmenu',e=>e.preventDefault());
