@@ -208,6 +208,49 @@ body{background:linear-gradient(180deg,#8FD3EE 0%,#B5E4F5 46%,#D9F2F8 100%)}
 .br-progress i{position:absolute;inset:0;width:var(--p,0%);border-radius:999px;background:linear-gradient(90deg,#FFD25A,#F29A12)}
 .br-progress span{position:absolute;right:-14px;top:50%;width:34px;height:34px;translate:0 -50%}
 .br-progress em{position:absolute;top:50%;left:var(--p,0%);width:26px;height:26px;translate:-50% -50%}
+/* daily routines */
+.stage-hygiene{--stage:repeating-linear-gradient(0deg,transparent 0 46px,rgba(255,255,255,.55) 46px 49px),repeating-linear-gradient(90deg,#CDEFFF 0 46px,rgba(255,255,255,.55) 46px 49px)}
+.stage-sleep{--stage:linear-gradient(#D8CCF7,#B7A8F0)}
+.rt-wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1.6vmin,16px);padding:clamp(12px,2.4vmin,22px)}
+.rt-dim{position:absolute;inset:0;background:#1B2245;opacity:var(--dim,0);transition:opacity 1.2s;pointer-events:none;z-index:0}
+.rt-wrap>*:not(.rt-dim){position:relative;z-index:1}
+.rt-wrap.off .rt-dim{opacity:.88}
+.rt-wrap.off .rt-cuti .eyes-open{display:none}.rt-wrap.off .rt-cuti .lid-closed{display:inline}
+.rt-dots{display:flex;gap:8px;justify-content:center}
+.rt-dots i{width:18px;height:18px;border-radius:50%;border:3px solid var(--ink);background:#fff;transition:background .3s,scale .3s}
+.rt-dots i.on{background:var(--sun);scale:1.15}
+.rt-scene{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;gap:clamp(12px,4vw,48px)}
+.rt-cuti{position:relative;height:min(100%,34vmin);aspect-ratio:1}
+.rt-cuti .bipsvg{width:100%;height:100%}
+.rt-acc{position:absolute;left:52%;top:-8%;width:46%;aspect-ratio:1;pointer-events:none}
+.rt-now{height:min(80%,26vmin);aspect-ratio:1;border-radius:50%;background:rgba(255,253,246,.85);border:4px solid var(--ink);display:grid;place-items:center;box-shadow:0 6px 0 rgba(43,53,80,.2)}
+.rt-now:empty{visibility:hidden}
+.rt-now .ic{width:72%;height:72%}
+.rt-cards{display:flex;gap:clamp(10px,2.4vmin,22px);justify-content:center;flex-wrap:wrap;min-height:clamp(120px,24vmin,190px)}
+.rt-card{--r:24px;width:clamp(110px,22vmin,170px);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px}
+.rt-card .ic{width:66%;flex:1;min-height:0}
+.rt-card .nm{font:700 clamp(14px,2.3vmin,19px)/1.1 var(--display);text-align:center}
+.rt-card.shake{animation:shake .4s}
+.rt-card:active{transform:scale(.95)}
+.rt-menu{position:absolute;inset:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;align-content:center;gap:clamp(14px,3vmin,28px);padding:16px}
+.rt-big{--r:30px;width:clamp(170px,32vmin,260px);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px}
+.rt-big .ic{width:62%;flex:1;min-height:0}
+.rt-big .nm{font:700 clamp(18px,3vmin,26px)/1.1 var(--display);text-align:center}
+.rt-stars{--r:24px;flex-basis:100%;max-width:640px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 20px;padding:14px 18px}
+.rt-stars div{display:flex;flex-direction:column;align-items:center}
+.rt-stars b{font:700 clamp(26px,5vmin,40px)/1 var(--display);color:#E0A31A;-webkit-text-stroke:2px var(--ink);paint-order:stroke fill}
+.rt-stars span{font-size:13.5px;color:var(--ink-soft)}
+.rt-brush{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px}
+.rt-mouth{position:relative;width:min(92%,calc(60vmin * 1.5));aspect-ratio:3/2}
+.rt-mouth>svg{width:100%;height:100%}
+.rt-germs{position:absolute;inset:0}
+.rt-germ{position:absolute;width:12%;aspect-ratio:1;translate:-50% -50%;animation:wob 1.6s ease-in-out infinite}
+.rt-tb{position:absolute;width:30%;aspect-ratio:1;left:35%;top:30%;transition:left .6s,top .6s;pointer-events:none;filter:drop-shadow(0 6px 4px rgba(43,53,80,.3))}
+.rt-tb.tl{left:14%;top:12%;animation:scrub .5s ease-in-out infinite alternate}.rt-tb.tr{left:52%;top:12%;animation:scrub .5s ease-in-out infinite alternate}
+.rt-tb.bl{left:14%;top:48%;animation:scrub .5s ease-in-out infinite alternate}.rt-tb.br{left:52%;top:48%;animation:scrub .5s ease-in-out infinite alternate}
+@keyframes scrub{to{translate:14% 0}}
+.rt-zone{font:700 clamp(20px,3.6vmin,30px)/1.1 var(--display);background:var(--felt);border:3px solid var(--ink);border-radius:999px;padding:6px 20px}
+.rt-zone:empty{display:none}
 .bub-field{position:absolute;inset:0}
 .bubble{position:absolute;left:0;top:0;border-radius:50%;cursor:pointer;will-change:transform;
   background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95) 0 7%,transparent 8%),
@@ -431,11 +474,11 @@ td:first-child{font-weight:800;white-space:nowrap}
 .gate-card .muted{font-size:14px;color:var(--ink-soft);font-weight:600}
 .gate-close{position:absolute;top:-18px;right:-12px}
 
-#rest{z-index:75;background:var(--night);color:#fff;display:flex;flex-direction:column;gap:18px;text-align:center}
-#rest .moon{width:clamp(150px,30vmin,240px);aspect-ratio:1;position:relative}
-#rest h2{font-size:clamp(28px,6vmin,52px);color:#FFF3C4}
-#rest p{font-size:18px;color:#D7DDF2;max-width:36ch}
-#rest .btn{color:var(--ink)}
+#rest,#night{z-index:75;background:var(--night);color:#fff;display:flex;flex-direction:column;gap:18px;text-align:center}
+#rest .moon,#night .moon{width:clamp(150px,30vmin,240px);aspect-ratio:1;position:relative}
+#rest h2,#night h2{font-size:clamp(28px,6vmin,52px);color:#FFF3C4}
+#rest p,#night p{font-size:18px;color:#D7DDF2;max-width:36ch}
+#rest .btn,#night .btn{color:var(--ink)}
 #brk{z-index:74;background:rgba(169,221,240,.92)}
 /* outdoor: home bar, mission/plant panel */
 .outbar{position:relative;z-index:2;display:flex;justify-content:center;gap:clamp(10px,2vmin,18px);margin:10px 0 12px}
@@ -856,6 +899,14 @@ td:first-child{font-weight:800;white-space:nowrap}
     </div>
   </div>
 
+  <div id="night" class="overlay" hidden>
+    <div class="nightstars"></div>
+    <div class="moon sleep" id="nightBip"><span class="zz">z z</span></div>
+    <h2>Cu Tí ngủ rồi</h2>
+    <p>Chúc Rio ngủ ngon! Ngủ dậy mình chơi tiếp nhé.</p>
+    <button class="btn" id="nightOpen"></button>
+  </div>
+
   <div id="brk" class="overlay" hidden>
     <div class="brk-card felt light">
       <p class="eyebrow">Giờ nghỉ mắt</p>
@@ -893,10 +944,10 @@ function fitGrid(el,n,ratio=1,gap=16){const cs=getComputedStyle(el);const W=el.c
   el.style.setProperty('--cols',best.c);el.style.setProperty('--cell',Math.max(40,Math.floor(Math.min(best.s,320)))+'px');el.style.setProperty('--gap',gap+'px')}
 function fitAspect(el,parent,ratio){const W=parent.clientWidth,H=parent.clientHeight;let w=W,h=w/ratio;if(h>H){h=H;w=h*ratio}el.style.width=w+'px';el.style.height=h+'px'}
 const store={get(k,d){try{const v=localStorage.getItem('bip.'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('bip.'+k,JSON.stringify(v))}catch(e){}}};
-const S={sound:store.get('sound',true),voice:store.get('voice',true),music:store.get('music',false),limit:store.get('limit',15),age:store.get('age',2),name:store.get('name',''),stickers:store.get('stickers',{}),brk:store.get('brk',true),hq:store.get('hq',!(navigator.deviceMemory&&navigator.deviceMemory<=2)),plant:store.get('plant',null),outN:store.get('outN',0),played:0,extra:0,round:0,day:''};
+const S={sound:store.get('sound',true),voice:store.get('voice',true),music:store.get('music',false),limit:store.get('limit',15),age:store.get('age',2),name:store.get('name',''),stickers:store.get('stickers',{}),brk:store.get('brk',true),potty:store.get('potty',{}),sleepUntil:store.get('sleepUntil',0),hq:store.get('hq',!(navigator.deviceMemory&&navigator.deviceMemory<=2)),plant:store.get('plant',null),outN:store.get('outN',0),played:0,extra:0,round:0,day:''};
 if(S.plant&&typeof S.plant!=='object')S.plant=null;
 if(typeof S.stickers!=='object'||Array.isArray(S.stickers)||!S.stickers)S.stickers={};
-const save=()=>['sound','voice','music','limit','age','name','stickers','brk','plant','outN','hq'].forEach(k=>store.set(k,S[k]));
+const save=()=>['sound','voice','music','limit','age','name','stickers','brk','plant','outN','hq','potty','sleepUntil'].forEach(k=>store.set(k,S[k]));
 /* play time is counted per calendar day and survives reloads */
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
 const saveDay=()=>store.set('today',{d:S.day,p:S.played,x:S.extra,r:S.round});
@@ -1533,6 +1584,109 @@ function gBear(api){
   api.cleanup.push(()=>cancelAnimationFrame(raf));
   level();render();raf=requestAnimationFrame(t=>{last=t;loop(t)})}
 
+/* ================= daily routines: Vệ sinh (potty + brushing) and Đi ngủ ================= */
+/* (owned by the routines session — keep this block intact when editing gBear above) */
+const RT_ART={
+  mom:()=>`<path d="M14 20 H86 a10 10 0 0 1 10 10 V62 a10 10 0 0 1 -10 10 H46 L28 88 L30 72 H14 a10 10 0 0 1 -10 -10 V30 a10 10 0 0 1 10 -10Z" fill="#fff" ${st(4)}/><path d="M50 60 C34 50 30 40 38 34 C44 30 50 36 50 40 C50 36 56 30 62 34 C70 40 66 50 50 60Z" fill="#F0603F" ${st(3)}/>`,
+  pantsDn:()=>`<path d="M22 22 H78 L82 70 H58 L50 44 L42 70 H18Z" fill="#4DA3FF" ${st(4)}/><rect x="22" y="18" width="56" height="10" rx="4" fill="#2F86E8" ${st(3.5)}/><path d="M50 74 V94 M40 84 L50 94 L60 84" fill="none" stroke="#F0603F" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>`,
+  pantsUp:()=>`<path d="M22 32 H78 L82 80 H58 L50 54 L42 80 H18Z" fill="#4DA3FF" ${st(4)}/><rect x="22" y="28" width="56" height="10" rx="4" fill="#2F86E8" ${st(3.5)}/><path d="M50 24 V4 M40 14 L50 4 L60 14" fill="none" stroke="#5DBB46" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>`,
+  potty:()=>`<path d="M24 52 C20 22 80 22 76 52Z" fill="#FFD3E0" ${st(4)}/><circle cx="50" cy="34" r="6" fill="#fff" opacity=".7"/><path d="M14 54 H86 L76 86 H24Z" fill="#FFB0C8" ${st(4)}/><ellipse cx="50" cy="54" rx="38" ry="11" fill="#FFE3EC" ${st(4)}/><ellipse cx="50" cy="55" rx="24" ry="5.5" fill="#E0558F" opacity=".45"/><path d="M8 52 C4 52 4 62 10 62 M92 52 C96 52 96 62 90 62" fill="none" ${st(4)}/><rect x="20" y="84" width="60" height="9" rx="4.5" fill="#E0558F" ${st(3.5)}/>`,
+  paper:()=>`<rect x="18" y="26" width="52" height="52" rx="10" fill="#fff" ${st(4)}/><ellipse cx="70" cy="52" rx="12" ry="26" fill="#F2F2F2" ${st(4)}/><ellipse cx="70" cy="52" rx="5" ry="11" fill="#C9CED8" ${st(3)}/><path d="M18 70 C10 78 14 92 26 94 L44 94" fill="none" ${st(3.5)}/>`,
+  flush:()=>`<rect x="26" y="12" width="48" height="26" rx="6" fill="#fff" ${st(4)}/><path d="M16 42 H84 C84 66 70 78 50 78 C30 78 16 66 16 42Z" fill="#fff" ${st(4)}/><rect x="36" y="76" width="28" height="16" rx="4" fill="#fff" ${st(3.5)}/><path d="M34 52 C40 44 60 44 66 52 C60 60 42 62 38 54" fill="none" stroke="#3D95F0" stroke-width="5" stroke-linecap="round"/><circle cx="62" cy="22" r="5" fill="#3D95F0" ${st(2.5)}/>`,
+  soap:()=>`<rect x="18" y="50" width="56" height="34" rx="12" fill="#FF8FC1" ${st(4)}/><ellipse cx="40" cy="60" rx="10" ry="4" fill="#fff" opacity=".6"/>${[[70,30,12],[52,24,9],[82,52,8],[34,32,7]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#CDEFFF" ${st(3)}/><circle cx="${x-r*.35}" cy="${y-r*.35}" r="${r*.25}" fill="#fff"/>`).join('')}`,
+  towel:()=>`<rect x="12" y="14" width="76" height="8" rx="4" fill="#B8783F" ${st(3.5)}/><path d="M22 20 H78 V86 H22Z" fill="#7CC7E3" ${st(4)}/><path d="M22 66 H78 M22 74 H78" stroke="#fff" stroke-width="4"/>`,
+  bath:()=>`<path d="M8 48 H92 V60 C92 78 78 88 60 88 H40 C22 88 8 78 8 60Z" fill="#fff" ${st(4)}/>${[[24,40,10],[40,34,12],[60,36,11],[76,40,9]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#CDEFFF" ${st(3)}/>`).join('')}<path d="M62 30 C62 22 74 20 76 28 L84 28 L76 34 C76 40 62 40 62 30Z" fill="#FFC93C" ${st(3)}/>`,
+  pajama:()=>`<path d="M30 16 L50 26 L70 16 L90 30 L80 46 L72 42 V90 H28 V42 L20 46 L10 30Z" fill="#B48CF0" ${st(4)}/>${[[40,52],[58,64],[44,78],[62,40]].map(([x,y])=>`<path d="M${x} ${y} l2.5 5 5.5 .8 -4 3.8 1 5.4 -5 -2.6 -5 2.6 1 -5.4 -4 -3.8 5.5 -.8z" fill="#FFE07A"/>`).join('')}`,
+  brush:()=>`<rect x="10" y="60" width="62" height="14" rx="7" fill="#3D95F0" ${st(4)}/><rect x="64" y="52" width="26" height="22" rx="5" fill="#fff" ${st(3.5)}/><path d="M68 52 V40 M74 52 V38 M80 52 V40 M86 52 V42" stroke="#7CC7E3" stroke-width="5" stroke-linecap="round"/><circle cx="78" cy="34" r="8" fill="#fff" ${st(3)}/>`,
+  book:()=>`<path d="M50 26 C38 18 20 18 8 24 V82 C20 76 38 76 50 84 C62 76 80 76 92 82 V24 C80 18 62 18 50 26Z" fill="#FFF3DC" ${st(4)}/><path d="M50 26 V84" ${st(3)}/><path d="M16 36 H40 M16 46 H40 M60 36 H84 M60 46 H84" stroke="#C9CED8" stroke-width="3" stroke-linecap="round"/>`,
+  teddy:()=>`<circle cx="30" cy="22" r="11" fill="#C98E5C" ${st(3.5)}/><circle cx="70" cy="22" r="11" fill="#C98E5C" ${st(3.5)}/><ellipse cx="50" cy="72" rx="28" ry="24" fill="#C98E5C" ${st(4)}/><circle cx="50" cy="38" r="24" fill="#C98E5C" ${st(4)}/><ellipse cx="50" cy="46" rx="10" ry="7" fill="#F2D2A9" ${st(3)}/><ellipse cx="50" cy="43" rx="3.5" ry="2.6" fill="${INK}"/>${eye(41,34,3.4)}${eye(59,34,3.4)}<ellipse cx="50" cy="74" rx="13" ry="11" fill="#F2D2A9"/>`,
+  lamp:()=>`<path d="M30 14 H70 L82 48 H18Z" fill="#FFC93C" ${st(4)}/><rect x="46" y="48" width="8" height="30" fill="#B8783F" ${st(3)}/><rect x="28" y="78" width="44" height="10" rx="5" fill="#B8783F" ${st(3.5)}/><path d="M64 60 L80 60 L80 70" fill="none" ${st(3)}/>`,
+  moon:()=>`<path d="M62 10 C36 14 22 40 30 62 C38 84 64 92 84 80 C62 78 46 62 48 40 C49 28 54 18 62 10Z" fill="#FFE59A" ${st(4)}/>${eye(46,52,3.6)}`
+};
+const rtArt=k=>wrap(RT_ART[k](),'0 0 100 100');
+tileArt.hygiene=wrap(`<g transform="translate(4 30) scale(.8)">${RT_ART.potty()}</g><g transform="translate(46 4) scale(.7)">${RT_ART.brush()}</g>`,'0 0 120 120');
+tileArt.sleep=wrap(`<g transform="translate(8 40) scale(.72)">${RT_ART.teddy()}</g><g transform="translate(52 6) scale(.62)">${RT_ART.moon()}</g>`,'0 0 120 120');
+const age2=()=>S.age===2;
+/* pick-the-next-step engine: Cu Tí acts out a routine, Rio picks what comes next */
+function rtSequence(api,o){
+  const s=api.stage;s.innerHTML=`<div class="rt-wrap ${o.cls||''}"><div class="rt-dim"></div><div class="rt-dots"></div><div class="rt-scene"><div class="rt-cuti">${MASCOT.replace('<svg','<svg class="bipsvg"')}<span class="rt-acc"></span></div><div class="rt-now"></div></div><div class="rt-cards"></div></div>`;
+  const W=s.firstElementChild,dots=W.querySelector('.rt-dots'),now=W.querySelector('.rt-now'),cards=W.querySelector('.rt-cards'),cuti=W.querySelector('.rt-cuti');
+  const steps=o.steps;let i=0,miss=0;dots.innerHTML=steps.map(()=>'<i></i>').join('');
+  function ask(){if(!api.alive)return;const cur=steps[i];miss=0;const n=age2()?2:3;
+    const others=shuffle(steps.filter(x=>x!==cur)).slice(0,n-1);const opts=shuffle([cur,...others]);
+    cards.innerHTML=opts.map(x=>`<button class="rt-card felt light" data-k="${x.k}" aria-label="${x.name}"><span class="ic">${rtArt(x.art||x.k)}</span><span class="nm">${x.name}</span></button>`).join('');
+    $$('.rt-card',cards).forEach(b=>b.addEventListener('click',()=>pickCard(b)));
+    api.say(i===0?o.intro:o.ask(cur,i))}
+  function pickCard(b){const cur=steps[i];if(b.dataset.k!==cur.k){miss++;A.soft();restart(b,'shake',450);const w=steps.find(x=>x.k===b.dataset.k);
+      api.say(w?`${w.name}? ${o.wrong||'Chưa phải bước này đâu.'}`:'Thử lại nhé!');if(miss>=2){const ok=cards.querySelector(`[data-k="${cur.k}"]`);ok&&hint(ok)}return}
+    A.pop(i);const r=b.getBoundingClientRect();FX.sparkle(r.left+r.width/2,r.top+r.height/2);cards.innerHTML='';
+    now.innerHTML=`<span class="ic">${rtArt(cur.art||cur.k)}</span>`;restart(now,'bump',500);restart(cuti,'bump',500);dots.children[i].classList.add('on');
+    if(cur.acc)W.querySelector('.rt-acc').innerHTML=cur.acc();o.onStep&&o.onStep(cur,i,W);api.say(cur.say);i++;
+    api.later(()=>{if(i<steps.length)ask();else o.done(W)},cur.wait||2800)}
+  ask()}
+
+const POTTY_STEPS=[
+  {k:'mom',name:'Gọi mẹ',say:'Mẹ ơi, con muốn đi bô! Rio nói với bố mẹ nhé.'},
+  {k:'pantsDn',name:'Kéo quần xuống',say:'Kéo quần xuống nào!'},
+  {k:'potty',name:'Ngồi lên bô',say:'Ngồi lên bô, ngồi yên một chút nhé.',wait:3400},
+  {k:'paper',name:'Lau bằng giấy',say:'Lau sạch bằng giấy nhé.'},
+  {k:'pantsUp',name:'Kéo quần lên',say:'Kéo quần lên rồi!'},
+  {k:'flush',name:'Đổ bô, giật nước',say:'Đổ bô, giật nước. Ào ào!'},
+  {k:'soap',name:'Rửa tay xà phòng',say:'Rửa tay với xà phòng. Xoa xoa, kì kì!',wait:3400},
+  {k:'towel',name:'Lau tay khô',say:'Lau tay thật khô. Xong rồi!'}];
+const pottyDay=()=>((S.potty||{})[today()]||0);
+const pottyWeek=()=>{const p=S.potty||{};let n=0;for(let k=0;k<7;k++){const d=new Date(Date.now()-k*864e5);n+=p[d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()]||0}return n};
+function gHygiene(api){
+  const s=api.stage;
+  function menu(){s.innerHTML=`<div class="rt-menu"><button class="rt-big felt" data-m="potty" style="--bgc:#FFD3E0"><span class="ic">${rtArt('potty')}</span><span class="nm">Đi bô cùng Cu Tí</span></button>
+      <button class="rt-big felt" data-m="brush" style="--bgc:#CDEFFF"><span class="ic">${rtArt('brush')}</span><span class="nm">Đánh răng</span></button>
+      <div class="rt-stars felt light"><div><b>${pottyDay()}</b><span>ngôi sao đi bô hôm nay</span></div><div><b>${pottyWeek()}</b><span>trong 7 ngày</span></div><button class="btn" id="rtPotty">${ICON.lock}<span>Rio đi bô thật rồi!</span></button></div></div>`;
+    $$('.rt-big',s).forEach(b=>b.addEventListener('click',()=>{A.tap();b.dataset.m==='potty'?potty():brush()}));
+    s.querySelector('#rtPotty').addEventListener('click',()=>{A.tap();gate(()=>{S.potty=S.potty||{};S.potty[today()]=pottyDay()+1;save();api.say('Rio đi bô giỏi quá! Thêm một ngôi sao!');celebrate(()=>{if(api.alive)menu()})})});
+    api.say('Rio muốn đi bô hay đánh răng cùng Cu Tí?')}
+  function potty(){rtSequence(api,{cls:'rt-bath',steps:POTTY_STEPS,intro:'Cu Tí muốn đi bô! Đầu tiên Cu Tí làm gì nhỉ?',ask:()=>'Tiếp theo Cu Tí làm gì nhỉ?',
+    done:()=>{api.say('Cu Tí đi bô giỏi quá! Lần sau Rio cũng làm như vậy nhé!');api.later(()=>api.win(menu),2600)}})}
+  /* brushing companion: about 2 minutes, one area of the teeth at a time, with a soft tune */
+  function brush(){const ZONES=[['Răng trên, bên trái','tl'],['Răng trên, bên phải','tr'],['Răng dưới, bên trái','bl'],['Răng dưới, bên phải','br']];const ZLEN=age2()?22:28;
+    const teeth=(y,flip)=>[0,1,2,3,4,5].map(k=>`<rect x="${58+k*31}" y="${y}" width="28" height="${flip?30:34}" rx="9" fill="#fff" ${st(3.5)}/>`).join('');
+    s.innerHTML=`<div class="rt-brush"><div class="rt-mouth">${wrap(`<path d="M20 70 C40 20 260 20 280 70 C290 150 220 190 150 190 C80 190 10 150 20 70Z" fill="#F0603F" ${st(5)}/><path d="M42 74 C60 50 240 50 258 74 C262 140 214 170 150 170 C86 170 38 140 42 74Z" fill="#7A1E2B"/><ellipse cx="150" cy="150" rx="60" ry="22" fill="#FF8FA3"/>${teeth(56)}${teeth(128,1)}`,'0 0 300 200')}
+      <div class="rt-germs"></div><div class="rt-tb">${rtArt('brush')}</div></div><div class="rt-zone"></div><div class="rt-dots">${ZONES.map(()=>'<i></i>').join('')}</div></div>`;
+    const tb=s.querySelector('.rt-tb'),germs=s.querySelector('.rt-germs'),zl=s.querySelector('.rt-zone'),dts=s.querySelectorAll('.rt-dots i');let z=-1,t=0,ni=0;
+    const tune=[523,659,784,659,587,698,880,698];const music=api.every(()=>{A.note({type:'triangle',f:tune[ni%8],dur:.5,vol:.07});ni++},620);
+    const POS={tl:[18,26],tr:[54,26],bl:[18,62],br:[54,62]};
+    function next(){z++;if(z>=ZONES.length){done();return}t=0;tb.className='rt-tb '+ZONES[z][1];zl.textContent=ZONES[z][0];dts[z].classList.add('on');
+      api.say(`${ZONES[z][0]}. Chải tới chải lui nào!`);germs.innerHTML='';for(let g=0;g<3;g++)addGerm()}
+    function addGerm(){const g=document.createElement('button');g.className='rt-germ';g.setAttribute('aria-label','Vi khuẩn');const [x0,y0]=POS[ZONES[z][1]];
+      g.style.left=(x0+rand(0,26))+'%';g.style.top=(y0+rand(-4,6))+'%';g.innerHTML=wrap(`<circle cx="50" cy="54" r="30" fill="#8FD16A" ${st(4)}/>${eye(40,50,4)}${eye(60,50,4)}<path d="M42 66 q8 6 16 0" fill="none" ${st(3)}/>`,'0 0 100 100');
+      g.addEventListener('pointerdown',e=>{e.preventDefault();A.pop(ni);FX.sparkle(e.clientX,e.clientY);g.remove()});germs.appendChild(g)}
+    let ticking=false;
+    function done(){clearInterval(music);ticking=false;tb.className='rt-tb';germs.innerHTML='';zl.textContent='Sạch bóng!';api.say('Răng sạch bóng rồi! Rio súc miệng nhé.');api.later(()=>api.win(menu),2600)}
+    api.every(()=>{if(!ticking||!$('#reward').hidden)return;t++;if(t%6===0&&germs.children.length)germs.firstElementChild.remove();if(t===Math.round(ZLEN/2))api.say('Giỏi lắm! Chải tiếp nhé!');if(t>=ZLEN)next()},1000);
+    api.say('Rio cầm bàn chải nào! Mình cùng đánh răng nhé.');api.later(()=>{ticking=true;next()},2600)}
+  menu()}
+
+/* bedtime: Rio helps Cu Tí get ready; the room dims step by step and the game ends for the night (or nap) */
+function sleepWindow(){const d=new Date(),h=d.getHours()+d.getMinutes()/60;return h>=18||h<5?'night':h>=11.5&&h<14.5?'nap':null}
+function sleepLocked(){return S.sleepUntil&&Date.now()<S.sleepUntil}
+function showNight(){closeGame();show('home');$('#night').hidden=false;A.music(false)}
+function gSleep(api){
+  const s=api.stage;const w=sleepWindow();
+  if(!w){s.innerHTML=`<div class="rt-menu"><div class="hempty felt light"><div class="ic">${wrap(sunI(),'0 0 100 100')}</div><h3>Chưa tới giờ ngủ đâu</h3><p>Giờ ngủ trưa từ 11 giờ 30 đến 14 giờ 30, giờ ngủ tối từ 18 giờ. Tới giờ Cu Tí sẽ rủ Rio đi ngủ nhé!</p><button class="btn" id="rtTry">${ICON.lock}<span>Người lớn mở thử</span></button></div></div>`;
+    api.say('Bây giờ chưa tới giờ ngủ. Rio chơi trò khác nhé!');s.querySelector('#rtTry').addEventListener('click',()=>{A.tap();gate(()=>run('night'))});return}
+  run(w);
+  function run(mode){const night=mode==='night';
+    const all=[{k:'bath',name:'Đi tắm',say:'Tắm ấm thơm tho!',night:1},{k:'pajama',name:'Mặc đồ ngủ',say:'Mặc bộ đồ ngủ hình sao nào!',night:1,acc:()=>wrap(`<path d="M20 60 C24 30 52 14 80 26 C70 34 66 46 68 60Z" fill="#B48CF0" ${st(4)}/><circle cx="84" cy="24" r="9" fill="#FFE07A" ${st(3)}/>`,'0 0 100 100')},
+      {k:'brush',name:'Đánh răng',say:'Đánh răng sạch sẽ trước khi ngủ.',night:1},{k:'potty',name:'Đi bô',say:'Đi bô trước khi ngủ nhé.'},
+      {k:'book',name:'Đọc truyện',say:'Ngày xưa có chú gấu nhỏ. Gấu chơi cả ngày, tối đến gấu ôm mẹ rồi ngủ thật ngon.',wait:5200},
+      {k:'teddy',name:'Ôm gấu bông',say:'Ôm gấu bông thật chặt.',acc:()=>rtArt('teddy')},{k:'lamp',name:'Tắt đèn',say:'Tắt đèn đi ngủ thôi. Suỵt!'}];
+    const steps=all.filter(x=>night||!x.night);
+    rtSequence(api,{cls:'rt-bed',steps,intro:night?'Tối rồi, Cu Tí buồn ngủ quá! Rio giúp Cu Tí chuẩn bị đi ngủ nhé. Đầu tiên làm gì nhỉ?':'Tới giờ ngủ trưa rồi! Rio giúp Cu Tí nhé. Đầu tiên làm gì nhỉ?',
+      ask:()=>'Tiếp theo làm gì nhỉ?',onStep:(c,i,W)=>{W.style.setProperty('--dim',((i+1)/steps.length*.6).toFixed(2))},
+      done:(W)=>{W.classList.add('off');[392,330,349,294,330,262].forEach((f,k)=>A.note({type:'sine',f,t:k*.7,dur:1.2,vol:.08}));
+        api.say(night?'Chúc Rio ngủ ngon! Cu Tí cũng ngủ đây. Mai mình chơi tiếp nhé.':'Ngủ trưa ngoan nhé Rio! Ngủ dậy mình chơi tiếp.');
+        const d=new Date();if(night){if(d.getHours()>=5)d.setDate(d.getDate()+1);d.setHours(6,0,0,0)}else d.setHours(15,0,0,0);S.sleepUntil=d.getTime();save();
+        api.later(showNight,5200)}})}}
+
 const GAMES=[
   {id:'bubbles',name:'Bong bóng',sk:'Nhân – quả',bg:'#7CC7E3',intro:'Chạm vào bong bóng nào!',start:gBubbles},
   {id:'shapes',name:'Hộp hình khối',sk:'Hình khối',bg:'#FFB347',intro:'Bé kéo từng hình vào đúng lỗ nhé!',start:gShapes},
@@ -1544,6 +1698,8 @@ const GAMES=[
   {id:'peek',name:'Ú òa',sk:'Tìm kiếm',bg:'#B5D86A',intro:'Ai đang trốn đây? Bé chạm vào để tìm nhé!',start:gPeek},
   {id:'memory',name:'Lật thẻ',sk:'Trí nhớ',bg:'#F49AC1',intro:'Lật thẻ tìm hai con giống nhau nhé!',start:gMemory},
   {id:'bear',name:'Gấu tìm mật',sk:'Vận động – Đếm',bg:'#FFC56E',intro:'',start:gBear},
+  {id:'hygiene',name:'Vệ sinh',sk:'Đi bô – Đánh răng',bg:'#9FD8F2',intro:'',start:gHygiene},
+  {id:'sleep',name:'Đi ngủ',sk:'Nếp sinh hoạt',bg:'#B7A8F0',intro:'',start:gSleep},
   {id:'house',name:'Nhà của Rio',sk:'Ảnh nhà mình',bg:'#F7C59F',intro:'',start:gHouse,hidden:true}
 ];
 const GENRES=[
@@ -1566,7 +1722,7 @@ const GENRES=[
 /* ================= app shell ================= */
 let cur=null;
 function show(id){$$('.screen').forEach(s=>{const was=s.hidden;s.hidden=s.id!==id;if(!s.hidden&&was)restart(s,'enter',450)});A.music(id==='home'||id==='album');if(id!=='game')$('#say').classList.remove('on')}
-function openGame(id){closeGame();if(overLimit()){showRest();return}const g=GAMES.find(x=>x.id===id);show('game');const st=$('#stage');st.className='stage stage-'+id;st.innerHTML='';
+function openGame(id){closeGame();if(sleepLocked()){showNight();return}if(overLimit()){showRest();return}const g=GAMES.find(x=>x.id===id);show('game');const st=$('#stage');st.className='stage stage-'+id;st.innerHTML='';
   $('#gname').textContent=g.name;$('#gdot').style.setProperty('--dot',g.bg);
   const timers=new Set();const api={id,stage:st,alive:true,wins:0,cleanup:[],
     later(fn,ms){const t=setTimeout(()=>{timers.delete(t);if(api.alive)fn()},ms);timers.add(t);return t},
@@ -1772,6 +1928,8 @@ document.addEventListener('fullscreenchange',()=>{const sp=$('#btnFull span');if
 
 /* wiring */
 $('#heroBip').innerHTML=MASCOT;$('#homeBip').innerHTML=MASCOT;$('#gameBip').innerHTML=MASCOT;$('#brkBip').innerHTML=MASCOT;$('#restBip').insertAdjacentHTML('afterbegin',MASCOT.replace('<svg','<svg class="bipsvg"'));
+$('#nightBip').insertAdjacentHTML('afterbegin',MASCOT.replace('<svg','<svg class="bipsvg"'));$('#nightOpen').innerHTML=ICON.lock+'<span>Người lớn mở lại</span>';
+$('#nightOpen').addEventListener('click',()=>gate(()=>{S.sleepUntil=0;save();$('#night').hidden=true;show('home');V.say('Chào Rio! Mình chơi tiếp nhé!')}));
 $('#heroBip').firstElementChild.classList.add('bipsvg');$('#homeBip').firstElementChild.classList.add('bipsvg');$('#gameBip').firstElementChild.classList.add('bipsvg');
 $('#sunball').innerHTML=SUNBIG;$$('.cloud').forEach(c=>c.innerHTML=CLOUD);
 $('#btnStart').innerHTML=ICON.play;$('#splashHint').innerHTML=ICON.speaker+'<span>Bật âm thanh để nghe Cu Tí nói chuyện</span>';
@@ -1790,7 +1948,7 @@ $('#icHouse').innerHTML=wrap(houseI(),'0 0 100 100');$('#houseBack').innerHTML=I
 $('#btnHouse').addEventListener('click',()=>{A.tap();openGame('house')});
 $('#mascot').addEventListener('click',()=>{if(lastLine)V.say(lastLine)});
 $('#btnStart').addEventListener('click',()=>{A.init();V.load();wake(true);
-  renderHome();show('home');if(overLimit()){showRest();return}A.fanfare();setTimeout(()=>V.say(HELLO),350)});
+  renderHome();show('home');if(sleepLocked()){showNight();return}if(overLimit()){showRest();return}A.fanfare();setTimeout(()=>V.say(HELLO),350)});
 document.addEventListener('pointerdown',()=>{if(A.ctx&&A.ctx.state==='suspended')A.ctx.resume()},{passive:true});
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('gesturestart',e=>e.preventDefault());
