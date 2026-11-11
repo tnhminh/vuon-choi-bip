@@ -175,6 +175,39 @@ body{background:linear-gradient(180deg,#8FD3EE 0%,#B5E4F5 46%,#D9F2F8 100%)}
 
 /* ---------- 1 bubbles ---------- */
 .stage-bubbles{--stage:linear-gradient(#BFEAF7,#7FCBE6)}
+/* Gấu tìm mật: side-scrolling meadow walk */
+.stage-bear{--stage:linear-gradient(#9ED8F0 0%,#CFEFF9 55%,#E8F6EC 100%);cursor:pointer}
+.br-layer{position:absolute;left:0;display:flex;will-change:transform;pointer-events:none}
+.br-layer svg{flex:none;height:100%}
+.br-far{top:calc(var(--u) * 36);height:calc(var(--u) * 50)}
+.br-mid{top:calc(var(--u) * 30);height:calc(var(--u) * 56)}
+.br-ground{top:calc(var(--u) * 82);height:calc(var(--u) * 20)}
+.br-cloud{position:absolute;width:calc(var(--u) * 24);height:calc(var(--u) * 12);opacity:.9}
+.br-world{position:absolute;left:0;top:0;height:100%;will-change:transform;pointer-events:none}
+.br-world>*{position:absolute;left:calc(var(--x) * var(--u));top:calc(var(--y) * var(--u));width:calc(var(--w) * var(--u));height:calc(var(--h) * var(--u))}
+.br-fruit{animation:wob 2.4s ease-in-out infinite}
+.br-fruit.got{animation:popb .35s forwards}
+.br-goal-glow{border-radius:50%;background:radial-gradient(circle,rgba(255,236,150,.9),rgba(255,214,90,0) 70%);animation:glow 2s ease-in-out infinite}
+.br-bear{position:absolute;left:calc(var(--u) * 9);top:calc(var(--u) * 61);width:calc(var(--u) * 27);height:calc(var(--u) * 23);will-change:transform;pointer-events:none;filter:drop-shadow(0 4px 3px rgba(43,53,80,.25))}
+.br-shadow{position:absolute;left:calc(var(--u) * 13);top:calc(var(--u) * 82.2);width:calc(var(--u) * 17);height:calc(var(--u) * 2.6);border-radius:50%;background:rgba(43,53,80,.22);filter:blur(2px);will-change:transform;pointer-events:none}
+.br-bear .legF,.br-bear .legB{transform-box:fill-box;transform-origin:50% 0}
+.br-bear.walk .legF{animation:brLeg .36s ease-in-out infinite alternate}
+.br-bear.walk .legB{animation:brLeg .36s ease-in-out infinite alternate-reverse}
+.br-bear.walk .bear-body{animation:brBob .36s ease-in-out infinite alternate}
+.br-bear.eat .bear-body{animation:brBob .2s ease-in-out infinite alternate}
+@keyframes brLeg{from{rotate:-22deg}to{rotate:22deg}}
+@keyframes brBob{to{translate:0 -2px}}
+.br-hud{position:absolute;left:14px;top:12px;z-index:5;display:flex;align-items:center;gap:8px;padding:6px 16px 6px 8px;border-radius:999px;background:rgba(255,253,246,.92);border:3px solid var(--ink);box-shadow:0 4px 0 rgba(43,53,80,.2);pointer-events:none}
+.br-hud .ic{width:40px;height:40px}
+.br-hud b{font:700 clamp(24px,4.4vmin,36px)/1 var(--display);font-variant-numeric:tabular-nums;min-width:1.2em;text-align:center}
+.br-hud.bump{animation:bump .4s}
+.br-hint{position:absolute;z-index:5;width:calc(var(--u) * 14);height:calc(var(--u) * 14);left:calc(var(--u) * 30);top:calc(var(--u) * 40);display:grid;place-items:center;border-radius:50%;background:rgba(255,253,246,.9);border:4px solid var(--ink);color:var(--ink);pointer-events:none;animation:brTap 1s ease-in-out infinite}
+.br-hint svg{width:58%;height:58%}
+@keyframes brTap{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(12%) scale(.92)}}
+.br-progress{position:absolute;left:50%;translate:-50% 0;top:22px;z-index:5;width:min(30%,220px);height:18px;border-radius:999px;border:3px solid var(--ink);background:rgba(255,255,255,.8);pointer-events:none}
+.br-progress i{position:absolute;inset:0;width:var(--p,0%);border-radius:999px;background:linear-gradient(90deg,#FFD25A,#F29A12)}
+.br-progress span{position:absolute;right:-14px;top:50%;width:34px;height:34px;translate:0 -50%}
+.br-progress em{position:absolute;top:50%;left:var(--p,0%);width:26px;height:26px;translate:-50% -50%}
 .bub-field{position:absolute;inset:0}
 .bubble{position:absolute;left:0;top:0;border-radius:50%;cursor:pointer;will-change:transform;
   background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95) 0 7%,transparent 8%),
@@ -595,6 +628,8 @@ td:first-child{font-weight:800;white-space:nowrap}
     <radialGradient id="gBelly" cx=".5" cy=".35" r=".7"><stop offset="0" stop-color="#FFF0D6"/><stop offset="1" stop-color="#FFCF96"/></radialGradient>
     <linearGradient id="gScarf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7DBDFF"/><stop offset="1" stop-color="#2F86E8"/></linearGradient>
     <linearGradient id="gLeaf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#4FAE3A"/><stop offset="1" stop-color="#9BE06E"/></linearGradient>
+    <radialGradient id="gBear" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#C98E5C"/><stop offset=".6" stop-color="#A86F42"/><stop offset="1" stop-color="#875332"/></radialGradient>
+    <linearGradient id="gHoney" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD25A"/><stop offset="1" stop-color="#F29A12"/></linearGradient>
     <linearGradient id="gGardenSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ED8F0"/><stop offset=".6" stop-color="#D3EFF8"/></linearGradient>
     <linearGradient id="gHillFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B9E39A"/><stop offset="1" stop-color="#9DD27B"/></linearGradient>
     <linearGradient id="gHillMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A3DA7D"/><stop offset="1" stop-color="#7CC05E"/></linearGradient>
@@ -627,7 +662,7 @@ td:first-child{font-weight:800;white-space:nowrap}
     <div class="splash-inner">
       <div class="bip-hero" id="heroBip"></div>
       <h1 class="logo" id="logo" aria-label="Vườn Chơi Cu Tí"></h1>
-      <p class="tag">Chín trò chơi nhỏ cho bé 2–3 tuổi</p>
+      <p class="tag">Mười trò chơi nhỏ cho bé 2–3 tuổi</p>
       <button id="btnStart" class="big-play" aria-label="Bắt đầu chơi"></button>
       <p class="hint" id="splashHint"></p>
     </div>
@@ -1414,6 +1449,90 @@ function gHouse(api){
     api.say(`Rio dọn nhà nào! Kéo đồ vào ${stI.label} nhé!`)}
 }
 
+/* ================= Gấu tìm mật: a gentle side-scroller ================= */
+/* Bear walks on its own; a tap anywhere makes it jump. Obstacles never hurt:
+   the bear simply waits in front of them until the child taps. No timer, no losing. */
+const bearI=()=>`<g class="legB"><rect x="36" y="74" width="14" height="26" rx="7" fill="#7A4A2A" ${st(3.5)}/><rect x="72" y="74" width="14" height="26" rx="7" fill="#7A4A2A" ${st(3.5)}/></g>
+  <g class="bear-body"><circle cx="20" cy="60" r="8" fill="url(#gBear)" ${st(3.5)}/>
+  <ellipse cx="56" cy="68" rx="36" ry="25" fill="url(#gBear)" ${st(4.5)}/><ellipse cx="58" cy="74" rx="18" ry="12" fill="#E8B985"/>
+  <circle cx="76" cy="21" r="9" fill="url(#gBear)" ${st(3.5)}/><circle cx="76" cy="21" r="4.2" fill="#E8B985"/><circle cx="102" cy="21" r="9" fill="url(#gBear)" ${st(3.5)}/><circle cx="102" cy="21" r="4.2" fill="#E8B985"/>
+  <circle cx="90" cy="42" r="24" fill="url(#gBear)" ${st(4.5)}/>
+  <ellipse cx="106" cy="50" rx="12" ry="9" fill="#F2D2A9" ${st(3)}/><ellipse cx="114" cy="46" rx="4.6" ry="3.6" fill="${INK}"/><path d="M106 56 q4 3.5 8 0" fill="none" ${st(2.5)}/>
+  ${eye(94,38,4.4)}${blush(84,52,5.5)}</g>
+  <g class="legF"><rect x="44" y="78" width="14" height="24" rx="7" fill="#9A6038" ${st(3.5)}/><rect x="80" y="78" width="14" height="24" rx="7" fill="#9A6038" ${st(3.5)}/></g>`;
+const honeyI=()=>`<path d="M22 40 H78 V78 a14 14 0 0 1 -14 14 H36 a14 14 0 0 1 -14 -14Z" fill="url(#gHoney)" ${st(4)}/>
+  <path d="M30 40 C30 54 36 52 36 60 C36 66 42 66 42 60 V40Z" fill="#FFE59A" opacity=".8"/><path d="M16 28 H84 L78 42 H22Z" fill="#E0558F" ${st(3.5)}/>
+  <path d="M26 30 l6 10 M40 30 l6 10 M54 30 l6 10 M68 30 l6 10" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/><ellipse cx="50" cy="66" rx="13" ry="10" fill="#FFF3C4" ${st(2.5)}/>
+  <path d="M44 66 h12 M50 60 v12" stroke="${INK}" stroke-width="2" opacity=".0"/>`;
+const logI=()=>`<rect x="6" y="40" width="86" height="40" rx="20" fill="#B8783F" ${st(4)}/><path d="M18 52 h40 M24 66 h44" stroke="#8E5A32" stroke-width="3" stroke-linecap="round"/><ellipse cx="80" cy="60" rx="13" ry="20" fill="#E0A463" ${st(4)}/><path d="M80 54 a6 6 0 1 1 -0.1 0" fill="none" stroke="#B8783F" stroke-width="2.5"/>`;
+const beeI=()=>`<ellipse cx="38" cy="32" rx="12" ry="14" fill="#fff" opacity=".85" ${st(2.5)}/><ellipse cx="62" cy="32" rx="12" ry="14" fill="#fff" opacity=".85" ${st(2.5)}/><ellipse cx="50" cy="58" rx="26" ry="20" fill="#FFC93C" ${st(4)}/><path d="M42 40 v36 M58 40 v36" stroke="${INK}" stroke-width="6"/>${eye(66,54,3.6)}`;
+const BR_OBS={rock:{w:15,h:11,art:()=>wrap(stoneI(),'8 28 84 58'),name:'hòn đá'},log:{w:18,h:10,art:()=>wrap(logI(),'4 36 92 48'),name:'khúc gỗ'},
+  bush:{w:16,h:12,art:()=>wrap(BUSH,'0 0 160 120'),name:'bụi cây'},mush:{w:10,h:13,art:()=>wrap(mushroomI(),'8 20 84 74'),name:'cây nấm'}};
+const BR_FRUIT={apple:{art:()=>wrap(appleI(),'0 0 100 100'),name:'quả táo'},orange:{art:()=>wrap(orangeI(),'0 0 100 100'),name:'quả cam'},honey:{art:()=>wrap(honeyI(),'10 20 80 80'),name:'hũ mật ong'}};
+tileArt.bear=wrap(`<g transform="translate(-4 18) scale(.86)">${bearI()}</g><g transform="translate(72 2) scale(.42)">${honeyI()}</g>`,'0 0 120 120');
+
+function gBear(api){
+  const s=api.stage;
+  const farTile=`<svg viewBox="0 0 400 100" preserveAspectRatio="none"><path d="M0 60 C60 26 130 28 200 52 C270 76 340 34 400 60 V100 H0Z" fill="url(#gHillFar)"/></svg>`;
+  const tree=(x,k)=>`<rect x="${x-7}" y="${92-40*k}" width="14" height="${40*k+10}" rx="5" fill="#B8783F" ${st(3.5)}/><path d="M${x} ${100-46*k} C${x-40*k} ${100-40*k} ${x-46*k} ${100-80*k} ${x-20*k} ${100-88*k} C${x-16*k} ${100-112*k} ${x+20*k} ${100-112*k} ${x+24*k} ${100-90*k} C${x+48*k} ${100-84*k} ${x+44*k} ${100-44*k} ${x} ${100-46*k}Z" fill="#5FAE45" ${st(3.5)}/>`;
+  const midTile=`<svg viewBox="0 0 400 160" preserveAspectRatio="xMidYMax slice"><g transform="translate(0 50)" class="tx" filter="url(#plush)">${tree(70,1)}${tree(250,.8)}<path d="M320 102 C300 102 300 84 316 84 C318 70 340 68 346 80 C360 74 374 88 364 102Z" fill="#6DBB52" ${st(3)}/></g></svg>`;
+  const groundTile=`<svg viewBox="0 0 400 60" preserveAspectRatio="none"><rect y="8" width="400" height="60" fill="#C4925E"/><rect y="20" width="400" height="6" fill="#B07E4C" opacity=".6"/><path d="M0 10 Q25 -2 50 10 T100 10 T150 10 T200 10 T250 10 T300 10 T350 10 T400 10 V22 H0Z" fill="#6FBE5A"/><path d="M0 10 Q25 -2 50 10 T100 10 T150 10 T200 10 T250 10 T300 10 T350 10 T400 10" fill="none" stroke="${INK}" stroke-width="3"/><path d="M0 22 H400" stroke="#4E9A47" stroke-width="2.5"/>
+    <g fill="#A97A4A"><ellipse cx="60" cy="40" rx="8" ry="4"/><ellipse cx="190" cy="48" rx="6" ry="3"/><ellipse cx="320" cy="38" rx="9" ry="4"/></g><g fill="#FF8FC1" ${st(1.5)}><circle cx="120" cy="13" r="4"/><circle cx="290" cy="12" r="4"/></g></svg>`;
+  s.innerHTML=`<div class="br-layer br-far">${farTile.repeat(3)}</div><div class="br-layer br-mid">${midTile.repeat(3)}</div><div class="br-layer br-ground">${groundTile.repeat(3)}</div>
+    <div class="br-world"></div><div class="br-shadow"></div><div class="br-bear walk">${wrap(bearI(),'0 0 130 110')}</div>
+    <div class="br-hud"><span class="ic">${wrap(appleI(),'0 0 100 100')}</span><b>0</b></div><div class="br-progress"><i></i><em>${wrap(`<g transform="scale(.92)">${bearI()}</g>`,'0 0 130 110')}</em><span>${wrap(honeyI(),'10 20 80 80')}</span></div>`;
+  const world=s.querySelector('.br-world'),bearEl=s.querySelector('.br-bear'),shadow=s.querySelector('.br-shadow'),hud=s.querySelector('.br-hud'),hudN=hud.querySelector('b'),prog=s.querySelector('.br-progress');
+  const layers=[[s.querySelector('.br-far'),.2],[s.querySelector('.br-mid'),.5],[s.querySelector('.br-ground'),1]];
+  let u=1,W=1;const resize=()=>{u=s.clientHeight/100;W=s.clientWidth;s.style.setProperty('--u',u+'px');
+    layers.forEach(([el])=>{const tw=Math.max(W,el.clientHeight*2.2);[...el.children].forEach(c=>c.style.width=tw+'px');el._tw=tw})};
+  const ro=new ResizeObserver(resize);ro.observe(s);api.cleanup.push(()=>ro.disconnect());resize();
+
+  const G=84,BX=22.5,HALF=8.5,BH=19;const age2=S.age===2;
+  const WALK=age2?20:26,LEAP=58,JDUR=.85,PEAK=34;
+  let lv=0,L=0,scroll=0,obs=[],fruits=[],got=0,state='walk',jt=0,jy=0,topY=0,waitT=0,hintEl=null,hinted=new Set(),raf=0,last=0,done=false;
+  function put(cls,x,y,w,h,html){const d=document.createElement('div');d.className=cls;Object.entries({x,y,w,h}).forEach(([k,v])=>d.style.setProperty('--'+k,v));d.innerHTML=html;world.appendChild(d);return d}
+  function level(){world.innerHTML='';obs=[];fruits=[];scroll=0;state='walk';jy=0;topY=0;done=false;got=0;hudN.textContent='0';hinted.clear();clearHint();bearEl.className='br-bear walk';
+    L=(age2?230:300)+lv*20;const kinds=age2?['rock','log','bush']:['rock','log','bush','mush'];let x=48;
+    while(x<L-40){const k=pick(kinds),o=BR_OBS[k];obs.push({x,w:o.w,h:o.h,k,el:put('br-obs',x,G-o.h,o.w,o.h,o.art())});
+      fruits.push(mkFruit(pick(['apple','orange']),x+o.w/2-4.5,G-44));
+      const gap=age2?rand(38,50):rand(30,44);const n=randInt(1,age2?2:3);for(let i=0;i<n;i++)fruits.push(mkFruit(pick(['apple','orange']),x+o.w+10+i*9,G-10));x+=o.w+gap}
+    fruits.push(mkFruit('honey',L*.55,G-PEAK*.8));
+    put('br-goal-glow',L-6,G-34,34,34,'');put('br-goal',L,G-22,22,22,wrap(honeyI(),'10 20 80 80'));put('br-bee',L+3,G-40,8,8,wrap(beeI(),'0 0 100 100'));
+    api.say(lv===0?'Gấu đi tìm mật ong! Rio chạm vào màn hình để gấu nhảy nhé!':'Gấu đi tiếp nào! Mật ong ở phía trước!')}
+  function mkFruit(k,x,y){return{k,x,y,got:false,el:put('br-fruit',x,y,9,9,BR_FRUIT[k].art())}}
+  function clearHint(){if(hintEl){hintEl.remove();hintEl=null}}
+  function jump(){if(done||state==='jump')return;if(state==='top'){state='jump';jt=0;topY=jy;A.boing();clearHint();return}state='jump';jt=0;topY=0;A.boing();clearHint();bearEl.classList.remove('walk')}
+  s.addEventListener('pointerdown',e=>{e.preventDefault();jump()});
+  const key=e=>{if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();jump()}};document.addEventListener('keydown',key);api.cleanup.push(()=>document.removeEventListener('keydown',key));
+  const bx=()=>scroll+BX;
+  const over=o=>bx()+HALF>o.x+1&&bx()-HALF<o.x+o.w-1;
+  function step(dt){if(done)return;let v=0;
+    if(state==='jump'){jt+=dt/JDUR;v=LEAP;const p=Math.min(1,jt);jy=topY*(1-p)+4*PEAK*p*(1-p);
+      if(p>=1){const o=obs.find(over);if(o){state='top';jy=o.h}else{state='walk';jy=0;bearEl.classList.add('walk');A.soft()}}}
+    else if(state==='top'){v=WALK;const o=obs.find(over);if(!o){state='fall';}}
+    else if(state==='fall'){v=WALK;jy=Math.max(0,jy-dt*90);if(jy===0){state='walk';bearEl.classList.add('walk')}}
+    else if(state==='walk'||state==='wait'){const nx=obs.find(o=>o.x+o.w>bx()-HALF);
+      if(nx&&nx.x-(bx()+HALF)<2.5){if(state!=='wait'){state='wait';waitT=0;bearEl.classList.remove('walk');A.soft()}waitT+=dt;
+        if(!hinted.has(nx)&&waitT>(age2?.2:1.2)){hinted.add(nx);api.say(`Có ${BR_OBS[nx.k].name}! Rio chạm để gấu nhảy qua nào!`)}
+        if(!hintEl&&waitT>(age2?.4:2)){hintEl=document.createElement('div');hintEl.className='br-hint';hintEl.innerHTML=ICON.hand;s.appendChild(hintEl)}}
+      else{if(state==='wait'){state='walk';bearEl.classList.add('walk')}v=WALK}}
+    scroll+=v*dt;
+    for(const f of fruits){if(f.got)continue;const fy=f.y+4.5,by=G-jy-BH/2;if(Math.abs(f.x+4.5-bx())<9&&Math.abs(fy-by)<13){f.got=true;f.el.classList.add('got');collect(f)}}
+    if(bx()>=L-2){finish()}}
+  function collect(f){got++;hudN.textContent=got;restart(hud,'bump',400);A.pop(got);const r=f.el.getBoundingClientRect();FX.sparkle(r.left+r.width/2,r.top+r.height/2);
+    if(f.k==='honey')api.say('Một hũ mật ong! Ngon quá!');else if(got<=5)api.say(cap(NUM[got])+'!');else if(got%5===0)api.say(`${cap(BR_FRUIT[f.k].name)}! Gấu có nhiều quả quá!`)}
+  function finish(){done=true;state='walk';jy=0;bearEl.className='br-bear eat';clearHint();A.fanfare();
+    api.say(`Gấu tìm được mật ong rồi! Gấu đã nhặt được ${got>10?'rất nhiều':NUM[got]||got} quả. Giỏi quá!`);
+    api.later(()=>api.win(()=>{lv++;level()}),2400)}
+  function render(){world.style.transform=`translate3d(${-scroll*u}px,0,0)`;bearEl.style.transform=`translate3d(0,${-jy*u}px,0)`;
+    const sc=Math.max(.45,1-jy/60);shadow.style.transform=`scale(${sc})`;shadow.style.opacity=sc;
+    layers.forEach(([el,f])=>{const tw=el._tw||W;el.style.transform=`translate3d(${-((scroll*u*f)%tw)}px,0,0)`});
+    prog.style.setProperty('--p',Math.min(100,scroll/(L-BX)*100)+'%')}
+  function loop(t){if(!api.alive)return;const dt=Math.min(.05,(t-last)/1000||0);last=t;
+    if($('#reward').hidden&&!document.hidden)step(dt);render();raf=requestAnimationFrame(loop)}
+  api.cleanup.push(()=>cancelAnimationFrame(raf));
+  level();render();raf=requestAnimationFrame(t=>{last=t;loop(t)})}
+
 const GAMES=[
   {id:'bubbles',name:'Bong bóng',sk:'Nhân – quả',bg:'#7CC7E3',intro:'Chạm vào bong bóng nào!',start:gBubbles},
   {id:'shapes',name:'Hộp hình khối',sk:'Hình khối',bg:'#FFB347',intro:'Bé kéo từng hình vào đúng lỗ nhé!',start:gShapes},
@@ -1424,6 +1543,7 @@ const GAMES=[
   {id:'paint',name:'Tô màu',sk:'Sáng tạo',bg:'#5CC8B8',intro:'',start:gPaint},
   {id:'peek',name:'Ú òa',sk:'Tìm kiếm',bg:'#B5D86A',intro:'Ai đang trốn đây? Bé chạm vào để tìm nhé!',start:gPeek},
   {id:'memory',name:'Lật thẻ',sk:'Trí nhớ',bg:'#F49AC1',intro:'Lật thẻ tìm hai con giống nhau nhé!',start:gMemory},
+  {id:'bear',name:'Gấu tìm mật',sk:'Vận động – Đếm',bg:'#FFC56E',intro:'',start:gBear},
   {id:'house',name:'Nhà của Rio',sk:'Ảnh nhà mình',bg:'#F7C59F',intro:'',start:gHouse,hidden:true}
 ];
 const GENRES=[
@@ -1438,6 +1558,7 @@ const GENRES=[
   ['Trí nhớ lật thẻ','Nhớ vị trí, tìm cặp giống nhau. Chỉ 2–3 cặp ở tuổi này.','3','yes','Lật thẻ'],
   ['Ghép tranh nhiều mảnh','Ghép 2–4 mảnh lớn. Hợp hơn khi bé gần 3 tuổi rưỡi.','3,5+','later','Để bản sau'],
   ['Đóng vai, chăm sóc','Cho búp bê ăn, tắm thú cưng. Bé học tốt hơn khi chơi bằng đồ chơi thật.','2+','later','Nên chơi ngoài đời'],
+  ['Phiêu lưu nhẹ nhàng','Nhân vật tự đi, bé chạm để nhảy qua chướng ngại và nhặt quả. Gặp chướng ngại thì nhân vật đứng chờ, không có thua.','2,5+','yes','Gấu tìm mật'],
   ['Đua tốc độ, mê cung, có thua cuộc','Đếm giờ và thua làm bé căng thẳng. Bé chưa hiểu luật thắng thua.','5+','no','Tránh'],
   ['Chữ cái, tập đọc','Quá sớm với 2 tuổi. Nghe kể chuyện và hát có ích hơn.','4+','no','Tránh']
 ];
@@ -1565,8 +1686,13 @@ function renderOutbar(){const due=!S.plant||(S.plant.w!==today()&&plantStage(S.p
   $('#icPlant').innerHTML=wrap(plantI(S.plant?plantStage(S.plant.d||0):0),'0 0 100 100')}
 
 /* home */
-function renderHome(){renderOutbar();$('#tiles').innerHTML=GAMES.filter(g=>!g.hidden).map((g,i)=>`<button class="tile felt" data-id="${g.id}" style="--bgc:${g.bg};--rot:${[-1.6,1.2,-.8,1.4,-1.2,.9,-1.4,1,-.6][i]}deg" aria-label="${g.name}"><span class="art">${tileArt[g.id]}</span><span class="nm">${g.name}</span><span class="sk">${g.sk}</span></button>`).join('');
-  $$('.tile').forEach(t=>t.addEventListener('click',()=>{A.tap();openGame(t.dataset.id)}));greetText()}
+function renderHome(){renderOutbar();$('#tiles').innerHTML=GAMES.filter(g=>!g.hidden).map((g,i)=>`<button class="tile felt" data-id="${g.id}" style="--bgc:${g.bg};--rot:${[-1.6,1.2,-.8,1.4,-1.2,.9,-1.4,1,-.6,1.1][i%10]}deg" aria-label="${g.name}"><span class="art">${tileArt[g.id]}</span><span class="nm">${g.name}</span><span class="sk">${g.sk}</span></button>`).join('');
+  $$('.tile').forEach(t=>t.addEventListener('click',()=>{A.tap();openGame(t.dataset.id)}));greetText();layoutTiles()}
+/* pick the column count that gives the biggest tiles for this screen */
+function layoutTiles(){const el=$('#tiles');if(!el||el.offsetParent===null)return;const n=el.children.length,W=el.clientWidth,H=el.clientHeight-8,g=parseFloat(getComputedStyle(el).columnGap)||16;
+  let best={c:3,s:0};for(let c=2;c<=5;c++){const r=Math.ceil(n/c);if(c*r-n>=c)continue;const s=Math.min((W-g*(c-1))/c,(H-g*(r-1))/r,320);if(s>best.s)best={c,s}}
+  const s=Math.max(70,Math.floor(best.s));el.style.gridTemplateColumns=`repeat(${best.c},${s}px)`;el.style.gridAutoRows=s+'px'}
+new ResizeObserver(()=>layoutTiles()).observe($('#tiles'));
 const HELLO='Chào Rio! Chơi game nhớ giữ sức khỏe nha Rio!';
 function greetText(){$('#greet').textContent=HELLO}
 
