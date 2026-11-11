@@ -402,6 +402,56 @@ td:first-child{font-weight:800;white-space:nowrap}
 .plant-days i{width:16px;height:16px;border-radius:50%;border:2.5px solid var(--ink);background:#fff}
 .plant-days i.on{background:#3D95F0}
 @media (prefers-reduced-motion:reduce){.out-art,.outbtn .due{animation:none}}
+@media (max-width:640px){.outbar{padding:0 12px;gap:8px}.outbtn{flex:1;min-width:0;height:auto;min-height:54px;padding:6px 8px 6px 6px;gap:6px;font-size:14px;line-height:1.1;text-align:left}.outbtn .ic{width:30px;height:30px}}
+/* Nhà của Rio: photo games + editor */
+.stage-house{--stage:linear-gradient(#FFF1E0,#FFDDBA)}
+.hwrap{position:absolute;inset:0;display:flex;flex-direction:column;gap:10px;padding:clamp(10px,2vmin,18px)}
+.harea{flex:1;min-height:0;display:grid;place-items:center}
+.hdock{display:none;justify-content:center;align-items:center;gap:clamp(10px,2vmin,18px);flex-wrap:wrap;flex:none}
+.hdock.on{display:flex}
+.pbox{position:relative;border-radius:22px;overflow:hidden;border:4px solid var(--ink);background:#fff;touch-action:none;box-shadow:0 6px 0 rgba(43,53,80,.18)}
+.pbox img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.pmarks{position:absolute;inset:0;pointer-events:none}
+.pmark{position:absolute;left:calc(var(--x) * 100%);top:calc(var(--y) * 100%);width:calc(var(--r) * 200%);aspect-ratio:1;translate:-50% -50%;border-radius:50%}
+.pmark .tag{position:absolute;left:50%;top:100%;translate:-50% 6px;white-space:nowrap;background:var(--felt);border:3px solid var(--ink);border-radius:999px;padding:2px 12px;font-family:var(--display);font-size:clamp(14px,2.4vmin,20px);line-height:1.3}
+.pmark.found{border:5px solid var(--sun);box-shadow:0 0 0 3px var(--ink),0 0 26px 6px rgba(255,255,255,.9);animation:rin .5s cubic-bezier(.3,1.6,.5,1)}
+.pmark.hint{border:5px dashed #fff;box-shadow:0 0 0 3px var(--ink);animation:pulse 1s ease-in-out infinite}
+.pmark.spot{border:4px dashed #fff;box-shadow:0 0 0 3px rgba(43,53,80,.6);background:rgba(255,255,255,.22);display:grid;place-items:center}
+.pmark.spot .q{font:700 clamp(22px,5vmin,44px)/1 var(--display);color:#fff;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}
+.pmark.spot.open{background:rgba(255,255,255,.55)}
+.pmark .cuti{width:120%;aspect-ratio:1;animation:rin .6s cubic-bezier(.3,1.6,.5,1)}
+.pmark.store{border:5px dashed var(--sun);box-shadow:0 0 0 3px var(--ink);background:rgba(255,201,60,.28)}
+.pring{position:absolute;width:44px;height:44px;border-radius:50%;border:4px solid #fff;translate:-50% -50%;animation:popb .6s forwards;pointer-events:none}
+.hchip{border-radius:50%;border:4px solid var(--ink);box-shadow:0 5px 0 var(--ink);background-color:#fff;background-repeat:no-repeat;flex:none}
+.hbridge{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(255,241,224,.95);text-align:center;padding:16px}
+.hbridge p{font:700 clamp(22px,4.6vmin,38px)/1.2 var(--display);margin:0;max-width:18ch}
+.hcrop{border-radius:50%;border:5px solid var(--ink);box-shadow:0 6px 0 var(--ink);background-repeat:no-repeat;flex:none}
+.hempty{--r:30px;max-width:460px;padding:24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.hempty .ic{width:110px;height:110px}
+.hempty h3{font-family:var(--display);font-size:24px;margin:0}
+.hempty p{margin:0;color:var(--ink-soft);font-size:17px}
+.hrooms{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;align-content:center;max-height:100%;overflow:auto;padding:6px}
+.hroom{--r:26px;width:clamp(150px,30vmin,260px);padding:10px;display:flex;flex-direction:column;gap:8px;align-items:center;background:var(--felt)}
+.hroom img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;border:3px solid var(--ink)}
+.hroom span{font-family:var(--display);font-size:clamp(17px,2.6vmin,22px)}
+.hlist{display:flex;flex-direction:column;gap:10px}
+.hrow{display:flex;align-items:center;gap:12px;padding:8px;border-radius:16px;background:#fff;border:3px solid var(--ink)}
+.hrow img{width:84px;height:62px;object-fit:cover;border-radius:10px;border:2.5px solid var(--ink);flex:none}
+.hrow div{flex:1;min-width:0;display:flex;flex-direction:column}
+.hrow span{font-size:13.5px;color:var(--ink-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips .chip{width:auto;height:auto;display:inline-block;box-shadow:none;padding:6px 12px;border-radius:999px;border:2.5px solid var(--ink);background:#fff;font-weight:800;font-size:14px}
+.chips .chip.on{background:var(--sun)}
+.ebox-wrap{display:flex;justify-content:center}
+.ebox{width:min(100%,calc(62vh * var(--ar,1.33)));aspect-ratio:var(--ar,1.33);cursor:crosshair}
+.ebox .pmark{pointer-events:auto;cursor:pointer;border:4px solid #fff;box-shadow:0 0 0 3px var(--ink),inset 0 0 0 2px rgba(43,53,80,.3)}
+.ebox .pmark.store{border:5px dashed var(--sun)}
+.ebox .pmark.sel{border-color:var(--tomato);box-shadow:0 0 0 3px var(--ink),0 0 0 9px rgba(240,96,63,.35)}
+.ebox .pmark .tag{font-size:13px;padding:1px 9px}
+.esel{display:flex;flex-direction:column;gap:6px;padding:12px;border-radius:18px;background:#FFF6E2;border:3px dashed rgba(43,53,80,.3)}
+.esel[hidden]{display:none}
+#eSize{width:200px;max-width:100%;accent-color:var(--tomato)}
+.btn.save{background:var(--sun)}
 .brk-card{--r:34px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:clamp(18px,3.4vmin,32px) clamp(18px,4vmin,40px);max-width:min(560px,100%);animation:rin .6s cubic-bezier(.3,1.6,.5,1)}
 .brk-art{width:clamp(110px,24vmin,180px);aspect-ratio:1;animation:wob 2s ease-in-out infinite}
 .brk-card h2{font-size:clamp(28px,6vmin,48px);line-height:1.1}
@@ -466,6 +516,7 @@ td:first-child{font-weight:800;white-space:nowrap}
     <div class="outbar">
       <button class="outbtn" id="btnOut" style="--bgc:#C9EDB3"><span class="ic" id="icOut"></span><span>Ra ngoài chơi</span></button>
       <button class="outbtn" id="btnPlant" style="--bgc:#FFE7A6"><span class="ic" id="icPlant"></span><span>Cây của Rio</span><b class="due" aria-hidden="true"></b></button>
+      <button class="outbtn" id="btnHouse" style="--bgc:#F7C59F"><span class="ic" id="icHouse"></span><span>Nhà của Rio</span></button>
     </div>
     <div class="tiles" id="tiles"></div>
   </section>
@@ -542,6 +593,14 @@ td:first-child{font-weight:800;white-space:nowrap}
       </div>
 
       <section class="panel felt light">
+        <h2>Nhà của Rio</h2>
+        <p class="muted">Chụp ảnh một phòng trong nhà rồi chạm lên ảnh để đánh dấu đồ vật. Rio sẽ chơi tìm đồ, ú òa và dọn nhà trên chính ảnh nhà mình. <b>Ảnh chỉ lưu trên máy này, không tải lên mạng.</b> Đổi máy hoặc xóa dữ liệu trình duyệt thì ảnh sẽ mất.</p>
+        <div class="hlist" id="hList"></div>
+        <div><button class="btn" id="hAdd"></button><input type="file" id="hFile" accept="image/*" hidden></div>
+        <p class="muted" id="hMsg" hidden></p>
+      </section>
+
+      <section class="panel felt light">
         <h2>Các thể loại game phù hợp với bé 2–3 tuổi</h2>
         <p class="muted">Ở tuổi này bé học bằng cách chạm, nghe và lặp lại. Thể loại tốt là loại có phản hồi ngay, không có thua, không đếm giờ và không cần biết chữ.</p>
         <div class="tbl-wrap">
@@ -564,6 +623,30 @@ td:first-child{font-weight:800;white-space:nowrap}
           <li><b>Nghỉ mắt thường xuyên</b>Cứ khoảng 5 phút, Cu Tí rủ bé nhìn xa, chớp mắt hoặc nhảy nhót 20 giây. Bé quen dần với việc rời mắt khỏi màn hình.</li>
           <li><b>Không quảng cáo, không mua hàng</b>Không có nút dẫn ra ngoài. Góc phụ huynh được khóa bằng một phép cộng.</li>
         </ul>
+      </section>
+    </div>
+  </section>
+
+  <section id="house" class="screen scroll" hidden>
+    <div class="page">
+      <header class="page-head">
+        <button class="btn-round" id="houseBack" aria-label="Lưu và về Góc phụ huynh"></button>
+        <div><p class="eyebrow">Góc phụ huynh</p><h1>Đánh dấu đồ vật</h1></div>
+      </header>
+      <section class="panel felt light">
+        <div class="row"><label class="lb" for="hName">Tên phòng</label><input class="field" id="hName" maxlength="24"></div>
+        <div class="chips" id="hNames"></div>
+        <p class="muted" id="eHelp">Chạm lên ảnh để đánh dấu một đồ vật Rio biết tên. Chạm vào dấu đã có để sửa. Nên có 3–6 đồ vật và một chỗ cất đồ.</p>
+        <div class="ebox-wrap"><div class="pbox ebox" id="ebox"><img id="eimg" alt="" draggable="false"><div class="pmarks" id="emarks"></div></div></div>
+        <div class="esel" id="esel" hidden>
+          <div class="row"><label class="lb" for="eLabel">Đồ vật này là</label><input class="field" id="eLabel" maxlength="24" placeholder="Ví dụ: cái gối"></div>
+          <div class="chips" id="eChips"></div>
+          <div class="row"><label class="lb" for="eSize">Vòng to hay nhỏ</label><input type="range" id="eSize" min="3" max="24" step="1"></div>
+          <div class="row"><span class="lb">Đây là chỗ cất đồ<span class="sub">Dùng cho trò Dọn nhà: Rio kéo đồ vật vào chỗ này. Mỗi ảnh có một chỗ.</span></span><button class="tog" id="eStore" role="switch" aria-label="Chỗ cất đồ"></button></div>
+          <div class="row"><button class="btn warn" id="eDel">Xóa dấu này</button><button class="btn" id="eDone">Xong dấu này</button></div>
+        </div>
+        <p class="muted" id="eMsg"></p>
+        <div class="row"><button class="btn warn" id="hDelete">Xóa ảnh phòng này</button><button class="btn save" id="hSave">Lưu</button></div>
       </section>
     </div>
   </section>
@@ -1117,6 +1200,84 @@ const tileArt={
   peek:wrap(`<g transform="translate(20 -2) scale(.68)"><path d="M33 46 L37 14 L58 30 Z" fill="#F4A24C" ${st(5)}/><path d="M87 46 L83 14 L62 30 Z" fill="#F4A24C" ${st(5)}/><circle cx="60" cy="54" r="30" fill="#F4A24C" ${st(5)}/>${eye(48,52,5)}${eye(72,52,5)}</g><g transform="translate(0 34) scale(.75)">${BUSH}</g>`),
   memory:wrap(`<g transform="rotate(-12 40 60)"><rect x="12" y="20" width="54" height="72" rx="10" fill="#7A62C9" ${st(4)}/><path d="${starPath(39,56,14,6)}" fill="#FFC325" ${st(2.5)}/></g><g transform="rotate(10 80 60)"><rect x="54" y="20" width="54" height="72" rx="10" fill="#FFFDF6" ${st(4)}/><g transform="translate(57 32) scale(.4)">${ART.chick}</g></g>`)
 };
+/* ================= Nhà của Rio: games built on the family's own photos ================= */
+/* Photos stay on this device (IndexedDB). Nothing is uploaded. */
+const HDB={p:null,
+  open(){return this.p||(this.p=new Promise((res,rej)=>{try{const r=indexedDB.open('cuti-home',1);r.onupgradeneeded=()=>r.result.createObjectStore('rooms',{keyPath:'id'});r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}}))},
+  async run(mode,fn){const db=await this.open();return new Promise((res,rej)=>{const t=db.transaction('rooms',mode);const q=fn(t.objectStore('rooms'));t.oncomplete=()=>res(q&&q.result);t.onerror=t.onabort=()=>rej(t.error)})},
+  all(){return this.run('readonly',s=>s.getAll()).then(r=>(r||[]).sort((a,b)=>(a.at||0)-(b.at||0)))},
+  put(o){return this.run('readwrite',s=>s.put(o))},
+  del(id){return this.run('readwrite',s=>s.delete(id))}};
+const HOUSE_LABELS=['cái gối','cái chăn','cái giường','con gấu bông','búp bê','cái ghế','cái bàn','cái tivi','cái tủ lạnh','cái cửa','cửa sổ','cái đèn','đồng hồ','quyển sách','đôi dép','cái bát','cái cốc','chậu cây','quả bóng','xe đồ chơi'];
+const STORE_LABELS=['hộp đồ chơi','cái giỏ','giá sách','cái tủ'];
+const ROOM_NAMES=['Phòng khách','Phòng ngủ','Bếp','Phòng tắm','Góc chơi'];
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const houseI=()=>`<path d="M14 50 L50 18 L86 50" fill="none" ${st(6)}/><path d="M22 46 V88 H78 V46 L50 22Z" fill="#FFB347" ${st(4)}/><rect x="42" y="60" width="18" height="28" rx="4" fill="#B8783F" ${st(3.5)}/><rect x="28" y="54" width="12" height="12" rx="2" fill="#BFE6F4" ${st(3)}/><rect x="62" y="54" width="12" height="12" rx="2" fill="#BFE6F4" ${st(3)}/>`;
+function fracOf(el,e){const r=el.getBoundingClientRect();return{x:Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)),y:Math.min(1,Math.max(0,(e.clientY-r.top)/r.height)),k:r.height/r.width}}
+function hitItem(it,p,pad=.035){return Math.hypot(p.x-it.x,(p.y-it.y)*p.k)<=it.r*1.2+pad}
+function markEl(it,cls){const m=document.createElement('div');m.className='pmark '+cls;m.style.setProperty('--x',it.x);m.style.setProperty('--y',it.y);m.style.setProperty('--r',it.r);m.dataset.id=it.id;return m}
+function cropTo(el,room,it,size){const bw=size/(2*it.r),bh=bw*room.h/room.w;Object.assign(el.style,{width:size+'px',height:size+'px',backgroundImage:`url("${room.img}")`,backgroundSize:`${bw}px ${bh}px`,backgroundPosition:`${-(it.x*bw-size/2)}px ${-(it.y*bh-size/2)}px`})}
+function loadPhoto(file){return new Promise((res,rej)=>{const url=URL.createObjectURL(file);const im=new Image();
+  im.onload=()=>{try{const M=1280,k=Math.min(1,M/Math.max(im.naturalWidth,im.naturalHeight));const w=Math.round(im.naturalWidth*k),h=Math.round(im.naturalHeight*k);
+    const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);URL.revokeObjectURL(url);res({img:c.toDataURL('image/jpeg',.82),w,h})}catch(e){rej(e)}};
+  im.onerror=()=>{URL.revokeObjectURL(url);rej(new Error('Không đọc được ảnh'))};im.src=url})}
+
+function gHouse(api){
+  const s=api.stage;s.innerHTML=`<div class="hwrap"><div class="harea"></div><div class="hdock"></div></div>`;
+  const area=s.querySelector('.harea'),dockEl=s.querySelector('.hdock');let rooms=[],room=null,box=null,marks=null,modeI=0;
+  const fit=()=>{if(box)fitAspect(box,area,room.w/room.h)};const ro=new ResizeObserver(fit);ro.observe(area);api.cleanup.push(()=>ro.disconnect());
+  const its=()=>room.items.filter(i=>!i.store&&i.label),storeIt=()=>room.items.find(i=>i.store);
+  const BIG=['giường','ghế','bàn','tivi','tủ','cửa','đèn','đồng hồ','cây','sofa','máy'];
+  const small=()=>its().filter(i=>!BIG.some(w=>i.label.includes(w)));
+  HDB.all().then(r=>{if(!api.alive)return;rooms=r.filter(x=>(x.items||[]).some(i=>!i.store&&i.label));
+    if(!rooms.length){area.innerHTML=`<div class="hempty felt light"><div class="ic">${wrap(houseI(),'0 0 100 100')}</div><h3>Chưa có ảnh nhà của Rio</h3><p>Bố mẹ vào Góc phụ huynh, mục “Nhà của Rio”, chụp ảnh một phòng rồi chạm để đánh dấu đồ vật nhé.</p></div>`;
+      api.say('Nhờ bố mẹ chụp ảnh nhà mình để chơi nhé!');return}
+    rooms.length===1?enter(rooms[0]):chooser()}).catch(()=>{area.innerHTML=`<div class="hempty felt light"><h3>Máy này chưa lưu được ảnh</h3><p>Trình duyệt đang chặn bộ nhớ. Bố mẹ thử mở bằng trình duyệt khác nhé.</p></div>`});
+  function chooser(){box=null;area.innerHTML=`<div class="hrooms">${rooms.map(r=>`<button class="hroom felt" data-id="${r.id}"><img src="${r.img}" alt=""><span>${esc(r.name)}</span></button>`).join('')}</div>`;
+    $$('.hroom',area).forEach(b=>b.addEventListener('click',()=>{A.tap();enter(rooms.find(r=>r.id===b.dataset.id))}));api.say('Rio muốn chơi ở phòng nào?')}
+  function enter(r){room=r;area.innerHTML=`<div class="pbox"><img src="${r.img}" alt="${esc(r.name)}" draggable="false"><div class="pmarks"></div></div>`;box=area.firstElementChild;marks=box.lastElementChild;fit();next()}
+  function next(){if(!api.alive)return;const ms=['find'];if(its().length>=2)ms.push('peek');if(storeIt()&&its().length)ms.push('tidy');
+    marks.innerHTML='';box.onpointerdown=null;dock(false);({find,peek,tidy})[ms[modeI++%ms.length]]()}
+  function dock(on){dockEl.classList.toggle('on',on);if(!on)dockEl.innerHTML='';requestAnimationFrame(fit)}
+  function ring(p){const d=document.createElement('div');d.className='pring';d.style.left=p.x*100+'%';d.style.top=p.y*100+'%';marks.appendChild(d);setTimeout(()=>d.remove(),700)}
+  function tag(m,t){m.innerHTML=`<span class="tag">${esc(cap(t))}</span>`;return m}
+
+  /* 1. find: "Where is the pillow?" — tap it on the photo, then touch the real one */
+  function find(){const list=shuffle(its()).slice(0,Math.min(S.age===2?2:3,its().length));let k=0,miss=0,t=null,hintM=null;
+    const ask=()=>{t=list[k];miss=0;api.say(`${cap(t.label)} đâu nhỉ? Rio chạm vào ${t.label} nhé!`)};
+    box.onpointerdown=e=>{e.preventDefault();if(!t)return;const p=fracOf(box,e);
+      if(hitItem(t,p)){const f=t;t=null;if(hintM)hintM.remove();marks.appendChild(tag(markEl(f,'found'),f.label));A.pop();FX.sparkle(e.clientX,e.clientY);api.say(`Đúng rồi! ${cap(f.label)} đây rồi!`);k++;
+        api.later(()=>{if(k<list.length)ask();else bridge(f)},2000);return}
+      const other=its().find(i=>i!==t&&hitItem(i,p,0));ring(p);A.soft();
+      if(other)api.say(`Đây là ${other.label}. Rio tìm ${t.label} nhé!`);
+      if(++miss>=2&&!hintM){hintM=markEl(t,'hint');marks.appendChild(hintM)}};
+    ask()}
+  function bridge(it){box.onpointerdown=null;const el=document.createElement('div');el.className='hbridge';
+    el.innerHTML=`<div class="hcrop"></div><p>Rio chạy đi chạm vào ${esc(it.label)} thật nhé!</p><button class="brk-done" disabled aria-label="Rio chạm rồi, chơi tiếp"><span class="brk-bip">${MASCOT.replace('<svg','<svg class="bipsvg"')}</span></button>`;
+    s.querySelector('.hwrap').appendChild(el);cropTo(el.querySelector('.hcrop'),room,it,Math.min(200,innerWidth*.34));
+    api.say(`Giờ Rio chạy đi chạm vào ${it.label} thật nhé! Chạm xong quay lại chạm Cu Tí.`);
+    const b=el.querySelector('button');api.later(()=>{b.disabled=false;hint(b)},5000);
+    b.addEventListener('click',()=>{if(b.disabled)return;A.tap();el.remove();api.win(next)})}
+
+  /* 2. peek: Cu Tí hides behind one of the marked things */
+  function peek(){const list=shuffle(its()).slice(0,Math.min(S.age===2?3:4,its().length)),at=pick(list);
+    list.forEach(it=>{const m=markEl(it,'spot');m.innerHTML='<span class="q">?</span>';marks.appendChild(m)});
+    api.say('Cu Tí trốn trong nhà Rio rồi! Rio tìm Cu Tí nhé!');
+    box.onpointerdown=e=>{e.preventDefault();const p=fracOf(box,e);const it=list.find(i=>hitItem(i,p));if(!it)return;const m=marks.querySelector(`[data-id="${it.id}"]`);if(!m||m.classList.contains('open'))return;m.classList.add('open');
+      if(it===at){box.onpointerdown=null;m.innerHTML=`<span class="cuti">${MASCOT.replace('<svg','<svg class="bipsvg"')}</span>`;A.boing();FX.sparkle(e.clientX,e.clientY);api.say(`Ú òa! Cu Tí trốn ở ${it.label}!`);api.later(()=>api.win(next),2600)}
+      else{A.rustle();m.innerHTML='';api.say(`Không có ở ${it.label}. Tìm chỗ khác nào!`)}}}
+
+  /* 3. tidy: drag things into the storage spot marked on the photo */
+  function tidy(){const stI=storeIt(),list=shuffle(its()).slice(0,Math.min(3,its().length));let done=0;
+    const sm=tag(markEl(stI,'store'),stI.label);marks.appendChild(sm);dock(true);
+    const size=Math.max(70,Math.min(110,innerWidth*.2));
+    list.forEach(it=>{const c=document.createElement('button');c.className='hchip';c.setAttribute('aria-label',it.label);cropTo(c,room,it,size);dockEl.appendChild(c);
+      dragify(c,{onTap:()=>api.say(cap(it.label)),onDrop:(x,y)=>{if(!hitTest([sm],x,y,50))return false;c.classList.add('gone');A.plop();FX.sparkle(x,y);restart(sm,'bump',500);done++;
+        api.say(`${cap(it.label)} vào ${stI.label} rồi!`);if(done===list.length)api.later(()=>api.win(next),1800);return true}})});
+    api.say(`Rio dọn nhà nào! Kéo đồ vào ${stI.label} nhé!`)}
+}
+
 const GAMES=[
   {id:'bubbles',name:'Bong bóng',sk:'Nhân – quả',bg:'#7CC7E3',intro:'Chạm vào bong bóng nào!',start:gBubbles},
   {id:'shapes',name:'Hộp hình khối',sk:'Hình khối',bg:'#FFB347',intro:'Bé kéo từng hình vào đúng lỗ nhé!',start:gShapes},
@@ -1126,7 +1287,8 @@ const GAMES=[
   {id:'xylo',name:'Đàn gõ',sk:'Âm nhạc',bg:'#A99AF0',intro:'Bé gõ đàn nào!',start:gXylo},
   {id:'paint',name:'Tô màu',sk:'Sáng tạo',bg:'#5CC8B8',intro:'',start:gPaint},
   {id:'peek',name:'Ú òa',sk:'Tìm kiếm',bg:'#B5D86A',intro:'Ai đang trốn đây? Bé chạm vào để tìm nhé!',start:gPeek},
-  {id:'memory',name:'Lật thẻ',sk:'Trí nhớ',bg:'#F49AC1',intro:'Lật thẻ tìm hai con giống nhau nhé!',start:gMemory}
+  {id:'memory',name:'Lật thẻ',sk:'Trí nhớ',bg:'#F49AC1',intro:'Lật thẻ tìm hai con giống nhau nhé!',start:gMemory},
+  {id:'house',name:'Nhà của Rio',sk:'Ảnh nhà mình',bg:'#F7C59F',intro:'',start:gHouse,hidden:true}
 ];
 const GENRES=[
   ['Nhân – quả','Chạm là có phản hồi ngay. Bé hiểu hành động của mình tạo ra kết quả, luyện phối hợp tay – mắt.','2+','yes','Bong bóng'],
@@ -1267,7 +1429,7 @@ function renderOutbar(){const due=!S.plant||(S.plant.w!==today()&&plantStage(S.p
   $('#icPlant').innerHTML=wrap(plantI(S.plant?plantStage(S.plant.d||0):0),'0 0 100 100')}
 
 /* home */
-function renderHome(){renderOutbar();$('#tiles').innerHTML=GAMES.map((g,i)=>`<button class="tile felt" data-id="${g.id}" style="--bgc:${g.bg};--rot:${[-1.6,1.2,-.8,1.4,-1.2,.9,-1.4,1,-.6][i]}deg" aria-label="${g.name}"><span class="art">${tileArt[g.id]}</span><span class="nm">${g.name}</span><span class="sk">${g.sk}</span></button>`).join('');
+function renderHome(){renderOutbar();$('#tiles').innerHTML=GAMES.filter(g=>!g.hidden).map((g,i)=>`<button class="tile felt" data-id="${g.id}" style="--bgc:${g.bg};--rot:${[-1.6,1.2,-.8,1.4,-1.2,.9,-1.4,1,-.6][i]}deg" aria-label="${g.name}"><span class="art">${tileArt[g.id]}</span><span class="nm">${g.name}</span><span class="sk">${g.sk}</span></button>`).join('');
   $$('.tile').forEach(t=>t.addEventListener('click',()=>{A.tap();openGame(t.dataset.id)}));greetText()}
 const HELLO='Chào Rio! Chơi game nhớ giữ sức khỏe nha Rio!';
 function greetText(){$('#greet').textContent=HELLO}
@@ -1294,11 +1456,54 @@ function renderParent(){
   $('#togBrk').setAttribute('aria-checked',S.brk);$('#togSound').setAttribute('aria-checked',S.sound);$('#togVoice').setAttribute('aria-checked',S.voice);$('#togMusic').setAttribute('aria-checked',S.music);
   $('#statOut').textContent=S.outN||0;$('#statPlant').textContent=S.plant?`${S.plant.d||0} ngày tưới`:'Chưa trồng';
   $('#statTime').textContent=Math.floor(S.played/60)+' phút';$('#statStick').textContent=Object.values(S.stickers).reduce((a,b)=>a+b,0);updVoice();
-  $('#genreRows').innerHTML=GENRES.map(([n,d,a,k,w])=>`<tr><td>${n}</td><td>${d}</td><td>${a}</td><td><span class="pill ${k}">${w}</span></td></tr>`).join('')}
+  $('#genreRows').innerHTML=GENRES.map(([n,d,a,k,w])=>`<tr><td>${n}</td><td>${d}</td><td>${a}</td><td><span class="pill ${k}">${w}</span></td></tr>`).join('');renderHouseList()}
 $$('#segAge button').forEach(b=>b.addEventListener('click',()=>{S.age=+b.dataset.v;save();renderParent()}));
 $$('#segLimit button').forEach(b=>b.addEventListener('click',()=>{S.limit=+b.dataset.v;save();renderParent()}));
 [['#togSound','sound'],['#togVoice','voice'],['#togMusic','music'],['#togBrk','brk']].forEach(([sel,k])=>$(sel).addEventListener('click',()=>{S[k]=!S[k];save();renderParent();if(k==='sound'&&S.sound){A.init();A.tap()}if(k==='voice'&&S.voice)V.say('Chào bé!')}));
 let resetArm=0;$('#btnReset').addEventListener('click',e=>{const b=e.currentTarget;if(Date.now()-resetArm<4000){S.stickers={};save();renderParent();b.textContent='Đã xóa';resetArm=0;setTimeout(()=>b.textContent='Làm lại khu vườn',1800)}else{resetArm=Date.now();b.textContent='Bấm lần nữa để xóa';setTimeout(()=>{if(Date.now()-resetArm>=3900)b.textContent='Làm lại khu vườn'},4000)}});
+/* Nhà của Rio: parent list + photo editor */
+function renderHouseList(){const el=$('#hList');HDB.all().then(rs=>{el.innerHTML=rs.length?rs.map(r=>{const n=r.items.filter(i=>!i.store&&i.label).length,hasStore=r.items.some(i=>i.store);
+    return `<div class="hrow"><img src="${r.img}" alt=""><div><b>${esc(r.name)}</b><span>${n} đồ vật${hasStore?' · có chỗ cất đồ':''}</span></div><button class="btn" data-id="${r.id}">Sửa</button></div>`}).join(''):'<p class="muted">Chưa có ảnh nào.</p>';
+    $$('.hrow .btn',el).forEach(b=>b.addEventListener('click',()=>{const r=rs.find(x=>x.id===b.dataset.id);if(r)openEditor(r)}))}).catch(()=>{el.innerHTML='<p class="muted">Trình duyệt này không cho lưu ảnh. Thử mở bằng Chrome hoặc Safari nhé.</p>'})}
+$('#hAdd').innerHTML='<span>+ Chụp hoặc chọn ảnh phòng</span>';
+$('#hAdd').addEventListener('click',()=>$('#hFile').click());
+$('#hFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];e.target.value='';if(!f)return;const msg=$('#hMsg');msg.hidden=false;msg.textContent='Đang xử lý ảnh…';
+  try{const p=await loadPhoto(f);msg.hidden=true;try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(_){}
+    const used=(await HDB.all().catch(()=>[])).map(r=>r.name);openEditor({id:uid(),name:ROOM_NAMES.find(n=>!used.includes(n))||'Phòng của Rio',img:p.img,w:p.w,h:p.h,items:[],at:Date.now()},true)}
+  catch(err){msg.textContent='Không mở được ảnh này. Bố mẹ thử ảnh khác nhé.'}});
+
+let ED=null;
+function openEditor(room,isNew){ED={room:{...room,items:room.items.map(i=>({...i}))},sel:null,isNew:!!isNew};
+  $('#eimg').src=room.img;$('#ebox').style.setProperty('--ar',room.w/room.h);$('#hName').value=room.name;$('#eMsg').textContent='';$('#hDelete').textContent=isNew?'Bỏ ảnh này':'Xóa ảnh phòng này';
+  $('#hNames').innerHTML=ROOM_NAMES.map(n=>`<button class="chip" data-v="${n}">${n}</button>`).join('');
+  $$('#hNames .chip').forEach(c=>c.addEventListener('click',()=>{$('#hName').value=c.dataset.v;ED.room.name=c.dataset.v;markChips()}));
+  markChips();renderEMarks();selectMark(null);show('house');$('#house').scrollTop=0}
+function markChips(){$$('#hNames .chip').forEach(c=>c.classList.toggle('on',c.dataset.v===$('#hName').value.trim()))}
+$('#hName').addEventListener('input',()=>{if(ED){ED.room.name=$('#hName').value.trim();markChips()}});
+const selItem=()=>ED&&ED.room.items.find(i=>i.id===ED.sel);
+function renderEMarks(){const box=$('#emarks');box.innerHTML='';ED.room.items.forEach(it=>{const m=markEl(it,(it.store?'store ':'')+(it.id===ED.sel?'sel':''));
+  m.innerHTML=`<span class="tag">${esc(it.label?cap(it.label):'?')}</span>`;m.addEventListener('click',e=>{e.stopPropagation();A.tap();selectMark(it.id)});box.appendChild(m)})}
+function selectMark(id){ED.sel=id;const it=selItem();$('#esel').hidden=!it;$('#eMsg').textContent='';renderEMarks();if(!it)return;
+  $('#eLabel').value=it.label;$('#eSize').value=Math.round(it.r*100);$('#eStore').setAttribute('aria-checked',!!it.store);
+  const opts=it.store?STORE_LABELS:HOUSE_LABELS;$('#eChips').innerHTML=opts.map(l=>`<button class="chip ${l===it.label?'on':''}" data-v="${l}">${cap(l)}</button>`).join('');
+  $$('#eChips .chip').forEach(c=>c.addEventListener('click',()=>{const t=selItem();if(!t)return;t.label=c.dataset.v;$('#eLabel').value=t.label;A.tap();selectMark(t.id)}));
+  requestAnimationFrame(()=>$('#esel').scrollIntoView({block:'nearest',behavior:'smooth'}))}
+$('#ebox').addEventListener('click',e=>{if(!ED||e.target.closest('.pmark'))return;const p=fracOf($('#ebox'),e);const it={id:uid(),label:'',x:p.x,y:p.y,r:.08,store:false};ED.room.items.push(it);A.tap();selectMark(it.id)});
+$('#eLabel').addEventListener('input',()=>{const t=selItem();if(!t)return;t.label=$('#eLabel').value.trim().toLowerCase();renderEMarks();$$('#eChips .chip').forEach(c=>c.classList.toggle('on',c.dataset.v===t.label))});
+$('#eSize').addEventListener('input',()=>{const t=selItem();if(!t)return;t.r=+$('#eSize').value/100;renderEMarks()});
+$('#eStore').addEventListener('click',()=>{const t=selItem();if(!t)return;const on=!t.store;ED.room.items.forEach(i=>i.store=false);t.store=on;
+  if(on&&(!t.label||HOUSE_LABELS.includes(t.label)))t.label=STORE_LABELS[0];if(!on&&STORE_LABELS.includes(t.label))t.label='';selectMark(t.id)});
+$('#eDel').addEventListener('click',()=>{if(!ED)return;ED.room.items=ED.room.items.filter(i=>i.id!==ED.sel);selectMark(null)});
+$('#eDone').addEventListener('click',()=>{if(!ED)return;const t=selItem();if(t&&!t.label){$('#eMsg').textContent='Dấu này chưa có tên. Chọn hoặc gõ tên đồ vật nhé.';return}$('#eMsg').textContent='';selectMark(null)});
+async function saveEditor(){if(!ED)return;const r=ED.room;r.name=($('#hName').value.trim()||'Phòng của Rio').slice(0,24);r.items=r.items.filter(i=>i.label);
+  if(!r.items.length&&ED.isNew){ED=null;renderParent();show('parent');return}
+  try{await HDB.put(r);ED=null;renderParent();show('parent')}catch(e){$('#eMsg').textContent='Không lưu được: bộ nhớ của trình duyệt có thể đã đầy.'}}
+$('#hSave').addEventListener('click',()=>{A.tap();saveEditor()});
+$('#houseBack').addEventListener('click',()=>{A.tap();saveEditor()});
+let hDelArm=0;$('#hDelete').addEventListener('click',async()=>{if(!ED)return;if(ED.isNew){ED=null;renderParent();show('parent');return}
+  if(Date.now()-hDelArm>4000){hDelArm=Date.now();$('#hDelete').textContent='Bấm lần nữa để xóa';return}
+  try{await HDB.del(ED.room.id)}catch(e){}ED=null;hDelArm=0;renderParent();show('parent')});
+
 $('#btnFull').innerHTML=ICON.expand+'<span>Bật</span>';
 $('#btnFull').addEventListener('click',()=>{const d=document;try{if(d.fullscreenElement)d.exitFullscreen();else{const r=d.documentElement.requestFullscreen&&d.documentElement.requestFullscreen();r&&r.catch&&r.catch(()=>{$('#btnFull span').textContent='Máy không hỗ trợ'})}}catch(e){}});
 document.addEventListener('fullscreenchange',()=>{const sp=$('#btnFull span');if(sp)sp.textContent=document.fullscreenElement?'Tắt':'Bật'});
@@ -1319,6 +1524,8 @@ $('#icOut').innerHTML=wrap(leafI(),'0 0 100 100');$('#outClose').innerHTML=ICON.
 $('#restOut').innerHTML=wrap(leafI(),'0 0 100 100')+'<span>Nhận nhiệm vụ ngoài trời</span>';
 $('#btnOut').addEventListener('click',()=>{A.tap();startMission()});
 $('#btnPlant').addEventListener('click',()=>{A.tap();openPlant()});
+$('#icHouse').innerHTML=wrap(houseI(),'0 0 100 100');$('#houseBack').innerHTML=ICON.left||ICON.home;
+$('#btnHouse').addEventListener('click',()=>{A.tap();openGame('house')});
 $('#mascot').addEventListener('click',()=>{if(lastLine)V.say(lastLine)});
 $('#btnStart').addEventListener('click',()=>{A.init();V.load();wake(true);
   renderHome();show('home');if(overLimit()){showRest();return}A.fanfare();setTimeout(()=>V.say(HELLO),350)});
