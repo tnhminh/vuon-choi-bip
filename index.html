@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
-<title>Vườn Chơi Bíp</title>
+<title>Vườn Chơi Rio</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -420,7 +420,7 @@ td:first-child{font-weight:800;white-space:nowrap}
   <section id="splash" class="screen splash">
     <div class="splash-inner">
       <div class="bip-hero" id="heroBip"></div>
-      <h1 class="logo" id="logo" aria-label="Vườn Chơi Bíp"></h1>
+      <h1 class="logo" id="logo" aria-label="Vườn Chơi Rio"></h1>
       <p class="tag">Chín trò chơi nhỏ cho bé 2–3 tuổi</p>
       <button id="btnStart" class="big-play" aria-label="Bắt đầu chơi"></button>
       <p class="hint" id="splashHint"></p>
@@ -430,7 +430,7 @@ td:first-child{font-weight:800;white-space:nowrap}
   <section id="home" class="screen" hidden>
     <header class="home-head">
       <div class="mini-bip" id="homeBip"></div>
-      <div class="titles"><h1>Vườn Chơi Bíp</h1><p id="greet">Chào bé! Hôm nay mình chơi gì nhỉ?</p></div>
+      <div class="titles"><h1>Vườn Chơi Rio</h1><p id="greet">Chào Rio! Chơi game nhớ giữ sức khỏe nha Rio!</p></div>
       <div class="head-btns">
         <button class="btn-round" id="btnAlbum" aria-label="Khu vườn của bé"></button>
         <button class="btn-round small" id="btnParent" aria-label="Góc phụ huynh"></button>
@@ -444,7 +444,7 @@ td:first-child{font-weight:800;white-space:nowrap}
       <button class="btn-round" id="btnHome" aria-label="Về trang chính"></button>
       <div class="gtitle felt"><span class="dot" id="gdot"></span><h2 id="gname">Trò chơi</h2><span class="stars" id="stars"></span></div>
       <div class="spacer"></div>
-      <button id="mascot" aria-label="Nghe lại lời Bíp"><span class="bipsvg" id="gameBip"></span><span class="saybubble" id="say"></span></button>
+      <button id="mascot" aria-label="Nghe lại lời Rio"><span class="bipsvg" id="gameBip"></span><span class="saybubble" id="say"></span></button>
     </header>
     <div class="stage" id="stage"></div>
   </section>
@@ -453,7 +453,7 @@ td:first-child{font-weight:800;white-space:nowrap}
     <div class="page">
       <header class="page-head">
         <button class="btn-round" data-go="home" aria-label="Về trang chính"></button>
-        <div><p class="eyebrow">Khu vườn của Bíp</p><h1>Vườn của bé</h1></div>
+        <div><p class="eyebrow">Khu vườn của Rio</p><h1>Vườn của bé</h1></div>
       </header>
       <div class="album-board felt">
         <div class="album-meta"><span class="big" id="albumCount">0 / 16</span><div class="meter"><b id="albumMeter" style="--p:0%"></b></div></div>
@@ -488,10 +488,8 @@ td:first-child{font-weight:800;white-space:nowrap}
           <div>
             <div class="row"><span class="lb">Độ tuổi<span class="sub">3 tuổi: thêm hình, thêm màu, thêm thẻ và phải gõ đúng nốt.</span></span>
               <span class="seg" id="segAge"><button data-v="2">2 tuổi</button><button data-v="3">3 tuổi</button></span></div>
-            <div class="row"><label for="kidName">Tên bé<span class="sub">Bíp sẽ gọi tên bé khi chào.</span></label>
-              <input class="field" id="kidName" maxlength="16" placeholder="Ví dụ: Na" autocomplete="off"></div>
             <div class="row"><span class="lb">Âm thanh</span><button class="tog" id="togSound" role="switch" aria-label="Âm thanh"></button></div>
-            <div class="row"><span class="lb">Giọng Bíp đọc<span class="sub" id="voiceStatus">Đang kiểm tra giọng đọc…</span></span><button class="tog" id="togVoice" role="switch" aria-label="Giọng đọc"></button></div>
+            <div class="row"><span class="lb">Giọng Rio đọc<span class="sub" id="voiceStatus">Đang kiểm tra giọng đọc…</span></span><button class="tog" id="togVoice" role="switch" aria-label="Giọng đọc"></button></div>
             <div class="row"><span class="lb">Nhạc nền<span class="sub">Chỉ phát ở màn hình chính và khu vườn.</span></span><button class="tog" id="togMusic" role="switch" aria-label="Nhạc nền"></button></div>
             <div class="row"><span class="lb">Toàn màn hình<span class="sub">Giúp bé không bấm nhầm ra ngoài.</span></span><button class="btn" id="btnFull"></button></div>
           </div>
@@ -502,9 +500,9 @@ td:first-child{font-weight:800;white-space:nowrap}
             <div><b id="statTime">0 phút</b><span>đã chơi hôm nay</span></div>
             <div><b id="statStick">0</b><span>nhãn dán đã nhận</span></div>
           </div>
-          <div class="row"><span class="lb">Giới hạn mỗi ngày<span class="sub">Tính tổng cả ngày, tải lại trang không đặt lại giờ. Hết giờ, Bíp đi ngủ. Người lớn có thể cho thêm 10 phút.</span></span>
+          <div class="row"><span class="lb">Giới hạn mỗi ngày<span class="sub">Tính tổng cả ngày, tải lại trang không đặt lại giờ. Hết giờ, Rio đi ngủ. Người lớn có thể cho thêm 10 phút.</span></span>
             <span class="seg" id="segLimit"><button data-v="10">10'</button><button data-v="15">15'</button><button data-v="20">20'</button><button data-v="30">30'</button><button data-v="0">Tắt</button></span></div>
-          <div class="row"><span class="lb">Nghỉ mắt mỗi 5 phút<span class="sub">Bíp rủ bé nhìn xa, chớp mắt hoặc vận động khoảng 20 giây rồi chơi tiếp.</span></span><button class="tog" id="togBrk" role="switch" aria-label="Nghỉ mắt mỗi 5 phút"></button></div>
+          <div class="row"><span class="lb">Nghỉ mắt mỗi 5 phút<span class="sub">Rio rủ bé nhìn xa, chớp mắt hoặc vận động khoảng 20 giây rồi chơi tiếp.</span></span><button class="tog" id="togBrk" role="switch" aria-label="Nghỉ mắt mỗi 5 phút"></button></div>
           <p class="muted">WHO khuyến nghị trẻ 2–4 tuổi ngồi trước màn hình không quá 1 giờ mỗi ngày, càng ít càng tốt. Chơi cùng bé và gọi tên những gì bé thấy sẽ giúp bé học nhiều hơn.</p>
           <div class="row"><span class="lb">Làm lại khu vườn<span class="sub">Đưa khu vườn về trống, bé mời các bạn về lại từ đầu.</span></span><button class="btn warn" id="btnReset">Làm lại khu vườn</button></div>
         </section>
@@ -515,7 +513,7 @@ td:first-child{font-weight:800;white-space:nowrap}
         <p class="muted">Ở tuổi này bé học bằng cách chạm, nghe và lặp lại. Thể loại tốt là loại có phản hồi ngay, không có thua, không đếm giờ và không cần biết chữ.</p>
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Thể loại</th><th>Bé học được gì</th><th>Tuổi</th><th>Trong Vườn Chơi Bíp</th></tr></thead>
+            <thead><tr><th>Thể loại</th><th>Bé học được gì</th><th>Tuổi</th><th>Trong Vườn Chơi Rio</th></tr></thead>
             <tbody id="genreRows"></tbody>
           </table>
         </div>
@@ -526,10 +524,10 @@ td:first-child{font-weight:800;white-space:nowrap}
         <ul class="rules">
           <li><b>Không có thua</b>Bé làm sai thì đồ vật nhẹ nhàng quay về chỗ cũ. Không có tiếng còi báo sai, không mất mạng.</li>
           <li><b>Không đếm giờ</b>Bé chơi theo nhịp của mình. Không có đồng hồ đếm ngược.</li>
-          <li><b>Không cần biết chữ</b>Bíp đọc lời nhắc. Chữ trên màn hình chỉ để bố mẹ đọc cùng.</li>
+          <li><b>Không cần biết chữ</b>Rio đọc lời nhắc. Chữ trên màn hình chỉ để bố mẹ đọc cùng.</li>
           <li><b>Nút to, dễ chạm</b>Mọi thứ bé chạm vào đều lớn hơn 2 cm. Kéo thả có vùng hút rộng.</li>
           <li><b>Lượt chơi ngắn</b>Mỗi lượt chỉ 1–2 phút rồi một bạn mới về vườn của bé, đủ để bé thấy mình làm được.</li>
-          <li><b>Nghỉ mắt thường xuyên</b>Cứ khoảng 5 phút, Bíp rủ bé nhìn xa, chớp mắt hoặc nhảy nhót 20 giây. Bé quen dần với việc rời mắt khỏi màn hình.</li>
+          <li><b>Nghỉ mắt thường xuyên</b>Cứ khoảng 5 phút, Rio rủ bé nhìn xa, chớp mắt hoặc nhảy nhót 20 giây. Bé quen dần với việc rời mắt khỏi màn hình.</li>
           <li><b>Không quảng cáo, không mua hàng</b>Không có nút dẫn ra ngoài. Góc phụ huynh được khóa bằng một phép cộng.</li>
         </ul>
       </section>
@@ -558,8 +556,8 @@ td:first-child{font-weight:800;white-space:nowrap}
   <div id="rest" class="overlay" hidden>
     <div class="nightstars"></div>
     <div class="moon sleep" id="restBip"><span class="zz">z z</span></div>
-    <h2>Bíp buồn ngủ rồi</h2>
-    <p>Hết giờ chơi hôm nay. Bé cất máy, uống nước và đi chơi với bố mẹ nhé! Mai Bíp chờ bé ở khu vườn.</p>
+    <h2>Rio buồn ngủ rồi</h2>
+    <p>Hết giờ chơi hôm nay. Bé cất máy, uống nước và đi chơi với bố mẹ nhé! Mai Rio chờ bé ở khu vườn.</p>
     <button class="btn" id="restContinue"></button>
   </div>
 
@@ -823,7 +821,7 @@ const V={voice:null,supported:'speechSynthesis' in window,
 let lastLine='',capT=0;
 function caption(t){lastLine=t;const b=$('#say');if($('#game').hidden)return;b.textContent=t;b.classList.add('on');const m=$('#mascot');restart(m,'talk',1600);clearTimeout(capT);capT=setTimeout(()=>b.classList.remove('on'),Math.max(2600,t.length*85))}
 function updVoice(){const el=$('#voiceStatus');if(!el)return;
-  el.textContent=!V.supported?'Trình duyệt này không có giọng đọc. Lời nhắc hiện bằng chữ để bố mẹ đọc cho bé.':V.voice?`Đang dùng giọng tiếng Việt: ${V.voice.name}.`:'Máy này chưa có giọng tiếng Việt, nên Bíp chỉ hiện lời nhắc bằng chữ. Bé vẫn nghe đủ hiệu ứng âm thanh.'}
+  el.textContent=!V.supported?'Trình duyệt này không có giọng đọc. Lời nhắc hiện bằng chữ để bố mẹ đọc cho bé.':V.voice?`Đang dùng giọng tiếng Việt: ${V.voice.name}.`:'Máy này chưa có giọng tiếng Việt, nên Rio chỉ hiện lời nhắc bằng chữ. Bé vẫn nghe đủ hiệu ứng âm thanh.'}
 
 /* ================= confetti / sparkles ================= */
 const FX={p:[],on:false,
@@ -1117,7 +1115,7 @@ setInterval(()=>{syncDay();
   if(overLimit()){saveDay();showRest();return}
   if(breakDue()&&S.round>=BREAK_EVERY+BREAK_GRACE)showBreak()},1000);
 function showRest(){closeGame();show('home');$('#brk').hidden=true;clearInterval(brkT);$('#rest').hidden=false;A.music(false);
-  V.say(`Hết giờ chơi hôm nay rồi. Bíp đi ngủ đây. Bé đi chơi với bố mẹ nhé!`)}
+  V.say(`Hết giờ chơi hôm nay rồi. Rio đi ngủ đây. Bé đi chơi với bố mẹ nhé!`)}
 $('#restContinue').addEventListener('click',()=>gate(()=>{S.extra+=10;saveDay();$('#rest').hidden=true;show('home');V.say('Bé được chơi thêm một chút nhé!')}));
 
 const MOVES=[
@@ -1126,7 +1124,7 @@ const MOVES=[
   {t:'Nhảy như ếch',d:'Bé ngồi xuống rồi bật nhảy như chú ếch. Ộp, ộp, ộp!',art:()=>wrap(ART.frog)},
   {t:'Cao như cây',d:'Bé giơ hai tay lên thật cao, vươn người như cái cây nào!',art:()=>wrap(appleI(),'0 0 100 100')},
   {t:'Nhắm mắt nghe',d:'Bé nhắm mắt lại, nghe xem trong nhà có tiếng gì nhé!',art:()=>wrap(ART.cat)},
-  {t:'Vỗ tay cùng Bíp',d:'Bé vỗ tay cùng Bíp nào. Một, hai, ba!',art:()=>wrap(starI('#FFC325'),'0 0 100 100')}
+  {t:'Vỗ tay cùng Rio',d:'Bé vỗ tay cùng Rio nào. Một, hai, ba!',art:()=>wrap(starI('#FFC325'),'0 0 100 100')}
 ];
 let brkT=0,brkGame=null,brkLast=-1;
 function showBreak(){if(!$('#brk').hidden)return;brkGame=cur&&cur.id;closeGame();
@@ -1136,16 +1134,17 @@ function showBreak(){if(!$('#brk').hidden)return;brkGame=cur&&cur.id;closeGame()
   A.soft();V.say(`Bé nghỉ mắt một chút nhé! ${m.d}`);
   let n=0;clearInterval(brkT);brkT=setInterval(()=>{if(document.hidden)return;n++;$('#brkProg').style.setProperty('--p',Math.min(1,n/BREAK_LEN));
     if(n===Math.round(BREAK_LEN/2))V.say(m.d);
-    if(n>=BREAK_LEN){clearInterval(brkT);done.disabled=false;hint(done);V.say('Giỏi quá! Bé chạm vào Bíp để chơi tiếp nhé!')}},1000)}
+    if(n>=BREAK_LEN){clearInterval(brkT);done.disabled=false;hint(done);V.say('Giỏi quá! Bé chạm vào Rio để chơi tiếp nhé!')}},1000)}
 $('#brkDone').addEventListener('click',()=>{if($('#brkDone').disabled)return;A.tap();clearInterval(brkT);S.round=0;saveDay();$('#brk').hidden=true;
   if(brkGame&&!overLimit())openGame(brkGame);else show('home')});
 
 /* home */
 function renderHome(){$('#tiles').innerHTML=GAMES.map((g,i)=>`<button class="tile felt" data-id="${g.id}" style="--bgc:${g.bg};--rot:${[-1.6,1.2,-.8,1.4,-1.2,.9,-1.4,1,-.6][i]}deg" aria-label="${g.name}"><span class="art">${tileArt[g.id]}</span><span class="nm">${g.name}</span><span class="sk">${g.sk}</span></button>`).join('');
   $$('.tile').forEach(t=>t.addEventListener('click',()=>{A.tap();openGame(t.dataset.id)}));greetText()}
-function greetText(){$('#greet').textContent=S.name?`Chào bé ${S.name}! Hôm nay mình chơi gì nhỉ?`:'Chào bé! Hôm nay mình chơi gì nhỉ?'}
+const HELLO='Chào Rio! Chơi game nhớ giữ sức khỏe nha Rio!';
+function greetText(){$('#greet').textContent=HELLO}
 
-/* garden (replaces the sticker grid): every sticker has its own spot in Bíp's garden */
+/* garden (replaces the sticker grid): every sticker has its own spot in Rio's garden */
 const SPOTS={sun:[90,13,11],star:[44,11,7],balloon:[67,19,9],bfly:[55,33,8],apple:[13,34,7],orange:[26,28,7],
   cow:[44,52,13],sheep:[63,50,11],duck:[93,69,8],frog:[70,83,8],fish:[84,86,9],
   dog:[17,80,11],pig:[31,81,11],cat:[48,89,9],chick:[61,89,7],flower:[6,62,7]};
@@ -1161,12 +1160,11 @@ function renderAlbum(){const got=STICKERS.filter(s=>S.stickers[s.id]).length;$('
 function renderParent(){
   $$('#segAge button').forEach(b=>b.classList.toggle('on',+b.dataset.v===S.age));$$('#segLimit button').forEach(b=>b.classList.toggle('on',+b.dataset.v===S.limit));
   $('#togBrk').setAttribute('aria-checked',S.brk);$('#togSound').setAttribute('aria-checked',S.sound);$('#togVoice').setAttribute('aria-checked',S.voice);$('#togMusic').setAttribute('aria-checked',S.music);
-  $('#kidName').value=S.name;$('#statTime').textContent=Math.floor(S.played/60)+' phút';$('#statStick').textContent=Object.values(S.stickers).reduce((a,b)=>a+b,0);updVoice();
+  $('#statTime').textContent=Math.floor(S.played/60)+' phút';$('#statStick').textContent=Object.values(S.stickers).reduce((a,b)=>a+b,0);updVoice();
   $('#genreRows').innerHTML=GENRES.map(([n,d,a,k,w])=>`<tr><td>${n}</td><td>${d}</td><td>${a}</td><td><span class="pill ${k}">${w}</span></td></tr>`).join('')}
 $$('#segAge button').forEach(b=>b.addEventListener('click',()=>{S.age=+b.dataset.v;save();renderParent()}));
 $$('#segLimit button').forEach(b=>b.addEventListener('click',()=>{S.limit=+b.dataset.v;save();renderParent()}));
 [['#togSound','sound'],['#togVoice','voice'],['#togMusic','music'],['#togBrk','brk']].forEach(([sel,k])=>$(sel).addEventListener('click',()=>{S[k]=!S[k];save();renderParent();if(k==='sound'&&S.sound){A.init();A.tap()}if(k==='voice'&&S.voice)V.say('Chào bé!')}));
-$('#kidName').addEventListener('input',e=>{S.name=e.target.value.trim().slice(0,16);save();greetText()});
 let resetArm=0;$('#btnReset').addEventListener('click',e=>{const b=e.currentTarget;if(Date.now()-resetArm<4000){S.stickers={};save();renderParent();b.textContent='Đã xóa';resetArm=0;setTimeout(()=>b.textContent='Làm lại khu vườn',1800)}else{resetArm=Date.now();b.textContent='Bấm lần nữa để xóa';setTimeout(()=>{if(Date.now()-resetArm>=3900)b.textContent='Làm lại khu vườn'},4000)}});
 $('#btnFull').innerHTML=ICON.expand+'<span>Bật</span>';
 $('#btnFull').addEventListener('click',()=>{const d=document;try{if(d.fullscreenElement)d.exitFullscreen();else{const r=d.documentElement.requestFullscreen&&d.documentElement.requestFullscreen();r&&r.catch&&r.catch(()=>{$('#btnFull span').textContent='Máy không hỗ trợ'})}}catch(e){}});
@@ -1176,9 +1174,9 @@ document.addEventListener('fullscreenchange',()=>{const sp=$('#btnFull span');if
 $('#heroBip').innerHTML=MASCOT;$('#homeBip').innerHTML=MASCOT;$('#gameBip').innerHTML=MASCOT;$('#brkBip').innerHTML=MASCOT;$('#restBip').insertAdjacentHTML('afterbegin',MASCOT.replace('<svg','<svg class="bipsvg"'));
 $('#heroBip').firstElementChild.classList.add('bipsvg');$('#homeBip').firstElementChild.classList.add('bipsvg');$('#gameBip').firstElementChild.classList.add('bipsvg');
 $('#sunball').innerHTML=SUNBIG;$$('.cloud').forEach(c=>c.innerHTML=CLOUD);
-$('#btnStart').innerHTML=ICON.play;$('#splashHint').innerHTML=ICON.speaker+'<span>Bật âm thanh để nghe Bíp nói chuyện</span>';
+$('#btnStart').innerHTML=ICON.play;$('#splashHint').innerHTML=ICON.speaker+'<span>Bật âm thanh để nghe Rio nói chuyện</span>';
 const LOGO_COLS=['#F0603F','#FFC93C','#5DBB46','#3D95F0','#E0558F','#FF8A2E','#7A62C9','#2BB5A8'];let li=0;
-$('#logo').innerHTML='Vườn Chơi Bíp'.split(' ').map(w=>`<span class="w">${[...w].map(ch=>`<span style="--c:${LOGO_COLS[li%8]};--i:${li++}">${ch}</span>`).join('')}</span>`).join('');
+$('#logo').innerHTML='Vườn Chơi Rio'.split(' ').map(w=>`<span class="w">${[...w].map(ch=>`<span style="--c:${LOGO_COLS[li%8]};--i:${li++}">${ch}</span>`).join('')}</span>`).join('');
 $('#btnHome').innerHTML=ICON.home;$('#btnAlbum').innerHTML=ICON.tree;$('#btnParent').innerHTML=ICON.lock;$('#gateClose').innerHTML=ICON.close;$('#restContinue').innerHTML=ICON.lock+'<span>Người lớn cho thêm 10 phút</span>';
 $$('[data-go="home"]').forEach(b=>{b.innerHTML=ICON.home;b.addEventListener('click',()=>{A.tap();show('home')})});
 $('#btnHome').addEventListener('click',()=>{A.tap();closeGame();show('home')});
@@ -1186,7 +1184,7 @@ $('#btnAlbum').addEventListener('click',()=>{A.tap();renderAlbum();show('album')
 $('#btnParent').addEventListener('click',()=>{A.tap();gate(()=>{renderParent();show('parent')})});
 $('#mascot').addEventListener('click',()=>{if(lastLine)V.say(lastLine)});
 $('#btnStart').addEventListener('click',()=>{A.init();V.load();try{navigator.wakeLock&&navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}
-  renderHome();show('home');if(overLimit()){showRest();return}A.fanfare();setTimeout(()=>V.say(S.name?`Chào bé ${S.name}! Mình là Bíp. Mình cùng chơi nhé!`:'Chào bé! Mình là Bíp. Mình cùng chơi nhé!'),350)});
+  renderHome();show('home');if(overLimit()){showRest();return}A.fanfare();setTimeout(()=>V.say(HELLO),350)});
 document.addEventListener('pointerdown',()=>{if(A.ctx&&A.ctx.state==='suspended')A.ctx.resume()},{passive:true});
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('gesturestart',e=>e.preventDefault());
