@@ -625,6 +625,58 @@ td:first-child{font-weight:800;white-space:nowrap}
 @keyframes glow{50%{scale:1.08;opacity:.85}}
 .reward-title{text-shadow:0 6px 0 var(--ink),0 0 30px rgba(255,214,90,.8)}
 
+/* ---------- Cu Tí thấy thế nào? ---------- */
+.stage-feel{--stage:linear-gradient(#FFF1E0,#FFE0C4)}
+.feel{position:absolute;inset:0;display:flex;flex-direction:column;gap:clamp(10px,2vmin,18px);padding:clamp(12px,2.4vmin,22px)}
+.feel-top{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:clamp(10px,3vmin,30px)}
+.feel-cuti{height:min(100%,34vmin);aspect-ratio:1;flex:none}
+.feel-scene{--r:28px;flex:0 1 auto;max-width:min(520px,62%);max-height:100%;display:flex;flex-direction:column;align-items:center;gap:6px;padding:clamp(10px,2vmin,18px)}
+.feel-art{width:clamp(90px,22vmin,170px);aspect-ratio:1}
+.feel-text{font:700 clamp(16px,2.8vmin,24px)/1.25 var(--display);text-align:center;color:var(--ink)}
+.feel-faces{flex:none;display:flex;justify-content:center;gap:clamp(12px,3vmin,30px);padding-bottom:4px}
+.feel-face{width:clamp(96px,19vmin,170px);display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 8px 10px;border-radius:26px;background:var(--fc);border:4px solid var(--ink);box-shadow:0 6px 0 var(--ink);background-image:var(--fabric);transition:transform .15s,opacity .3s}
+.feel-face svg{width:100%;aspect-ratio:1;height:auto}
+.feel-face span{font:700 clamp(15px,2.6vmin,22px)/1 var(--display)}
+.feel-face:active{transform:translateY(4px);box-shadow:0 2px 0 var(--ink)}
+.feel-face.shake{animation:shake .4s}
+.feel-face.right{transform:scale(1.08);box-shadow:0 6px 0 var(--ink),0 0 0 8px rgba(255,201,60,.6)}
+.feel-face.dim{opacity:.35}
+.feel-breath{position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:rgba(255,241,224,.85);pointer-events:none}
+.feel-breath i{width:clamp(120px,30vmin,240px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#BFE3F5,#7CC7E3);border:5px solid var(--ink);transition:transform 3s ease-in-out;transform:scale(.6)}
+.feel-breath.in i{transform:scale(1.15)}
+.feel-breath.out i{transform:scale(.6)}
+.feel-breath b{position:absolute;font:700 clamp(24px,5vmin,40px)/1 var(--display);color:var(--ink)}
+@media (max-width:560px){.feel-top{flex-direction:column}.feel-scene{max-width:100%}.feel-cuti{height:22vh}}
+
+/* ---------- Nhảy cùng Cu Tí ---------- */
+.stage-dance{--stage:linear-gradient(#FFE6F2,#E8DDFF)}
+.dance{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:background 1s}
+.dance.on{background:linear-gradient(120deg,#FFE6F2,#FFF3C4,#DDF3E0,#E8DDFF);background-size:300% 300%;animation:danceBg 8s ease-in-out infinite}
+@keyframes danceBg{50%{background-position:100% 100%}}
+.dance.ice{background:radial-gradient(circle at 50% 45%,#F4FBFF,#BFE6F7);box-shadow:inset 0 0 0 10px rgba(255,255,255,.7)}
+.dance-cuti{height:min(56%,46vmin);aspect-ratio:1;transition:transform .3s}
+.dance-cuti.spin svg{animation:spin 1.9s linear infinite}
+.dance-call{font:700 clamp(30px,7vmin,64px)/1.1 var(--display);color:#fff;-webkit-text-stroke:4px var(--ink);paint-order:stroke fill;text-shadow:0 5px 0 var(--ink);text-align:center;padding:0 12px}
+.dance.ice .dance-call{color:#BFE6F7}
+.dance-dots{position:absolute;top:14px;left:50%;translate:-50% 0;display:flex;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.8);border:3px solid var(--ink)}
+.dance-dots i{width:18px;height:18px;border-radius:50%;border:3px solid var(--ink);background:#fff;transition:background .3s,scale .3s}
+.dance-dots i.on{background:#7CC7E3;scale:1.15}
+.dance-notes{position:absolute;inset:0;pointer-events:none}
+
+/* ---------- Ba chú gấu ---------- */
+.stage-bears{--stage:linear-gradient(#FCEFD9 0 50%,#E9C79C 50%)}
+.bears{position:absolute;inset:0;display:flex;flex-direction:column;padding:clamp(10px,2vmin,18px);gap:8px}
+.bears-row{flex:1;min-height:0;display:flex;align-items:flex-end;justify-content:space-evenly;gap:8px}
+.bear-slot{position:relative;width:calc(30% * var(--k));max-width:calc(36vh * var(--k));display:flex;flex-direction:column;align-items:center;border-radius:24px;padding:4px 4px 0}
+.bear-fig{width:100%;aspect-ratio:156/126}
+.bear-spot{height:calc(min(15vmin,120px) * var(--k));display:flex;align-items:center;justify-content:center;margin-top:-6px}
+.bear-placed{width:calc(min(15vmin,120px) * var(--k));aspect-ratio:1;animation:rin .5s cubic-bezier(.3,1.6,.5,1)}
+.bear-name{font:700 clamp(14px,2.4vmin,20px)/1.2 var(--display);background:rgba(255,253,246,.92);border:3px solid var(--ink);border-radius:999px;padding:2px 12px;margin-top:4px}
+.bears-tray{flex:none;display:flex;justify-content:center;align-items:flex-end;gap:clamp(18px,5vmin,48px);min-height:min(19vmin,150px);padding:6px 10px;border-radius:24px;background:rgba(255,253,246,.55);border:3px dashed rgba(43,53,80,.25)}
+.bear-item{width:calc(min(17vmin,140px) * var(--k));aspect-ratio:1;filter:drop-shadow(0 6px 0 rgba(43,53,80,.2))}
+.bear-name{white-space:nowrap}
+@media (max-aspect-ratio:3/4){.stage-bears{--stage:linear-gradient(#FCEFD9 0 48%,#E9C79C 48%)}.bears-row{gap:0;align-items:flex-end;padding-bottom:4vh}.bear-slot{width:calc(42% * var(--k));max-width:none;margin:0 -3%}.bear-name{font-size:13px;padding:2px 8px}.bear-spot{height:calc(17vw * var(--k))}.bear-placed{width:calc(17vw * var(--k))}.bear-item{width:calc(22vw * var(--k))}}
+
 /* lite graphics for older devices */
 .lite .tx{filter:none}
 .lite .rays,.lite .flyer,.lite .pollen,.lite .lawn,.lite .hills-far,.lite .grain{display:none}
@@ -1846,6 +1898,127 @@ function gSleep(api){
         const d=new Date();if(night){if(d.getHours()>=5)d.setDate(d.getDate()+1);d.setHours(6,0,0,0)}else d.setHours(15,0,0,0);S.sleepUntil=d.getTime();save();
         api.later(showNight,5200)}})}}
 
+/* ================= three new games: feelings, freeze dance, three bears ================= */
+/* --- Cu Tí faces and extra moves (added to the existing rig) --- */
+const CUTI_FACE={
+  happy:{eyes:`<path d="M39 58 q7 -9 14 0 M67 58 q7 -9 14 0" fill="none" stroke="${INK}" stroke-width="4.2" stroke-linecap="round"/><path d="M39 43 q6 -5 12 -2 M69 41 q6 -3 12 2" fill="none" stroke="#B4471F" stroke-width="2.6" stroke-linecap="round"/>`,
+    beakT:`<path d="M51 65 Q60 59 69 65 Q60 68 51 65Z" fill="#FFC93C" ${st(2.8)}/>`,beakB:`<path d="M53 67 Q60 82 67 67 Q60 70 53 67Z" fill="#F4A623" ${st(2.6)}/><ellipse cx="60" cy="72" rx="3" ry="2" fill="#FF8FA3"/>`},
+  sad:{eyes:`${eye(46,58,5.6)}${eye(74,58,5.6)}<path d="M38 47 L51 42 M69 42 L82 47" fill="none" stroke="#B4471F" stroke-width="2.8" stroke-linecap="round"/><path d="M40 65 q-4 7 0 10 q4 -3 0 -10Z" fill="#7CC7E3" ${st(1.6)}/>`,
+    beakT:`<path d="M52 67 Q60 62 68 67 Q60 70 52 67Z" fill="#FFC93C" ${st(2.8)}/>`,beakB:`<path d="M54 69 Q60 74 66 69 Q60 71 54 69Z" fill="#F4A623" ${st(2.4)}/>`},
+  angry:{eyes:`<ellipse cx="46" cy="57" rx="5.6" ry="4" fill="${INK}"/><ellipse cx="74" cy="57" rx="5.6" ry="4" fill="${INK}"/><path d="M37 44 L52 50 M68 50 L83 44" fill="none" stroke="#8E2E14" stroke-width="3.4" stroke-linecap="round"/>
+      <ellipse cx="34" cy="71" rx="8" ry="5" fill="#F0503A" opacity=".45"/><ellipse cx="86" cy="71" rx="8" ry="5" fill="#F0503A" opacity=".45"/><path d="M20 30 q5 -6 0 -12 M100 30 q-5 -6 0 -12" fill="none" stroke="#B4471F" stroke-width="2.6" stroke-linecap="round"/>`,
+    beakT:`<path d="M51 66 Q60 61 69 66 Q60 69 51 66Z" fill="#FFC93C" ${st(2.8)}/>`,beakB:`<path d="M54 68 L66 68 Q60 72 54 68Z" fill="#F4A623" ${st(2.4)}/>`},
+  wow:{eyes:`${eye(46,55,8)}${eye(74,55,8)}<circle cx="43.5" cy="58.5" r="1.6" fill="#fff"/><circle cx="71.5" cy="58.5" r="1.6" fill="#fff"/><path d="M38 40 q8 -7 15 -1 M67 39 q7 -6 15 1" fill="none" stroke="#B4471F" stroke-width="2.6" stroke-linecap="round"/>`,
+    beakT:`<path d="M52 64 Q60 58 68 64 Q60 66 52 64Z" fill="#FFC93C" ${st(2.8)}/>`,beakB:`<ellipse cx="60" cy="72" rx="5.5" ry="6.5" fill="#7A2E1E" ${st(2.4)}/>`}};
+const FACE_PART=b=>CUTI_RIG.parts.findIndex(p=>p.b===b);
+const CUTI_DEFAULT={eyes:CUTI_RIG.parts[FACE_PART('eyes')].svg,beakT:CUTI_RIG.parts[FACE_PART('beakT')].svg,beakB:CUTI_RIG.parts[FACE_PART('beakB')].svg};
+function setCutiFace(rig,mood){const f=CUTI_FACE[mood]||CUTI_DEFAULT;['eyes','beakT','beakB'].forEach(b=>{const g=rig.svg.querySelector(`[data-p="${FACE_PART(b)}"]`);if(g)g.innerHTML=f[b]})}
+function cutiFaceSvg(mood){const f=CUTI_FACE[mood];return `<svg viewBox="0 0 120 120" aria-hidden="true"><g class="tx" filter="url(#plush)">${CUTI_RIG.parts.map(p=>f[p.b]||p.svg).join('')}</g></svg>`}
+Object.assign(CUTI_RIG.clips,{
+  sad:{dur:3,keys:{body:{sy:[[0,.96],[1.5,.94],[3,.96]],r:[[0,-3],[1.5,3],[3,-3]]},leaf:{r:[[0,30],[3,30]]},wingL:{r:[[0,-6],[3,-6]]},wingR:{r:[[0,6],[3,6]]}}},
+  angry:{dur:.5,keys:{root:{x:[[0,0],[.12,-2],[.25,2],[.37,-2],[.5,0]]},body:{sy:[[0,.97],[.25,1.02],[.5,.97]]},wingL:{r:[[0,-20],[.25,-28],[.5,-20]]},wingR:{r:[[0,20],[.25,28],[.5,20]]},leaf:{r:[[0,-12],[.25,12],[.5,-12]]}}},
+  wow:{dur:1.2,keys:{root:{y:[[0,0],[.15,-10],[.35,0],[1.2,0]]},body:{sy:[[0,1],[.15,1.08],[.35,.94],[.55,1],[1.2,1]]},wingL:{r:[[0,0],[.15,60],[.6,40],[1.2,40]]},wingR:{r:[[0,0],[.15,-60],[.6,-40],[1.2,-40]]},leaf:{r:[[0,0],[.15,-20],[.5,10],[1.2,0]]}}},
+  dance:{dur:.96,keys:{root:{x:[[0,-5],[.48,5],[.96,-5]],y:[[0,0],[.24,-7],[.48,0],[.72,-7],[.96,0]]},body:{r:[[0,-7],[.48,7],[.96,-7]],sy:[[0,.95],[.24,1.03],[.48,.95],[.72,1.03],[.96,.95]]},
+    wingL:{r:[[0,10],[.24,55],[.48,10],[.72,55],[.96,10]]},wingR:{r:[[0,-55],[.24,-10],[.48,-55],[.72,-10],[.96,-55]]},leaf:{r:[[0,-14],[.48,14],[.96,-14]]},footL:{r:[[0,0],[.24,-16],[.48,0],[.96,0]]},footR:{r:[[0,0],[.48,0],[.72,16],[.96,0]]},beakB:{y:[[0,1.5],[.48,2.5],[.96,1.5]]}}},
+  freeze:{dur:1,keys:{wingL:{r:[[0,70],[1,70]]},wingR:{r:[[0,-70],[1,-70]]},leaf:{r:[[0,8],[1,8]]},footL:{r:[[0,-10],[1,-10]]},body:{r:[[0,-4],[1,-4]]}}}});
+
+/* ---------- 1. Cu Tí thấy thế nào? ---------- */
+const MOODS={happy:{n:'vui',col:'#FFE38A'},sad:{n:'buồn',col:'#BFE3F5'},angry:{n:'giận',col:'#FFC9BD'},wow:{n:'ngạc nhiên',col:'#E3D4FF'}};
+const iceI=(fallen)=>fallen?`<path d="M34 86 L58 70 L62 92Z" fill="#E0A463" ${st(3.5)}/><ellipse cx="74" cy="88" rx="18" ry="8" fill="#FF8FC1" ${st(3.5)}/><circle cx="66" cy="82" r="3" fill="#fff" opacity=".7"/>`
+  :`<path d="M38 48 L50 92 L62 48Z" fill="#E0A463" ${st(3.5)}/><path d="M42 58 l14 -6 M44 68 l12 -6" stroke="#B8783F" stroke-width="2.5"/><circle cx="50" cy="40" r="16" fill="#FF8FC1" ${st(3.5)}/>`;
+const blocksI=(fallen)=>fallen?`<rect x="10" y="74" width="24" height="18" rx="3" fill="#F0503A" ${st(3)} transform="rotate(-18 22 83)"/><rect x="40" y="76" width="22" height="16" rx="3" fill="#3D95F0" ${st(3)} transform="rotate(12 51 84)"/><rect x="66" y="72" width="22" height="20" rx="3" fill="#FFC325" ${st(3)} transform="rotate(-8 77 82)"/><path d="M88 60 l6 -6 M92 70 l8 -2" stroke="${INK}" stroke-width="2.5" stroke-linecap="round"/>`
+  :`<rect x="38" y="70" width="26" height="20" rx="3" fill="#F0503A" ${st(3)}/><rect x="40" y="50" width="22" height="20" rx="3" fill="#3D95F0" ${st(3)}/><rect x="42" y="30" width="18" height="20" rx="3" fill="#FFC325" ${st(3)}/>`;
+const FEEL_SIT=[
+  {m:'happy',t:'Cu Tí được tặng một quả bóng bay đỏ.',art:()=>`<g transform="translate(20 0) scale(.9)">${balloonI('#F0503A')}</g>`},
+  {m:'happy',t:'Mẹ ôm Cu Tí thật chặt.',art:()=>`<g transform="translate(14 8) scale(.8)">${heartI('#FF6F91')}</g>`},
+  {m:'happy',t:'Trời nắng đẹp, Cu Tí được ra công viên chơi.',art:()=>`<g transform="translate(26 4) scale(.62)">${sunI()}</g><g transform="translate(4 52) scale(.42)">${flowerI('#FF8FC1')}</g><g transform="translate(64 54) scale(.4)">${flowerI('#B48CF0')}</g>`},
+  {m:'sad',t:'Cu Tí làm rơi cây kem xuống đất.',art:()=>`<g transform="translate(-22 -42) scale(1.35)">${iceI(true)}</g>`},
+  {m:'sad',t:'Quả bóng bay của Cu Tí bay mất rồi.',art:()=>`<g transform="translate(46 0) scale(.42)">${balloonI('#3D95F0')}</g><path d="M66 44 q-6 20 4 40" fill="none" stroke="${INK}" stroke-width="2" stroke-dasharray="3 4"/>`},
+  {m:'angry',t:'Tháp gỗ Cu Tí xây bị đổ mất rồi.',art:()=>`<g transform="translate(-14 -40) scale(1.3)">${blocksI(true)}</g>`},
+  {m:'angry',t:'Bạn giật quả bóng của Cu Tí.',art:()=>`<g transform="translate(4 18) scale(.62)">${ART.dog}</g><g transform="translate(58 46) scale(.42)">${itemArt('ball','#F0503A')}</g>`},
+  {m:'wow',t:'Mở hộp quà ra, một chú ếch nhảy ra!',art:()=>`<g transform="translate(14 44) scale(.45)">${boxI('#3D95F0')}</g><g transform="translate(30 4) scale(.5)">${ART.frog}</g>`},
+  {m:'wow',t:'Sau cơn mưa, một cầu vồng thật to hiện ra!',art:()=>`<g transform="translate(0 0)">${rainbowI()}</g>`}];
+function gFeel(api){
+  const s=api.stage,age2=S.age===2;
+  s.innerHTML=`<div class="feel"><div class="feel-top"><div class="feel-cuti"></div><div class="feel-scene felt light"><div class="feel-art"></div><p class="feel-text"></p></div></div><div class="feel-faces"></div><div class="feel-breath" hidden><i></i><b>Hít vào…</b></div></div>`;
+  const cutiEl=s.querySelector('.feel-cuti'),art=s.querySelector('.feel-art'),txt=s.querySelector('.feel-text'),faces=s.querySelector('.feel-faces'),breath=s.querySelector('.feel-breath');
+  const rig=mountRig(cutiEl,CUTI_RIG,{cls:'bipsvg',clip:'idle'});let deck=[],done=0,busy=false,miss=0,last=null;
+  function next(){if(!api.alive)return;busy=false;miss=0;setCutiFace(rig,null);rig.play('idle');
+    if(done>=3){done=0;api.win(next);return}
+    if(!deck.length)deck=shuffle(FEEL_SIT);let sit=deck.pop();if(last&&sit.m===last.m&&deck.length)sit=deck.pop();last=sit;
+    const pool=age2?['happy','sad']:['happy','sad','angry','wow'];const others=shuffle(pool.filter(m=>m!==sit.m)).slice(0,age2?1:2);const opts=shuffle([sit.m,...others]);
+    art.innerHTML=wrap(sit.art(),'0 0 100 100');txt.textContent=sit.t;
+    faces.innerHTML=opts.map(m=>`<button class="feel-face" data-m="${m}" style="--fc:${MOODS[m].col}" aria-label="Mặt ${MOODS[m].n}">${cutiFaceSvg(m)}<span>${cap(MOODS[m].n)}</span></button>`).join('');
+    $$('.feel-face',faces).forEach(b=>b.addEventListener('click',()=>choose(b,sit)));
+    api.say(`${sit.t} Cu Tí thấy thế nào nhỉ? ${opts.map((m,i)=>i?MOODS[m].n:cap(MOODS[m].n)).join(', hay ')}?`)}
+  function choose(b,sit){if(busy)return;const m=b.dataset.m;A.tap();
+    if(m!==sit.m){miss++;restart(b,'shake',450);api.say(`Mặt này đang ${MOODS[m].n}. Rio thử mặt khác nhé!`);if(miss>=2)hint(faces.querySelector(`[data-m="${sit.m}"]`));return}
+    busy=true;b.classList.add('right');$$('.feel-face',faces).forEach(x=>{if(x!==b)x.classList.add('dim')});setCutiFace(rig,m);rig.play(m==='happy'?'cheer':m);A.fanfare&&m==='happy'?A.fanfare():A.soft();
+    const r=b.getBoundingClientRect();FX.sparkle(r.left+r.width/2,r.top+r.height/2);done++;
+    if(m==='happy'){api.say('Đúng rồi! Cu Tí đang vui. Khi vui, mình cười thật tươi! Rio có vui không?');api.later(next,4200)}
+    else if(m==='wow'){api.say('Đúng rồi! Cu Tí ngạc nhiên quá. Ồ! Bất ngờ chưa!');api.later(next,4000)}
+    else if(m==='sad'){api.say('Đúng rồi, Cu Tí đang buồn. Khi buồn, mình có thể ôm bố mẹ, hoặc nói: con đang buồn.');api.later(()=>{setCutiFace(rig,'happy');rig.play('idle');api.say('Được bố mẹ ôm, Cu Tí thấy vui hơn rồi!')},5200);api.later(next,8600)}
+    else{api.say('Đúng rồi, Cu Tí đang giận. Khi giận, mình cùng hít thật sâu nhé.');api.later(()=>breathe(()=>{setCutiFace(rig,null);rig.play('idle');api.say('Cu Tí bình tĩnh lại rồi. Rio giỏi quá!');api.later(next,3000)}),3600)}}
+  function breathe(after){breath.hidden=false;const lab=breath.querySelector('b');let i=0;
+    const stepB=()=>{if(!api.alive)return;if(i>=4){breath.hidden=true;breath.className='feel-breath';after();return}const inh=i%2===0;breath.className='feel-breath '+(inh?'in':'out');lab.textContent=inh?'Hít vào…':'Thở ra…';api.say(inh?'Hít vào':'Thở ra');i++;api.later(stepB,3000)};stepB()}
+  next()}
+
+/* ---------- 2. Nhảy cùng Cu Tí (freeze dance) ---------- */
+const DANCE_MOVES=[{t:'Giơ tay lên cao!',c:'cheer'},{t:'Lắc lư qua lại nào!',c:'dance'},{t:'Vẫy tay chào nào!',c:'wave'},{t:'Nhảy như con ếch!',c:'cheer'},{t:'Xoay một vòng!',c:'dance',spin:true},{t:'Nhún nhún theo nhạc!',c:'dance'}];
+function gDance(api){
+  const s=api.stage,GOAL=5;
+  s.innerHTML=`<div class="dance"><div class="dance-dots">${'<i></i>'.repeat(GOAL)}</div><div class="dance-cuti"></div><div class="dance-call"></div><div class="dance-notes"></div></div>`;
+  const wrapEl=s.querySelector('.dance'),cutiEl=s.querySelector('.dance-cuti'),call=s.querySelector('.dance-call'),notes=s.querySelector('.dance-notes'),dots=$$('.dance-dots i',s);
+  const rig=mountRig(cutiEl,CUTI_RIG,{cls:'bipsvg',clip:'idle'});let freezes=0,mode='idle',mt=0,beat=0,nextT=0,noteT=0;
+  const BASS=[130.81,196,220,174.61],MEL=[0,2,4,2,5,4,2,0,4,5,7,5,4,2,4,0];const PEN=[523.25,587.33,659.25,783.99,880,1046.5,1174.66,1318.5];
+  function music(on){clearInterval(mt);mt=0;if(!on||!A.ctx)return;const c=A.ctx;nextT=c.currentTime+.08;
+    mt=setInterval(()=>{if(!api.alive){clearInterval(mt);return}while(nextT<c.currentTime+.35){const rel=nextT-c.currentTime,b=beat%16;
+      if(b%2===0){A.note({type:'triangle',f:BASS[Math.floor(beat/8)%4],t:rel,dur:.28,vol:.2});A.noise({t:rel,dur:.06,vol:.08,filter:{type:'lowpass',f:300}})}
+      if(b%4===2)A.noise({t:rel,dur:.05,vol:.07,filter:{type:'highpass',f:4000}});
+      A.note({type:'sine',f:PEN[MEL[b]%8],t:rel,dur:.18,vol:.1});beat++;nextT+=.25}},90);api.cleanup.push(()=>clearInterval(mt))}
+  function flyNote(){const n=document.createElement('div');n.className='notefly';n.style.left=rand(15,85)+'%';n.style.top=rand(50,75)+'%';n.style.setProperty('--dx',rand(-40,40)+'px');n.innerHTML=ICON.note(pick(XCOL));notes.appendChild(n);setTimeout(()=>n.remove(),1150)}
+  function dance(){if(!api.alive)return;mode='dance';wrapEl.className='dance on';const mv=pick(DANCE_MOVES);rig.play(mv.c);cutiEl.classList.toggle('spin',!!mv.spin);
+    call.textContent=mv.t;restart(call,'bump',500);api.say(freezes===0?`Mình cùng nhảy nhé! Khi nhạc dừng, Rio đứng im như tượng nha. ${mv.t}`:`Nhảy tiếp nào! ${mv.t}`);
+    music(true);clearInterval(noteT);noteT=api.every(flyNote,600);api.later(freeze,(freezes===0?7000:rand(4500,8500)))}
+  function freeze(){if(!api.alive)return;mode='freeze';music(false);clearInterval(noteT);wrapEl.className='dance ice';cutiEl.classList.remove('spin');rig.play('freeze');call.textContent='Đứng im!';restart(call,'bump',500);
+    api.say(pick(['Dừng! Đứng im như tượng!','Đứng im nào! Không nhúc nhích nhé!','Tượng! Đứng im!']));
+    api.later(()=>{if(!api.alive)return;dots[freezes].classList.add('on');freezes++;A.pop(freezes);
+      if(freezes>=GOAL){api.say('Rio nhảy giỏi quá! Đứng im cũng giỏi nữa!');api.later(()=>api.win(()=>{freezes=0;dots.forEach(d=>d.classList.remove('on'));dance()}),1600)}
+      else{api.say(pick(['Giỏi quá! Rio đứng im như tượng thật!','Tuyệt vời! Đứng im giỏi ghê!']));api.later(dance,1900)}},3600)}
+  cutiEl.addEventListener('click',()=>{A.boing();restart(cutiEl,'bump',500)});
+  api.cleanup.push(()=>music(false));
+  rig.play('wave');call.textContent='Sẵn sàng chưa?';api.later(dance,1200)}
+
+/* ---------- 3. Ba chú gấu: big, medium, small ---------- */
+const BEAR_SIZES=[{n:'gấu con',adj:'nhỏ xíu',k:.62},{n:'gấu mẹ',adj:'vừa vừa',k:.8},{n:'gấu bố',adj:'to nhất',k:1}];
+const bowlI=c=>`<path d="M8 44 H92 C90 74 72 88 50 88 C28 88 10 74 8 44Z" fill="${c}" ${st(4)}/><ellipse cx="50" cy="44" rx="42" ry="9" fill="#FFE2A8" ${st(3.5)}/><path d="M36 30 q-6 -8 0 -16 M50 28 q-6 -8 0 -16 M64 30 q-6 -8 0 -16" fill="none" stroke="#B9C2D6" stroke-width="3" stroke-linecap="round"/><path d="M26 60 q24 10 48 0" fill="none" stroke="#fff" stroke-width="3" opacity=".6" stroke-linecap="round"/>`;
+const chairI=c=>`<rect x="24" y="8" width="52" height="46" rx="10" fill="${c}" ${st(4)}/><rect x="16" y="52" width="68" height="14" rx="6" fill="${shade(c,-.15)}" ${st(4)}/><path d="M24 66 V94 M76 66 V94" stroke="${INK}" stroke-width="9" stroke-linecap="round"/><path d="M24 66 V94 M76 66 V94" stroke="${shade(c,-.25)}" stroke-width="5" stroke-linecap="round"/><path d="M34 22 h32" stroke="#fff" stroke-width="3" opacity=".6" stroke-linecap="round"/>`;
+const bedI=c=>`<rect x="6" y="24" width="12" height="66" rx="5" fill="#B8783F" ${st(3.5)}/><rect x="82" y="44" width="12" height="46" rx="5" fill="#B8783F" ${st(3.5)}/><rect x="12" y="52" width="76" height="22" rx="6" fill="#FFF6E6" ${st(3.5)}/><path d="M34 52 H88 V72 H34Z" fill="${c}" ${st(3.5)}/><ellipse cx="25" cy="48" rx="11" ry="7" fill="#fff" ${st(3)}/><path d="M42 60 h40 M42 66 h40" stroke="#fff" stroke-width="2.5" opacity=".6"/>`;
+const BEAR_ITEMS=[{k:'bowl',n:'bát',art:bowlI,c:'#7CC7E3',say:'Bát cháo'},{k:'chair',n:'ghế',art:chairI,c:'#FF8FA3',say:'Cái ghế'},{k:'bed',n:'giường',art:bedI,c:'#B48CF0',say:'Cái giường'}];
+function gBears(api){
+  const s=api.stage;let ki=0,placed=0,miss=0;
+  s.innerHTML=`<div class="bears"><div class="bears-row">${BEAR_SIZES.map((b,i)=>`<div class="bear-slot" data-i="${i}" style="--k:${b.k}"><div class="bear-fig"></div><div class="bear-spot"></div><span class="bear-name">${cap(b.n)}</span></div>`).join('')}</div><div class="bears-tray"></div></div>`;
+  const slots=$$('.bear-slot',s),tray=s.querySelector('.bears-tray');
+  const rigs=slots.map(sl=>mountRig(sl.querySelector('.bear-fig'),BEAR_RIG,{cls:'bear-rig',clip:'idle'}));
+  api.later(()=>api.say('Đây là ba chú gấu: gấu con nhỏ xíu, gấu mẹ vừa vừa, và gấu bố to nhất!'),300);
+  function round(){placed=0;miss=0;const it=BEAR_ITEMS[ki%BEAR_ITEMS.length];ki++;$$('.bear-spot',s).forEach(x=>x.innerHTML='');rigs.forEach(r=>r.play('idle'));
+    const order=shuffle([0,1,2]);
+    tray.innerHTML=order.map(i=>`<div class="bear-item" data-i="${i}" style="--k:${BEAR_SIZES[i].k}" aria-label="${it.n} ${BEAR_SIZES[i].adj}">${wrap(it.art(it.c),'0 0 100 100')}</div>`).join('');
+    api.later(()=>api.say(`${it.say} nào của gấu nào nhỉ? Rio kéo ${it.n} to cho gấu to, ${it.n} nhỏ cho gấu nhỏ nhé!`),ki===1?5200:400);
+    $$('.bear-item',tray).forEach(el=>{const i=+el.dataset.i;const mine=()=>slots[i];
+      dragify(el,{onTap(){api.say(`${cap(it.n)} ${BEAR_SIZES[i].adj}. Của ${BEAR_SIZES[i].n} đó!`);hint(mine())},
+        onDrop(x,y){const sl=hitTest(slots,x,y,20);if(!sl)return false;const j=+sl.dataset.i;
+          if(j!==i){miss++;A.soft();api.say(i<j?`${cap(it.n)} này nhỏ quá với ${BEAR_SIZES[j].n}. Thử gấu khác nhé!`:`${cap(it.n)} này to quá với ${BEAR_SIZES[j].n}. Thử gấu khác nhé!`);if(miss>=2)hint(mine());return false}
+          el.classList.add('gone');const spot=sl.querySelector('.bear-spot');spot.innerHTML=`<div class="bear-placed" style="--k:${BEAR_SIZES[i].k}">${wrap(it.art(it.c),'0 0 100 100')}</div>`;
+          rigs[i].play(it.k==='bowl'?'eat':'look');api.later(()=>rigs[i].play('idle'),2400);A.plop();bump(sl);const c=centerOf(sl);FX.sparkle(c.x,c.y);placed++;
+          if(placed===3){api.say(`Đúng hết rồi! ${cap(it.n)} to cho gấu bố, ${it.n} vừa cho gấu mẹ, ${it.n} nhỏ cho gấu con. Giỏi quá!`);api.later(()=>api.win(round),3600)}
+          else api.say(`${cap(it.n)} ${BEAR_SIZES[i].adj} cho ${BEAR_SIZES[i].n}!`);return true}})})}
+  round()}
+
+tileArt.feel=wrap(`<g transform="translate(-2 14) scale(.52)">${CUTI_RIG.parts.map(p=>CUTI_FACE.happy[p.b]||p.svg).join('')}</g><g transform="translate(58 44) scale(.52)">${CUTI_RIG.parts.map(p=>CUTI_FACE.sad[p.b]||p.svg).join('')}</g>`,'0 0 120 120');
+tileArt.dance=wrap(`<g transform="translate(16 18) scale(.72)">${CUTI_RIG.parts.map(p=>p.svg).join('')}</g><g transform="translate(8 6) scale(.9)"><path d="M14 30 V8 l14 -4 V26" fill="none" ${st(3)}/><circle cx="10" cy="30" r="5" fill="${INK}"/><circle cx="24" cy="26" r="5" fill="${INK}"/></g><g transform="translate(92 14) scale(.8)"><path d="M10 26 V4 l10 3" fill="none" ${st(3)}/><circle cx="6" cy="26" r="5" fill="${INK}"/></g>`,'0 0 120 120');
+tileArt.bears=wrap(`<g transform="translate(-4 52) scale(.38)">${BEAR_RIG.parts.map(p=>p.svg).join('')}</g><g transform="translate(26 40) scale(.47)">${BEAR_RIG.parts.map(p=>p.svg).join('')}</g><g transform="translate(58 26) scale(.58)">${BEAR_RIG.parts.map(p=>p.svg).join('')}</g>`,'0 0 120 120');
+
 const GAMES=[
   {id:'bubbles',name:'Bong bóng',sk:'Nhân – quả',bg:'#7CC7E3',intro:'Chạm vào bong bóng nào!',start:gBubbles},
   {id:'shapes',name:'Hộp hình khối',sk:'Hình khối',bg:'#FFB347',intro:'Bé kéo từng hình vào đúng lỗ nhé!',start:gShapes},
@@ -1859,6 +2032,9 @@ const GAMES=[
   {id:'bear',name:'Gấu tìm mật',sk:'Vận động – Đếm',bg:'#FFC56E',intro:'',start:gBear},
   {id:'hygiene',name:'Vệ sinh',sk:'Đi bô – Đánh răng',bg:'#9FD8F2',intro:'',start:gHygiene},
   {id:'sleep',name:'Đi ngủ',sk:'Nếp sinh hoạt',bg:'#B7A8F0',intro:'',start:gSleep},
+  {id:'feel',name:'Cu Tí thấy thế nào?',sk:'Cảm xúc',bg:'#FFD6A8',intro:'',start:gFeel},
+  {id:'dance',name:'Nhảy cùng Cu Tí',sk:'Vận động – Nghe',bg:'#F7B6D8',intro:'',start:gDance},
+  {id:'bears',name:'Ba chú gấu',sk:'To – vừa – nhỏ',bg:'#E7C9A0',intro:'',start:gBears},
   {id:'house',name:'Nhà của Rio',sk:'Ảnh nhà mình',bg:'#F7C59F',intro:'',start:gHouse,hidden:true}
 ];
 const GENRES=[
@@ -1874,6 +2050,9 @@ const GENRES=[
   ['Ghép tranh nhiều mảnh','Ghép 2–4 mảnh lớn. Hợp hơn khi bé gần 3 tuổi rưỡi.','3,5+','later','Để bản sau'],
   ['Đóng vai, chăm sóc','Cho búp bê ăn, tắm thú cưng. Bé học tốt hơn khi chơi bằng đồ chơi thật.','2+','later','Nên chơi ngoài đời'],
   ['Phiêu lưu nhẹ nhàng','Nhân vật tự đi, bé chạm để nhảy qua chướng ngại và nhặt quả. Gặp chướng ngại thì nhân vật đứng chờ, không có thua.','2,5+','yes','Gấu tìm mật'],
+  ['Cảm xúc','Gọi tên vui, buồn, giận, ngạc nhiên qua tình huống quen thuộc, kèm cách bình tĩnh lại (ôm bố mẹ, hít thở sâu).','2+','yes','Cu Tí thấy thế nào?'],
+  ['Vận động theo nhạc','Nhảy khi có nhạc, đứng im khi nhạc dừng. Luyện nghe, tự kiểm soát và gần như không cần nhìn màn hình.','2+','yes','Nhảy cùng Cu Tí'],
+  ['So sánh kích thước','To – vừa – nhỏ: ghép bát, ghế, giường đúng cỡ cho từng chú gấu.','2,5+','yes','Ba chú gấu'],
   ['Đua tốc độ, mê cung, có thua cuộc','Đếm giờ và thua làm bé căng thẳng. Bé chưa hiểu luật thắng thua.','5+','no','Tránh'],
   ['Chữ cái, tập đọc','Quá sớm với 2 tuổi. Nghe kể chuyện và hát có ích hơn.','4+','no','Tránh']
 ];
