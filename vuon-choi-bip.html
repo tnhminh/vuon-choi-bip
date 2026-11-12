@@ -129,6 +129,10 @@ body{background:linear-gradient(180deg,#8FD3EE 0%,#B5E4F5 46%,#D9F2F8 100%)}
 .tile .sk{font-size:clamp(10px,1.6vmin,14px);color:rgba(43,53,80,.7);font-weight:800;letter-spacing:.04em;text-transform:uppercase;text-align:center}
 .tile:hover{transform:translateY(-4px) rotate(1deg)}
 .tile:active{transform:scale(.94)}
+.tiles.scrolly{overflow-y:auto;overflow-x:hidden;align-content:start;padding:6px 0 18px;-webkit-overflow-scrolling:touch;touch-action:pan-y;
+  -webkit-mask:linear-gradient(#000 calc(100% - 22px),transparent);mask:linear-gradient(#000 calc(100% - 22px),transparent)}
+.tiles.compact .tile .sk{display:none}
+.tiles.compact .tile .nm{font-size:clamp(13px,3.6vw,17px)}
 @media (max-height:560px){.tile .sk{display:none}}
 
 /* ---------- game shell ---------- */
@@ -2185,7 +2189,11 @@ function renderHome(){renderOutbar();$('#tiles').innerHTML=GAMES.filter(g=>!g.hi
 /* pick the column count that gives the biggest tiles for this screen */
 function layoutTiles(){const el=$('#tiles');if(!el||el.offsetParent===null)return;const n=el.children.length,W=el.clientWidth,H=el.clientHeight-8,g=parseFloat(getComputedStyle(el).columnGap)||16;
   let best={c:3,s:0};for(let c=2;c<=5;c++){const r=Math.ceil(n/c);if(c*r-n>=c)continue;const s=Math.min((W-g*(c-1))/c,(H-g*(r-1))/r,320);if(s>best.s)best={c,s}}
-  const s=Math.max(70,Math.floor(best.s));el.style.gridTemplateColumns=`repeat(${best.c},${s}px)`;el.style.gridAutoRows=s+'px'}
+  /* small phones: rather than shrinking tiles below a toddler-friendly size, keep big tiles and let the list scroll */
+  let c=best.c,s=Math.floor(best.s);const MIN=100,scroll=s<MIN;
+  if(scroll){c=Math.max(2,Math.min(3,Math.floor((W+g)/(MIN+g))));s=Math.floor(Math.min(140,(W-g*(c-1))/c))}
+  el.classList.toggle('scrolly',scroll);el.classList.toggle('compact',s<120);
+  el.style.gridTemplateColumns=`repeat(${c},${s}px)`;el.style.gridAutoRows=s+'px'}
 new ResizeObserver(()=>layoutTiles()).observe($('#tiles'));
 const HELLO='Chào Rio! Chơi game nhớ giữ sức khỏe nha Rio!';
 function greetText(){$('#greet').textContent=HELLO}
